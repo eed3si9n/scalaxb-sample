@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--	xmlns:elements="http://infobank.edb.com/GlobaleElementer"
+	xmlns:tns="http://infobank.edb.com/GlobaleTyper"
+	targetNamespace="http://dsf.infobank.edb.com/dsfantprkomResponse"
+	xmlns:local ="http://dsf.infobank.edb.com/dsfantprkomResponse"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">-->
+
+<!--	<xsd:import namespace="http://infobank.edb.com/GlobaleElementer" schemaLocation="https://infobank.test.edb.com/InfobankServices-1.3/xsd/GlobaleElementer.xsd"/>
+	<xsd:import namespace="http://infobank.edb.com/GlobaleTyper" schemaLocation="https://infobank.test.edb.com/InfobankServices-1.3/xsd/GlobaleTyper.xsd"/>-->
+        <xsd:include schemaLocation="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/include/GlobaleElementer.xsd" />
+        <xsd:include schemaLocation="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/include/GlobaleTyper.xsd" />
+
+	<xsd:annotation>
+		<xsd:documentation>Version 1.3</xsd:documentation>
+	</xsd:annotation>
+
+<!--	<xsd:element name="RESPONSE">
+		<xsd:complexType>-->
+                    <xsd:complexType name="AntallInnbyggere">
+			<xsd:sequence>
+				<xsd:element name="RESULT" minOccurs="0" maxOccurs="1">
+				<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element minOccurs="1" maxOccurs="1" name="KOMM" type="Tkomnr">
+								<xsd:annotation>
+									<xsd:documentation xml:lang="no">Bo-kommune nummer.</xsd:documentation>
+									<xsd:documentation xml:lang="en">Live-in communenumber.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element minOccurs="1" maxOccurs="1" name="KONA" type="Tkomnavn">
+								<xsd:annotation>
+									<xsd:documentation xml:lang="no">Bo kommune navn.</xsd:documentation>
+									<xsd:documentation xml:lang="en">Live-in communename.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element maxOccurs="1" minOccurs="1" name="ANTALL" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation xml:lang="no">Antall</xsd:documentation>
+									<xsd:documentation xml:lang="en">Amount</xsd:documentation>
+								</xsd:annotation>								
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+                                <!--<xsd:element ref="elements:MESSAGE" minOccurs="0" maxOccurs="1"/>
+                                <xsd:element ref="elements:METADATA" minOccurs="0" maxOccurs="1"/>
+                                <xsd:element ref="elements:DEBITERINGSINFO" minOccurs="0" maxOccurs="unbounded" />-->
+                                <xsd:element name="MESSAGE" type="MESSAGE" minOccurs="0" maxOccurs="1"/>
+                                <xsd:element name="METADATA" type="METADATA" minOccurs="0" maxOccurs="1"/>
+                                <xsd:element name="DEBITERINGSINFO" type="DEBITERINGSINFO" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	<!--</xsd:element>-->
+	
+</xsd:schema>

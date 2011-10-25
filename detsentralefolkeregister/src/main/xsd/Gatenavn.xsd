@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--	xmlns:elements="http://infobank.edb.com/GlobaleElementer"
+	xmlns:tns="http://infobank.edb.com/GlobaleTyper"
+	targetNamespace="http://dsf.infobank.edb.com/dsfgatenavnResponse"
+	xmlns:local ="http://dsf.infobank.edb.com/dsfgatenavnResponse"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">-->
+
+<!--	<xsd:import schemaLocation="https://infobank.test.edb.com/InfobankServices-1.3/xsd/GlobaleElementer.xsd" namespace="http://infobank.edb.com/GlobaleElementer"/>
+	<xsd:import schemaLocation="https://infobank.test.edb.com/InfobankServices-1.3/xsd/GlobaleTyper.xsd" namespace="http://infobank.edb.com/GlobaleTyper"/>-->
+	
+	<xsd:annotation>
+		<xsd:documentation>Version 1.3</xsd:documentation>
+	</xsd:annotation>
+
+<!--	<xsd:element name="RESPONSE">
+		<xsd:complexType>-->
+                <xsd:complexType name="Gatenavn">
+			<xsd:sequence>
+				<xsd:element name="RESULT" minOccurs="0" maxOccurs="1">
+				<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element maxOccurs="1" minOccurs="0" name="GATENAVN">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element maxOccurs="unbounded" minOccurs="0" name="GATENAVNELEMENT">
+											<xsd:complexType>
+												<xsd:all>
+													<xsd:element name="Kommnr" minOccurs="0" maxOccurs="1" type="Tkomnr">
+														<xsd:annotation>
+																<xsd:documentation xml:lang="no">Kommunenr</xsd:documentation>
+																<xsd:documentation xml:lang="en">Municipal number</xsd:documentation>
+														</xsd:annotation>
+													</xsd:element>
+													<xsd:element name="Kommnavn" minOccurs="0" maxOccurs="1">
+														<xsd:annotation>
+																<xsd:documentation xml:lang="no">Kommunenavn</xsd:documentation>
+																<xsd:documentation xml:lang="en">Municipal name</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>								
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="25" />
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>							
+													<xsd:element name="Gatenr" minOccurs="0" maxOccurs="1" type="Tgatenr">
+														<xsd:annotation>
+															<xsd:documentation xml:lang="no">Gatenr</xsd:documentation>
+															<xsd:documentation xml:lang="en">Streetnumber</xsd:documentation>
+														</xsd:annotation>
+													</xsd:element>
+													<xsd:element name="Gatenavn" minOccurs="0" maxOccurs="1">
+														<xsd:annotation>
+															<xsd:documentation xml:lang="no">Gatenavn</xsd:documentation>
+															<xsd:documentation xml:lang="en">Streetname</xsd:documentation>
+														</xsd:annotation>							
+														<xsd:simpleType>								
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="30" />
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>	
+												</xsd:all>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+<!--				<xsd:element ref="elements:MESSAGE" minOccurs="0" maxOccurs="1"/>
+				<xsd:element ref="elements:METADATA" minOccurs="0" maxOccurs="1"/>
+				<xsd:element ref="elements:DEBITERINGSINFO" minOccurs="0" maxOccurs="unbounded" />-->
+                                <xsd:element name="MESSAGE" type="MESSAGE" minOccurs="0" maxOccurs="1"/>
+                                <xsd:element name="METADATA" type="METADATA" minOccurs="0" maxOccurs="1"/>
+                                <xsd:element name="DEBITERINGSINFO" type="DEBITERINGSINFO" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+<!--	</xsd:element>-->
+	
+</xsd:schema>

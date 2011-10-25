@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<schema targetNamespace="http://ws-test.infotorg.no/xml/Admin/Transaksjon/2006-07-07/Transaksjon.xsd"
+    xmlns:tns="http://ws-test.infotorg.no/xml/Admin/Transaksjon/2006-07-07/Transaksjon.xsd"
+    xmlns="http://www.w3.org/2001/XMLSchema">
+
+    <annotation>
+        <documentation xml:lang="no">
+            Felles datatyper for transaksjoner.
+
+            © 2006 ErgoGroup AS
+            Forfatter: Dag Lem &lt;dag@nimrod.no&gt;
+            QA: Morten Haugen &lt;morten.haugen@ifront.no&gt;
+        </documentation>
+    </annotation>
+       
+    <element name="Transaksjon">
+        <complexType>
+            <sequence>
+                <element name="referanse" type="string" minOccurs="0"/>
+                <element name="visDetaljer" type="boolean" minOccurs="0"/>
+                <element name="visResponstid" type="boolean" minOccurs="0"/>
+                <element name="visRaadata" type="boolean" minOccurs="0"/>
+            </sequence>
+            <anyAttribute namespace="http://schemas.xmlsoap.org/soap/envelope/" processContents="skip"/>
+        </complexType>
+    </element>
+
+    <complexType name="raadata">
+        <sequence>
+            <element name="spoerring" type="string" nillable="true"/>
+            <element name="svar" type="string" nillable="true"/>
+            <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="responstid">
+        <sequence>
+            <element name="total" type="duration"/>
+            <element name="intern" type="duration"/>
+            <element name="backOffice" type="duration"/>
+            <element name="datakilde" type="duration"/>
+            <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="debitering">
+        <sequence>
+            <element name="debitert" type="integer"/>
+            <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+        </sequence>
+    </complexType>
+
+    <group name="produktid">
+        <sequence>
+            <element name="datakilde" type="string"/>
+            <element name="tjeneste" type="string"/>
+            <element name="produkt" type="string"/>
+        </sequence>
+    </group>
+
+    <element name="Transaksjonsinfo">
+        <complexType>
+            <sequence>
+                <element name="sammendrag">
+                    <complexType>
+                        <sequence>
+                            <group ref="tns:produktid"/>
+                            <element name="referanse" type="string" nillable="true"/>
+                            <element name="antallTransaksjoner" type="integer"/>
+                            <element name="debitering" type="tns:debitering"/>
+                            <element name="responstid" type="tns:responstid" minOccurs="0"/>
+                        </sequence>
+                    </complexType>
+                </element>
+
+                <element name="detaljer" minOccurs="0">
+                    <complexType>
+                        <sequence>
+                            <element name="transaksjon" minOccurs="0" maxOccurs="unbounded">
+                                <complexType>
+                                    <sequence>
+                                        <group ref="tns:produktid"/>
+                                        <element name="debitering" type="tns:debitering"/>
+                                        <element name="responstid" type="tns:responstid" minOccurs="0"/>
+                                        <element name="raadata" type="tns:raadata" minOccurs="0"/>
+                                    </sequence>
+                                </complexType>
+                            </element>
+                        </sequence>
+                    </complexType>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+
+</schema>

@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<schema targetNamespace="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/DetSentraleFolkeregister.xsd"
+    xmlns:tns="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/DetSentraleFolkeregister.xsd"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.w3.org/2001/XMLSchema">
+
+    <annotation>
+        <documentation xml:lang="no">
+            Datatyper for DetSentraleFolkeregister.
+            Basert på https://infobank.edb.com/InfobankServices-1.3/wsdl/Dsf.wsdl
+
+            © 2010 ErgoGroup AS
+            Forfatter: Ergogroup &lt;even.aasland@ergogroup.no&gt;
+        </documentation>
+    </annotation>
+
+    <xsd:include schemaLocation="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/include/Detaljer.xsd"/>
+    <xsd:include schemaLocation="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/include/Foedselsnummerkontroll.xsd"/>
+    <xsd:include schemaLocation="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/include/Historikk.xsd"/>
+    <xsd:include schemaLocation="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/include/TrefflisteHistorikk.xsd"/>
+    <xsd:include schemaLocation="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/include/Tilgjengelighetskontroll.xsd"/>
+    <xsd:include schemaLocation="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/include/Treffliste.xsd"/>
+    <xsd:include schemaLocation="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/include/AntallInnbyggere.xsd"/>
+    <xsd:include schemaLocation="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/include/Gatenavn.xsd"/>
+
+    <!-- sokfrtr -->
+    <element name="hentTrefflisteEnkel" type="tns:treffliste"/>
+    <element name="hentTreffliste" type="tns:treffliste"/>
+
+    <complexType name="treffliste">
+        <sequence>
+            <element name="saksref" type="string" minOccurs="0"/>
+            <element name="antall" type="string" minOccurs="0"/>
+            <element name="etternavn" type="string" minOccurs="0"/>
+            <element name="fornavn" type="string" minOccurs="0"/>
+            <element name="navnUgift" type="string" minOccurs="0"/>
+            <element name="mellomnavn" type="string" minOccurs="0"/>
+            <element name="foedselsdato" type="string" minOccurs="0"/>
+            <element name="foedselsaar" type="string" minOccurs="0"/>
+            <element name="foedekommunenr" type="string" minOccurs="0"/>
+            <element name="foedekommunenavn" type="string" minOccurs="0"/>
+            <element name="kjoenn" type="string" minOccurs="0"/>
+            <element name="kommunefylkenr" type="string" minOccurs="0"/>
+            <element name="kommunefylkenavn" type="string" minOccurs="0"/>
+            <element name="adresse" type="string" minOccurs="0"/>
+            <element name="husnrFra" type="string" minOccurs="0"/>
+            <element name="husnrTil" type="string" minOccurs="0"/>
+            <element name="postnr" type="string" minOccurs="0"/>
+            <element name="gatenr" type="string" minOccurs="0"/>
+            <element name="husnr" type="string" minOccurs="0"/>
+            <element name="bokstav" type="string" minOccurs="0"/>
+            <element name="bolignr" type="string" minOccurs="0"/>
+            <element name="gaardsnr" type="string" minOccurs="0"/>
+            <element name="bruksnr" type="string" minOccurs="0"/>
+            <element name="festenr" type="string" minOccurs="0"/>
+            <element name="fonetiskNavn" type="string" minOccurs="0"/>
+            <element name="fonetiskAdresse" type="string" minOccurs="0"/>
+            <element name="foedselsaarFra" type="string" minOccurs="0"/>
+            <element name="foedselsaarTil" type="string" minOccurs="0"/>
+            <element name="alderFra" type="string" minOccurs="0"/>
+            <element name="alderTil" type="string" minOccurs="0"/>
+            <element name="foedselsnrMor" type="string" minOccurs="0"/>
+            <element name="foedselsnrFar" type="string" minOccurs="0"/>
+            <element name="ikkeDoed" type="string" minOccurs="0"/>
+            <element name="status" type="string" minOccurs="0"/>
+            <element name="doedsdatoFra" type="string" minOccurs="0"/>
+            <element name="doedsdatoTil" type="string" minOccurs="0"/>
+            <element name="fornavnnr" type="string" minOccurs="0"/>
+            <element name="undernr" type="string" minOccurs="0"/>
+            <!--<element name="metadata" type="metadata" minOccurs="1" maxOccurs="1"/>-->
+        </sequence>
+    </complexType>
+
+    <!-- dsfdet -->
+    <element name="hentDetaljer" type="tns:personsoek"/>
+    <element name="hentRelatertePersoner" type="tns:personsoek"/>
+
+    <complexType name="personsoek">
+        <sequence>
+            <element name="saksref" type="string" minOccurs="0"/>
+            <element name="foedselsnr" type="string" minOccurs="0"/>
+            <element name="personid" type="string" minOccurs="0"/>
+            <element name="dufnr" type="string" minOccurs="0"/>
+            <element name="etternavn" type="string" minOccurs="0"/>
+            <element name="fornavn" type="string" minOccurs="0"/>
+            <element name="fornavnnr" type="string" minOccurs="0"/>
+            <element name="navnUgift" type="string" minOccurs="0"/>
+            <element name="mellomnavn" type="string" minOccurs="0"/>
+            <element name="foedselsdato" type="string" minOccurs="0"/>
+            <element name="foedselsaar" type="string" minOccurs="0"/>
+            <element name="foedekommunenr" type="string" minOccurs="0"/>
+            <element name="foedekommunenavn" type="string" minOccurs="0"/>
+            <element name="kjoenn" type="string" minOccurs="0"/>
+            <element name="kommunefylkenr" type="string" minOccurs="0"/>
+            <element name="kommunefylkenavn" type="string" minOccurs="0"/>
+            <element name="adresse" type="string" minOccurs="0"/>
+            <element name="husnrFra" type="string" minOccurs="0"/>
+            <element name="husnrTil" type="string" minOccurs="0"/>
+            <element name="postnr" type="string" minOccurs="0"/>
+            <element name="gatenr" type="string" minOccurs="0"/>
+            <element name="husnr" type="string" minOccurs="0"/>
+            <element name="bokstav" type="string" minOccurs="0"/>
+            <element name="gaardsnr" type="string" minOccurs="0"/>
+            <element name="bruksnr" type="string" minOccurs="0"/>
+            <element name="festenr" type="string" minOccurs="0"/>
+            <element name="fonetiskNavn" type="string" minOccurs="0"/>
+            <element name="fonetiskAdresse" type="string" minOccurs="0"/>
+            <element name="foedselsaarFra" type="string" minOccurs="0"/>
+            <element name="foedselsaarTil" type="string" minOccurs="0"/>
+            <element name="alderFra" type="string" minOccurs="0"/>
+            <element name="alderTil" type="string" minOccurs="0"/>
+            <element name="status" type="string" minOccurs="0"/>
+            <element name="doedsdatoFra" type="string" minOccurs="0"/>
+            <element name="doedsdatoTil" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+
+    <!-- dsfsjekk -->
+    <element name="hentFoedselsnummerkontroll">
+        <complexType>
+            <sequence>
+                <element name="saksref" type="string" minOccurs="0"/>
+                <element name="foedselsnr" type="string"/>
+                <element name="etternavn" type="string"/>
+                <element name="fornavn" type="string"/>
+                <element name="navnUgift" type="string" minOccurs="0"/>
+                <element name="mellomnavn" type="string" minOccurs="0"/>
+                <element name="foedekommunenr" type="string" minOccurs="0"/>
+                <element name="foedekommunenavn" type="string" minOccurs="0"/>
+                <element name="kjoenn" type="string" minOccurs="0"/>
+                <element name="kommunefylkenr" type="string" minOccurs="0"/>
+                <element name="kommunefylkenavn" type="string" minOccurs="0"/>
+                <element name="adresse" type="string" minOccurs="0"/>
+                <element name="postnr" type="string" minOccurs="0"/>
+                <element name="gatenr" type="string" minOccurs="0"/>
+                <element name="husnr" type="string" minOccurs="0"/>
+                <element name="bokstav" type="string" minOccurs="0"/>
+                <element name="bolignr" type="string" minOccurs="0"/>
+                <element name="gaardsnr" type="string" minOccurs="0"/>
+                <element name="bruksnr" type="string" minOccurs="0"/>
+                <element name="festenr" type="string" minOccurs="0"/>
+                <element name="foedselsnrMor" type="string" minOccurs="0"/>
+                <element name="foedselsnrFar" type="string" minOccurs="0"/>
+                <element name="ikkeDoed" type="string" minOccurs="0"/>
+                <element name="fornavnnr" type="string" minOccurs="0"/>
+                <element name="fonetiskNavn" type="string" minOccurs="0"/>
+                <element name="fonetiskAdresse" type="string" minOccurs="0"/>
+		<!--<element name="metadata" type="metadata" minOccurs="1"/>-->
+            </sequence>
+        </complexType>
+    </element>
+
+    <!-- baseoppe -->
+    <element name="hentTilgjengelighetskontroll">
+        <complexType>
+            <sequence>
+                <element name="saksref" type="string" minOccurs="0"/>
+                <element name="sjekk" type="string" minOccurs="1" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="hentHistorikk" type="tns:historikkSoek"/>
+
+    <complexType name="historikkSoek">
+        <sequence>
+            <element name="saksref" type="string" minOccurs="0"/>
+            <element name="antall" type="string" minOccurs="0"/>
+            <element name="foedselsnr" type="string" minOccurs="0"/>
+            <element name="personid" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+
+    <!-- sokhistr  -->
+    <element name="hentTrefflisteHistorikkEnkel" type="tns:trefflisteHistorikk"/>
+    <element name="hentTrefflisteHistorikk" type="tns:trefflisteHistorikk"/>
+
+    <complexType name="trefflisteHistorikk">
+        <sequence>
+            <element name="saksref" type="string" minOccurs="0"/>
+            <element name="antall" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="etternavn" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="fornavn" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="foedselsdato" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="kommunefylkenr" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="kjoenn" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="kommunefylkenavn" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="adresse" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="gatenr" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="husnr" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="bokstav" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="postnr" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="gaardsnr" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="bruksnr" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="festenr" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="meldingstype" type="string" minOccurs="0" maxOccurs="1"/>
+            <!--<element name="metadata" type="metadata" minOccurs="1" maxOccurs="1"/>-->
+        </sequence>
+    </complexType>
+   
+    <element name="hentAntallInnbyggere">
+        <complexType>
+            <sequence>
+                <element name="saksref" type="string" minOccurs="0"/>
+                <element name="kommunenr" type="string">
+                    <annotation>
+                        <documentation xml:lang="no">Kommunenummer, fire siffer</documentation>
+                    </annotation>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="hentGatenavn">
+        <complexType>
+            <sequence>
+                <element name="saksref" type="string" minOccurs="0"/>
+                <element name="antall" type="string" minOccurs="0" maxOccurs="1">
+                    <annotation>
+                        <documentation xml:lang="no">Maksimale antall treff som skal gis tilbake. Ved overskridelse vil dette antallet bli overført.</documentation>
+                    </annotation>
+                </element>
+                <element name="gatenavn" type="string"/>
+                <element name="kommunefylkenr" minOccurs="0" maxOccurs="1">
+                    <annotation>
+                        <documentation xml:lang="no">Kommunenr./fylkenr. Ikke oppgitt gir søk på hele landet.</documentation>
+                    </annotation>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+ 
+    <element name="Detaljer" type="tns:Detaljer"/>
+    <element name="Foedselsnummerkontroll" type="tns:Foedselsnummerkontroll"/>
+    <element name="Tilgjengelighetskontroll" type="tns:Tilgjengelighetskontroll"/>
+    <element name="Historikk" type="tns:Historikk"/>
+    <element name="Treffliste" type="tns:Treffliste"/>
+    <element name="TrefflisteEnkel" type="tns:Treffliste"/>
+    <element name="TrefflisteHistorikk" type="tns:TrefflisteHistorikk"/>
+    <element name="TrefflisteHistorikkEnkel" type="tns:TrefflisteHistorikk"/>
+    <element name="AntallInnbyggere" type="tns:AntallInnbyggere"/>
+    <element name="Gatenavn" type="tns:Gatenavn"/>
+</schema>

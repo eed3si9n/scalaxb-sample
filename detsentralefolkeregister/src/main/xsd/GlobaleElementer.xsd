@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <!--xmlns:tns="http://infobank.edb.com/GlobaleElementer" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://infobank.edb.com/GlobaleElementer">
+	<xsd:annotation>
+		<xsd:documentation>Version 1.3</xsd:documentation>
+	</xsd:annotation>-->
+
+	<!--<xsd:element name="METADATA">
+		<xsd:complexType>-->
+                    <xsd:complexType name="METADATA">
+			<xsd:all>
+				<xsd:element maxOccurs="1" minOccurs="1" name="Username" nillable="false" type="USERNAME"/>
+				<xsd:element maxOccurs="1" minOccurs="1" name="Password" nillable="false" type="PASSWORD"/>
+				<xsd:element maxOccurs="1" minOccurs="0" name="Saksref" nillable="false" type="SAKSREF"/>			
+				<xsd:element maxOccurs="1" minOccurs="0" name="SenderId" nillable="false" type="SENDERID"/>
+				<xsd:element maxOccurs="1" minOccurs="0" name="ReceiverId" nillable="false" type="RECEIVERID"/>
+				<xsd:element maxOccurs="1" minOccurs="0" name="MessageId" nillable="false" type="MESSAGEID"/>
+				<xsd:element maxOccurs="1" minOccurs="0" name="TransactionId" nillable="false" type="TRANSACTIONID"/>
+				<xsd:element maxOccurs="1" minOccurs="0" name="SequenceNr" nillable="false" type="SEQUENCENR"/>
+				<xsd:element maxOccurs="1" minOccurs="0" name="Test" nillable="false" type="TEST"/>
+				<xsd:element maxOccurs="1" minOccurs="0" name="MessageTimeStamp" nillable="false" type="MESSAGETIMESTAMP"/>
+				<xsd:element maxOccurs="1" minOccurs="0" name="SecurityType" nillable="false" type="SECURITYTYPE"/>
+			</xsd:all>
+		</xsd:complexType>
+	<!--</xsd:element>-->
+
+	<!--<xsd:element name="DEBITERINGSINFO">
+		<xsd:annotation>
+            <xsd:documentation>Betalingsinformasjon</xsd:documentation>
+        </xsd:annotation>	
+		<xsd:complexType>-->
+                <xsd:complexType name="DEBITERINGSINFO">
+			<xsd:all>
+				<xsd:element maxOccurs="1" minOccurs="0" name="SAKSREF" type="xsd:string">
+					<xsd:annotation>
+	            		<xsd:documentation>Lokal brukerident som idetfiserer bruker når 'brukerid' er fellesident.</xsd:documentation>
+	            		<xsd:documentation>Local user-id used for identification when 'brukerid' is a system-id.</xsd:documentation>
+	        		</xsd:annotation>
+				</xsd:element>
+				<xsd:element maxOccurs="1" minOccurs="0" name="TELLERTYPE" type="xsd:string">
+					<xsd:annotation>
+	            		<xsd:documentation>Faktureringskode.</xsd:documentation>
+	            		<xsd:documentation>Invoice code.</xsd:documentation>
+	        		</xsd:annotation>
+				</xsd:element>
+				<xsd:element maxOccurs="1" minOccurs="0" name="TELLERVERDI" type="xsd:string">
+					<xsd:annotation>
+	            		<xsd:documentation>Antall "fakturalinjer" på gitte faktureringskode.</xsd:documentation>
+	            		<xsd:documentation>Number of lines on the invoice</xsd:documentation>
+	        		</xsd:annotation>
+				</xsd:element>
+			</xsd:all>
+		</xsd:complexType>
+	<!--</xsd:element>-->
+	
+	<!--<xsd:element name="MESSAGE">
+		<xsd:annotation>
+            <xsd:documentation xml:lang="no">Tilbakemelding til konsument hvis normal respons ikke kan gis. Benyttes for valideringsfeil, samt meldinger og ikke kritiske feil fra bakenforliggende systemer</xsd:documentation>
+            <xsd:documentation xml:lang="en">Message to consumer if normal response is not available. Used for validation messages, plus messages and non critical errors from underlying systems</xsd:documentation>
+        </xsd:annotation>	
+		<xsd:complexType>-->
+                <xsd:complexType name="MESSAGE">
+			<xsd:sequence>
+				<xsd:element maxOccurs="1" minOccurs="0" name="CODE" type="xsd:string">
+					<xsd:annotation>
+	            		<xsd:documentation xml:lang="no">Kode fra bekenforligende system</xsd:documentation>
+	            		<xsd:documentation xml:lang="no">Code from underlying system</xsd:documentation>
+	        		</xsd:annotation>				
+				</xsd:element>			
+				<xsd:element maxOccurs="1" minOccurs="0" name="SUMMARY" type="xsd:string">
+					<xsd:annotation>
+	            		<xsd:documentation xml:lang="no">Valideringsmelding, eller medlig fra bakenforliggende system</xsd:documentation>
+	            		<xsd:documentation xml:lang="no">Validation message, or message from underlying system</xsd:documentation>
+	        		</xsd:annotation>
+				</xsd:element>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" name="DETAIL" type="xsd:string">
+					<xsd:annotation>
+	            		<xsd:documentation xml:lang="no">Detaljer om meldignen hvis tilgjengelig</xsd:documentation>
+	            		<xsd:documentation xml:lang="en">Details if availbale</xsd:documentation>
+	        		</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	<!--</xsd:element>-->	
+
+	<xsd:complexType name="SECURITYTYPE">
+		<xsd:annotation>
+            <xsd:documentation>
+                Sikkerhetsinformasjon
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="BankId" nillable="false" type="BANKID"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ApplicationId" nillable="false" type="APPLICATIONID"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="CustomerId" nillable="false" type="CUSTOMERID"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UserId" nillable="false" type="USERID"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="SecurityToken" nillable="false" type="SECURITYTOKEN"/>
+		</xsd:sequence>
+    </xsd:complexType>
+
+	<xsd:simpleType name="SENDERID">
+		<xsd:annotation>
+			<xsd:documentation>Identifikasjonsnummer av konsumenten. Benyttes ikke av Infobank. Kan benyttes for logging og sporbarhet.</xsd:documentation>
+			<xsd:documentation>Identificationnumber of the consumer.Not used by Infobank</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RECEIVERID">
+		<xsd:annotation>
+			<xsd:documentation>Valgfri identifikasjon av produsenten. Benyttes ikke av Infobank. Kan være nødvendig om anrop går via en mediator.</xsd:documentation>
+			<xsd:documentation>Optional identification of the producer. Not used by Infobank</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="MESSAGEID">
+		<xsd:annotation>
+			<xsd:documentation>Applikasjonsunikt sekvensnummer brukt for å identifisere en melding. Benyttes ikke av Infobank. Kan benyttes for logging og sporbarhet.</xsd:documentation>
+			<xsd:documentation>Application-unique sequencenumber used to identify a message. Not used by Infobank</xsd:documentation>
+			<xsd:documentation>Ex: 12345678</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="TRANSACTIONID">
+		<xsd:annotation>
+			<xsd:documentation>Valgfritt transaksjonsunikt sekvensnummer brukt for å identifisere transaksjonen som denne meldingen er den del av. Benyttes ikke av Infobank. Logging, sporbarhet og transaksjonshåndtering.</xsd:documentation>
+			<xsd:documentation>Transaction-unique sequencenumber used to identify a transaction. Not used by Infobank</xsd:documentation>
+			<xsd:documentation>Ex: 12345678</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="USERNAME">
+		<xsd:annotation>
+			<xsd:documentation>Brukerident hos EDB Infobank</xsd:documentation>
+			<xsd:documentation>Infobank user id</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PASSWORD">
+		<xsd:annotation>
+			<xsd:documentation>Brukeridentens passord</xsd:documentation>
+			<xsd:documentation>Infoabnk password</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SAKSREF">
+		<xsd:annotation>
+			<xsd:documentation>Lokal brukerident som idetfiserer bruker når 'brukerid' er fellesident.</xsd:documentation>
+            <xsd:documentation>Local user-id used for identification when 'brukerid' is a system-id.</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SEQUENCENR">
+		<xsd:annotation>
+			<xsd:documentation>Valgfritt sekvensnummer om en komplett transaksjon krever flere meldinger. Benyttes ikke av Infobank. Brukes for logging, sporbarhet og transaksjonshåndtering.</xsd:documentation>
+			<xsd:documentation>Not used by Infobank</xsd:documentation>
+			<xsd:documentation>Ex: 4</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>	
+	<xsd:simpleType name="TEST">
+		<xsd:annotation>
+			<xsd:documentation>Valgfri indikasjon på om dette er en test eller ikke. Benyttes ikke av Infobank.</xsd:documentation>
+			<xsd:documentation>Not used by Infobank</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:boolean">
+		</xsd:restriction>
+	</xsd:simpleType>	
+	<xsd:simpleType name="MESSAGETIMESTAMP">
+		<xsd:annotation>
+			<xsd:documentation>Tidsstempel for når en melding ble skapt. Brukes for logging og sporbarhet. Benyttes ikke av Infobank.</xsd:documentation>
+			<xsd:documentation>Timestamp when a message was created</xsd:documentation>				
+			<xsd:documentation>Ex: 2006-02-13T20:30:47.0Z</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="BANKID">
+		<xsd:annotation>
+			<xsd:documentation>Valgfri identifikasjon av en bank. Brukes for tilgangskontroll, logging og sporbarhet. Benyttes ikke av Infobank.</xsd:documentation>
+			<xsd:documentation>Not used by Infobank</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="APPLICATIONID">
+		<xsd:annotation>
+			<xsd:documentation>Valgfritt brukerid for pålogging til en applikasjon, for eksempel en produsent. Brukes for tilgangskontroll, logging og sporbarhet. Benyttes ikke av Infobank.</xsd:documentation>
+			<xsd:documentation>Not used by Infobank</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CUSTOMERID">
+		<xsd:annotation>
+			<xsd:documentation>Valgfritt kundeid om en kunde er involvert I transaksjonen. Brukes for tilgangskontroll, logging og sporbarhet. Benyttes ikke av Infobank.</xsd:documentation>
+			<xsd:documentation>Not used by Infobank</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="USERID">
+		<xsd:annotation>
+			<xsd:documentation>Valgfritt brukerid for person/ansatt. Brukes for tilgangskontroll, logging og sporbarhet. Benyttes ikke av Infobank.</xsd:documentation>
+			<xsd:documentation>Not used by Infobank</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SECURITYTOKEN">
+		<xsd:annotation>
+			<xsd:documentation>Valgfritt brukerid for person/ansatt. Brukes for tilgangskontroll, logging og sporbarhet. Benyttes ikke av Infobank.</xsd:documentation>
+			<xsd:documentation>Not used by Infobank</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

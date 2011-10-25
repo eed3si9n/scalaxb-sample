@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<definitions name="Brukersesjon"
+    targetNamespace="http://ws-test.infotorg.no/xml/Admin/Brukersesjon/2006-07-07/Brukersesjon.wsdl"
+    xmlns:tns="http://ws-test.infotorg.no/xml/Admin/Brukersesjon/2006-07-07/Brukersesjon.wsdl"
+    xmlns:brukersesjon="http://ws-test.infotorg.no/xml/Admin/Brukersesjon/2006-07-07/Brukersesjon.xsd"
+    xmlns:transaksjon="http://ws-test.infotorg.no/xml/Admin/Transaksjon/2006-07-07/Transaksjon.xsd"
+    xmlns:feil="http://ws-test.infotorg.no/xml/Feil/Feil.xsd"
+    xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <documentation>
+        Tjenestespesifikasjon for Brukersesjon.
+
+        © 2006 ErgoGroup AS
+        Forfatter: Dag Lem &lt;dag@nimrod.no&gt;
+        QA: Morten Haugen &lt;morten.haugen@ifront.no&gt;
+    </documentation>
+
+    <types>
+        <schema
+            xmlns="http://www.w3.org/2001/XMLSchema">
+            <import
+                 namespace="http://ws-test.infotorg.no/xml/Admin/Brukersesjon/2006-07-07/Brukersesjon.xsd"
+                 schemaLocation="http://ws-test.infotorg.no/xml/Admin/Brukersesjon/2006-07-07/Brukersesjon.xsd"/>
+            <import
+                namespace="http://ws-test.infotorg.no/xml/Admin/Transaksjon/2006-07-07/Transaksjon.xsd"
+                schemaLocation="http://ws-test.infotorg.no/xml/Admin/Transaksjon/2006-07-07/Transaksjon.xsd"/>
+            <import
+                namespace="http://ws-test.infotorg.no/xml/Feil/Feil.xsd"
+                schemaLocation="http://ws-test.infotorg.no/xml/Feil/Feil.xsd"/>
+        </schema>
+    </types>
+
+    <message name="spoerring">
+        <part name="Brukersesjon" element="brukersesjon:Brukersesjon"/>
+        <part name="Transaksjon" element="transaksjon:Transaksjon"/>
+    </message>
+
+    <message name="svar">
+        <part name="Brukersesjon" element="brukersesjon:Brukersesjon"/>
+        <part name="Transaksjonsinfo" element="transaksjon:Transaksjonsinfo"/>
+    </message>
+
+    <message name="feil">
+        <part name="feil" element="feil:feil"/>
+    </message>
+
+    <message name="hentAutorisasjonRequest">
+        <part name="hentAutorisasjon" element="brukersesjon:hentAutorisasjon"/>
+    </message>
+    <message name="hentAutorisasjonResponse">
+        <part name="Autorisasjon" element="brukersesjon:Autorisasjon"/>
+    </message>
+
+    <message name="loggInnRequest">
+        <part name="loggInn" element="brukersesjon:loggInn"/>
+    </message>
+    <message name="loggInnResponse">
+        <part name="Autorisasjon" element="brukersesjon:Autorisasjon"/>
+    </message>
+
+    <message name="loggInnWebRequest">
+        <part name="loggInnWeb" element="brukersesjon:loggInnWeb"/>
+    </message>
+
+    <message name="loggUtRequest">
+        <part name="loggUt" element="brukersesjon:loggUt"/>
+    </message>
+    <message name="loggUtResponse">
+        <part name="OK" element="brukersesjon:OK"/>
+    </message>
+
+    <message name="byttPassordRequest">
+        <part name="byttPassord" element="brukersesjon:byttPassord"/>
+    </message>
+    <message name="byttPassordResponse">
+        <part name="OK" element="brukersesjon:OK"/>
+    </message>
+
+    <portType name="brukersesjonPortType">
+        <operation name="hentAutorisasjon">
+           <input message="tns:hentAutorisasjonRequest"/>
+           <output message="tns:hentAutorisasjonResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation>
+        <operation name="loggInn">
+           <input message="tns:loggInnRequest"/>
+           <output message="tns:loggInnResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation>
+        <operation name="loggInnWeb">
+           <input message="tns:loggInnWebRequest"/>
+           <output message="tns:loggInnResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation>
+        <operation name="loggUt">
+           <input message="tns:loggUtRequest"/>
+           <output message="tns:loggUtResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation>
+        <operation name="byttPassord">
+           <input message="tns:byttPassordRequest"/>
+           <output message="tns:byttPassordResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation>
+    </portType>
+
+    <binding name="brukersesjonBinding" type="tns:brukersesjonPortType">
+        <soapbind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="hentAutorisasjon">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation>
+        <operation name="loggInn">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation>
+        <operation name="loggInnWeb">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation>
+        <operation name="loggUt">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation>
+        <operation name="byttPassord">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation>
+    </binding>
+
+    <service name="BrukersesjonService">
+        <port name="brukersesjonPort" binding="tns:brukersesjonBinding">
+            <soapbind:address location="https://ws-test.infotorg.no/ws/Admin/Brukersesjon.pl"/>
+        </port>
+    </service>
+</definitions>

@@ -1,0 +1,331 @@
+<?xml version="1.0"?>
+<definitions name="DetSentraleFolkeregister"
+    targetNamespace="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/DetSentraleFolkeregister.wsdl"
+    xmlns:tns="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/DetSentraleFolkeregister.wsdl"
+    xmlns:brukersesjon="http://ws-test.infotorg.no/xml/Admin/Brukersesjon/2006-07-07/Brukersesjon.xsd"
+    xmlns:transaksjon="http://ws-test.infotorg.no/xml/Admin/Transaksjon/2006-07-07/Transaksjon.xsd"
+    xmlns:feil="http://ws-test.infotorg.no/xml/Feil/Feil.xsd"
+    xmlns:dsf="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/DetSentraleFolkeregister.xsd"
+    xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <documentation>
+        Tjenestespesifikasjon for DetSentraleFolkeregister.
+
+        © 2010 ErgoGroup AS
+        Forfattere: Thomas Flatmo, Even Aasland
+    </documentation>
+
+    <types>
+        <schema
+            xmlns="http://www.w3.org/2001/XMLSchema">
+            <import
+                namespace="http://ws-test.infotorg.no/xml/Admin/Brukersesjon/2006-07-07/Brukersesjon.xsd"
+                schemaLocation="http://ws-test.infotorg.no/xml/Admin/Brukersesjon/2006-07-07/Brukersesjon.xsd"/>
+            <import
+                namespace="http://ws-test.infotorg.no/xml/Admin/Transaksjon/2006-07-07/Transaksjon.xsd"
+                schemaLocation="http://ws-test.infotorg.no/xml/Admin/Transaksjon/2006-07-07/Transaksjon.xsd"/>
+            <import
+                namespace="http://ws-test.infotorg.no/xml/Feil/Feil.xsd"
+                schemaLocation="http://ws-test.infotorg.no/xml/Feil/Feil.xsd"/>
+            <import
+                 namespace="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/DetSentraleFolkeregister.xsd"
+                 schemaLocation="http://ws-test.infotorg.no/xml/EDB/DetSentraleFolkeregister/2011-04-13/DetSentraleFolkeregister.xsd"/>
+        </schema>
+    </types>
+
+    <message name="spoerring">
+        <part name="Brukersesjon" element="brukersesjon:Brukersesjon"/>
+        <part name="Transaksjon" element="transaksjon:Transaksjon"/>
+    </message>
+
+    <message name="svar">
+        <part name="Brukersesjon" element="brukersesjon:Brukersesjon"/>
+        <part name="Transaksjonsinfo" element="transaksjon:Transaksjonsinfo"/>
+    </message>
+
+    <message name="feil">
+        <part name="feil" element="feil:feil"/>
+    </message>
+
+    <message name="hentDetaljerRequest">
+        <part name="hentDetaljer" element="dsf:hentDetaljer"/>
+    </message>
+    <message name="hentDetaljerResponse">
+        <part name="hentDetaljerResponse" element="dsf:Detaljer"/>
+    </message>
+
+    <message name="hentTrefflisteRequest">
+        <part name="hentTreffliste" element="dsf:hentTreffliste"/>
+    </message>
+    <message name="hentTrefflisteResponse">
+        <part name="hentTrefflisteResponse" element="dsf:Treffliste"/>
+    </message>
+
+    <!--<message name="hentSivilstandHistorikkRequest">
+        <part name="hentSivilstandHistorikk" element="dsf:hentSivilstandHistorikk"/>
+    </message>
+    <message name="hentSivilstandHistorikkResponse">
+        <part name="hentSivilstandHistorikkResponse" element="dsf:SivilstandHistorikk"/>
+    </message>-->
+
+    <message name="hentHistorikkRequest">
+        <part name="hentHistorikk" element="dsf:hentHistorikk"/>
+    </message>
+    <message name="hentHistorikkResponse">
+        <part name="hentHistorikkResponse" element="dsf:Historikk"/>
+    </message>
+
+    <message name="hentTilgjengelighetskontrollRequest">
+        <part name="hentTilgjengelighetskontroll" element="dsf:hentTilgjengelighetskontroll"/>
+    </message>
+    <message name="hentTilgjengelighetskontrollResponse">
+        <part name="hentTilgjengelighetskontrollResponse" element="dsf:Tilgjengelighetskontroll"/>
+    </message>
+
+    <message name="hentFoedselsnummerkontrollRequest">
+        <part name="hentFoedselsnummerkontroll" element="dsf:hentFoedselsnummerkontroll"/>
+    </message>
+    <message name="hentFoedselsnummerkontrollResponse">
+        <part name="hentFoedselsnummerkontrollResponse" element="dsf:Foedselsnummerkontroll"/>
+    </message>
+
+    <!--message name="hentSjekkPersReseptRequest">
+        <part name="hentSjekkPersReseptRequest" element="dsf:hentSjekkPersResept"/>
+    </message>
+    <message name="hentSjekkPersReseptResponse">
+        <part name="hentSjekkPersReseptResponse" element="dsf:SjekkPersResept"/>
+    </message-->
+
+    <message name="hentTrefflisteHistorikkRequest">
+        <part name="hentTrefflisteHistorikkRequest" element="dsf:hentTrefflisteHistorikk"/>
+    </message>
+    <message name="hentTrefflisteHistorikkResponse">
+        <part name="hentTrefflisteHistorikkResponse" element="dsf:TrefflisteHistorikk"/>
+    </message>
+
+    <!--message name="hentEksternRequest">
+        <part name="hentEkstern" element="dsf:hentEkstern"/>
+    </message>
+    <message name="hentEksternResponse">
+        <part name="Ekstern" element="dsf:Ekstern"/>
+    </message-->
+
+    <portType name="dsfPortType">
+        <operation name="hentDetaljer">
+           <input message="tns:hentDetaljerRequest"/>
+           <output message="tns:hentDetaljerResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation>
+
+        <operation name="hentTreffliste">
+           <input message="tns:hentTrefflisteRequest"/>
+           <output message="tns:hentTrefflisteResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation>
+
+        <!--<operation name="hentSivilstandHistorikk">
+           <input message="tns:hentSivilstandHistorikkRequest"/>
+           <output message="tns:hentSivilstandHistorikkResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation>-->
+
+        <operation name="hentHistorikk">
+           <input message="tns:hentHistorikkRequest"/>
+           <output message="tns:hentHistorikkResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation>
+
+        <operation name="hentTrefflisteHistorikk">
+           <input message="tns:hentTrefflisteHistorikkRequest"/>
+           <output message="tns:hentTrefflisteHistorikkResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation>
+
+        <operation name="hentTilgjengelighetskontroll">
+           <input message="tns:hentTilgjengelighetskontrollRequest"/>
+           <output message="tns:hentTilgjengelighetskontrollResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation>
+
+        <operation name="hentFoedselsnummerkontroll">
+           <input message="tns:hentFoedselsnummerkontrollRequest"/>
+           <output message="tns:hentFoedselsnummerkontrollResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation>
+
+        <!--operation name="hentSjekkPersResept">
+           <input message="tns:hentSjekkPersReseptRequest"/>
+           <output message="tns:hentSjekkPersReseptResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation-->
+
+        <!--operation name="hentEkstern">
+           <input message="tns:hentEksternRequest"/>
+           <output message="tns:hentEksternResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation-->
+    </portType>
+
+    <binding name="dsfBinding" type="tns:dsfPortType">
+        <soapbind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="hentDetaljer">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation>
+
+        <operation name="hentTreffliste">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation>
+
+        <!--<operation name="hentSivilstandHistorikk">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation>-->
+
+        <operation name="hentHistorikk">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation>
+
+        <operation name="hentTrefflisteHistorikk">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation>
+
+        <operation name="hentTilgjengelighetskontroll">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation>
+
+        <operation name="hentFoedselsnummerkontroll">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation>
+
+        <!--operation name="hentSjekkPersResept">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation-->
+
+        <!--operation name="hentEkstern">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation-->
+    </binding>
+
+    <service name="DSFService">
+        <port name="dsfPort" binding="tns:dsfBinding">
+            <soapbind:address location="https://ws-test.infotorg.no/ws/EDB/DetSentraleFolkeregister.pl"/>
+        </port>
+    </service>
+</definitions>
