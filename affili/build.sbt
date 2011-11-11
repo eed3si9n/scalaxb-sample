@@ -14,4 +14,4 @@ sourceGenerators in Compile <+= scalaxb in Compile
 
 libraryDependencies += "net.databinder" %% "dispatch-http" % "0.8.5"
 
-// logLevel in scalaxb in Compile := Level.Debug
+logLevel in scalaxb in Compile := Level.Debug
