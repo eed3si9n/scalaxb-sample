@@ -1,0 +1,22 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:ns1="http://schemas.datacontract.org/Entities"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://tempuri.org/">
+  <wsdl:types>
+    <xsd:schema
+        attributeFormDefault="unqualified" elementFormDefault="qualified"
+        targetNamespace="http://schemas.datacontract.org/Entities">
+      <xsd:complexType name="ComplexEntity">
+        <xsd:sequence>
+          <xsd:element name="test" type="ns1:EntityType"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="EntityType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Account"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="EntityType" nillable="true" type="ns1:EntityType"/>
+    </xsd:schema>
+  </wsdl:types>
+</wsdl:definitions>
