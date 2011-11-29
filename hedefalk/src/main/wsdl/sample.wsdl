@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+xmlns:tns="http://www.hedefalk.se/test"
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+targetNamespace="http://www.hedefalk.se/test">
+<wsdl:types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:tns="http://www.hedefalk.se/test"
+targetNameSpace="http://www.hedefalk.se/test">
+<xsd:element name="WsdlTestElement">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="switch" type="WsdlSwitch" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:simpleType name="WsdlSwitch">
+
+
+<xsd:restriction base="xsd:normalizedString">
+<xsd:enumeration value="On" />
+<xsd:enumeration value="Off" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>
+</wsdl:types>
+<wsdl:portType name="service">
+</wsdl:portType>
+<wsdl:binding name="serviceSoap11" type="tns:service">
+<soap:binding style="document"
+transport="http://schemas.xmlsoap.org/soap/http" />
+</wsdl:binding>
+<wsdl:service name="serviceService">
+<wsdl:port binding="tns:serviceSoap11" name="serviceSoap11">
+<soap:address location="http://hedefalk.se:80/ws/" />
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
