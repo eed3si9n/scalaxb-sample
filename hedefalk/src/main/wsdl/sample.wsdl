@@ -44,7 +44,10 @@
   <wsdl:message name="MessageOut">
       <wsdl:part name="out" type="xsd:string" />
   </wsdl:message>
-    
+  
+  <wsdl:message name="EmptyMessageIn" />
+  <wsdl:message name="EmptyMessageOut" />
+  
   <wsdl:portType name="PortType1">
       <wsdl:operation name="Operation1">
           <wsdl:input message="tns:MessageIn" />
@@ -59,6 +62,12 @@
   </wsdl:portType>
   <wsdl:portType name="service">
   </wsdl:portType>
+  <wsdl:portType name="EmptyPortType1">
+    <wsdl:operation name="Operation1">
+      <wsdl:input message="tns:EmptyMessageIn" />
+      <wsdl:output message="tns:EmptyMessageOut" />
+    </wsdl:operation>
+  </wsdl:portType>  
   
   <wsdl:binding name="Binding1" type="tns:PortType1">
       <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -84,11 +93,21 @@
           </wsdl:output>
       </wsdl:operation>
   </wsdl:binding>
-    
   <wsdl:binding name="serviceSoap11" type="tns:service">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
   </wsdl:binding>
-  
+  <wsdl:binding name="EmptyPortType1Binding" type="tns:EmptyPortType1">
+      <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+      <wsdl:operation name="Operation1">
+          <soap:operation soapAction="http://hedefalk.se/test" style="document" />
+          <wsdl:input>
+              <soap:body use="literal" />
+          </wsdl:input>
+          <wsdl:output>
+              <soap:body use="literal" />
+          </wsdl:output>
+      </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="serviceService">
     <wsdl:port binding="tns:serviceSoap11" name="serviceSoap11">
       <soap:address location="http://hedefalk.se:80/ws/"/>
