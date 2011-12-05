@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cm="urn:ec.europa.eu:taxud:fiscalis:common:v1" xmlns:mes="urn:ec.europa.eu:taxud:fiscalis:message:v1" xmlns:vr="urn:ec.europa.eu:taxud:fiscalis:vatrefund:v1" targetNamespace="urn:ec.europa.eu:taxud:fiscalis:vatrefund:v1" elementFormDefault="qualified" version="1.06" xml:lang="en">
+	<xs:annotation>
+		<xs:documentation xml:lang="en"><![CDATA[
+			
+		A schema for the definition of messages to be exchanged in the VAT Refund system.
+		=== HISTORY===
+		Version 1.08 - 16/12/2010
+		+ The type of RequestedAmount and AcceptedAmount in the decision is SignedMoneyAmount_Type instead of PositiveMoneyAmount_Type.
+		Version 1.07 - 15/07/2010
+		- Remove non EU Member State constraint on Supplier in ImportInformation: Trader_Type uses
+		  cm:CountryCode_Type instead of cm:CountryCodeExMS_Type
+		+ AccountName_Type maxLength changed from 35 to 70
+		- Type of element FileDescription changed from xs:token to xs:string
+		+ Addition of bank fees in CorrectionReason_Type
+		
+		Version 1.06 - 22/07/2009
+		- Remove constraints PurchaseInformationReference_Unique and ImportInformationReferenceNumber_Unique 
+
+		Version 1.05 - 28/05/2009
+		+Add application/zip to enumeration in OfficialCopyFileType_Type
+		
+		Version 1.04 - 11/05/2009
+		+Add ReasonCode 5 to 	UpdateRefusalReasonCode_Type
+		+Correct RefundDecisionJustificationReasonCode_Type code for "Partial decision of repayment" - 87 -> 95
+		+Add RefundDecisionJustificationReasonCode_Type codes agreed at March workshop (codes 64 to 68 inclusive)	
+		
+		Version 1.03 - 25/03/2009
+		+ Allow two decimal places for the pro-rata rate
+		Version 1.02 - 20/03/2009
+		+ Add disclose attribute to VATREfundReceipt, VATRefundDecision, AdjustmentReceipt and AdjustmentDecision
+		+ Add telephone number to BaseTrader_Type
+		Version 1.01 - 18/12/2008 
+		 + Add a constraint on the issuedBy attribute of the TaxReferenceNumber - it must be the same as the RefundingCountryCode
+		 + Fix erroneous definition of constraint applying on reference of PurchaseInformation of VATRefundApplication
+		 + Offer the possibility to provide multiple GoodsDescription for ImportInformation and PurchaseInformation of VATRefundApplication 
+		Version 1.00 - first release of the schema to the Member States 
+		]]></xs:documentation>
+	</xs:annotation>
+	<xs:import namespace="urn:ec.europa.eu:taxud:fiscalis:message:v1" schemaLocation="fiscalismessage_v1.xsd"/>
+	<xs:import namespace="urn:ec.europa.eu:taxud:fiscalis:common:v1" schemaLocation="commontypes_v1.xsd"/>
+	<xs:include schemaLocation="goodsdescriptiontypes_v1.xsd"/>
+	<xs:include schemaLocation="decreasons_v1.xsd"/>
+	<xs:include schemaLocation="adjreasons_v1.xsd"/>
+	<!--The VAT Refund Messages-->
+	<xs:element name="VATRefundApplication" type="vr:VATRefundApplicationBody_Type" substitutionGroup="mes:AbstractBody">
+		<xs:unique name="SequenceNumber_Unique">
+			<xs:selector xpath=".//*"/>
+			<xs:field xpath="vr:SequenceNumber"/>
+		</xs:unique>
+		<xs:unique name="BusinessActivity_Unique">
+			<xs:selector xpath=".//vr:BusinessDescription/vr:BusinessActivity"/>
+			<xs:field xpath="."/>
+		</xs:unique>
+		<xs:unique name="TextualDescrLanguage_Unique">
+			<xs:selector xpath=".//vr:BusinessDescription/vr:TextualDescription"/>
+			<xs:field xpath="./@language"/>
+		</xs:unique>
+		<!-- ensure the supplier country code is the same as the refunding country code -->
+		<xs:key name="RefundingCountryKey">
+			<xs:selector xpath="./vr:ApplicationReference"/>
+			<xs:field xpath="vr:RefundingCountryCode"/>
+		</xs:key>
+		<xs:keyref name="RefundingCountryToSupplier" refer="vr:RefundingCountryKey">
+			<xs:selector xpath=".//vr:PurchaseInformation"/>
+			<xs:field xpath="vr:EUSupplier/vr:EUTraderID/vr:VATIdentificationNumber/@issuedBy"/>
+		</xs:keyref>
+		<xs:keyref name="RefundingCountryToSupplier2" refer="vr:RefundingCountryKey">
+			<xs:selector xpath=".//vr:PurchaseInformation"/>
+			<xs:field xpath="vr:EUSupplier/vr:EUTraderID/vr:TaxReferenceNumber/@issuedBy"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="ApplicationReceipt" type="vr:ApplicationReceiptBody_Type" substitutionGroup="mes:AbstractBody"/>
+	<xs:element name="VATRefundDecision" type="vr:VATRefundDecisionBody_Type" substitutionGroup="mes:AbstractBody"/>
+	<xs:element name="ProRataRateAdjustment" type="vr:ProRataRateAdjustmentBody_Type" substitutionGroup="mes:AbstractBody"/>
+	<xs:element name="AdjustmentReceipt" type="vr:AdjustmentReceiptBody_Type" substitutionGroup="mes:AbstractBody"/>
+	<xs:element name="AdjustmentResult" type="vr:AdjustmentResultBody_Type" substitutionGroup="mes:AbstractBody">
+		<!-- ensure the refunding country code of application is the same as the refunding country code -->
+		<xs:key name="RefundingCountryKey2">
+			<xs:selector xpath="."/>
+			<xs:field xpath="vr:RefundingCountryCode"/>
+		</xs:key>
+		<xs:keyref name="RefundingCountryToAcceptedRefundCountryCode" refer="vr:RefundingCountryKey2">
+			<xs:selector xpath=".//vr:AcceptedRefund"/>
+			<xs:field xpath="vr:ApplicationReference/vr:RefundingCountryCode"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="NETPNotification" type="vr:NETPNotificationBody_Type" substitutionGroup="mes:AbstractBody"/>
+	<xs:element name="ValidationReport" type="vr:ValidationReportBody_Type" substitutionGroup="mes:AbstractBody"/>
+	<!--The XML types for the content of the body element-->
+	<xs:complexType name="VATRefundApplicationBody_Type">
+		<xs:sequence>
+			<xs:element name="ApplicationReference" type="vr:VersionedReference_Type"/>
+			<xs:element name="Applicant" type="vr:Applicant_Type"/>
+			<xs:element name="Representative" type="vr:Representative_Type" minOccurs="0"/>
+			<xs:element name="RefundPeriod" type="cm:Period_Type"/>
+			<xs:element name="BusinessDescription" type="vr:BusinessDescription_Type"/>
+			<xs:element name="DetailedBankAccount" type="vr:DetailedBankAccount_Type"/>
+			<xs:element name="ImportInformation" type="vr:ImportInformation_Type" minOccurs="0" maxOccurs="unbounded">
+				<xs:unique name="ImportGoodsDescription_Unique">
+					<xs:selector xpath="./vr:GoodsDescription"/>
+					<xs:field xpath="vr:Code"/>
+					<xs:field xpath="vr:SubCode"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="PurchaseInformation" type="vr:PurchaseInformation_Type" minOccurs="0" maxOccurs="unbounded">
+				<xs:unique name="PurchaseGoodsDescription_Unique">
+					<xs:selector xpath="./vr:GoodsDescription"/>
+					<xs:field xpath="vr:Code"/>
+					<xs:field xpath="vr:SubCode"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="DocumentCopy" type="vr:FileAttachment_Type" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ApplicationReceiptBody_Type">
+		<xs:sequence>
+			<xs:element name="ReceiptReference" type="vr:VersionedReference_Type"/>
+			<xs:element name="ReceiptDate" type="vr:RestrictedDate_Type"/>
+			<xs:element name="UpdateRefusal" type="vr:UpdateRefusal_Type" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="disclose" type="vr:Disclose_Type" use="optional" default="03"/>
+	</xs:complexType>
+	<xs:complexType name="VATRefundDecisionBody_Type">
+		<xs:sequence>
+			<xs:element name="DecisionReference" type="vr:VersionedReference_Type"/>
+			<xs:element name="ApplicationVersion" type="vr:RestrictedDateTime_Type"/>
+			<xs:element name="Decision" type="vr:RefundDecision_Type"/>
+			<xs:element name="DecisionDate" type="vr:RestrictedDate_Type"/>
+			<xs:element name="RefundInformation" type="vr:RefundInformation_Type" minOccurs="0"/>
+			<xs:element name="Justification" type="vr:RefundDecisionJustification_Type" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="OfficialCopy" type="vr:OfficialCopy_Type" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="disclose" type="vr:Disclose_Type" use="optional" default="03"/>
+	</xs:complexType>
+	<xs:complexType name="ProRataRateAdjustmentBody_Type">
+		<xs:sequence>
+			<xs:element name="ReferenceNumber" type="vr:ApplicationNumber_Type"/>
+			<xs:element name="Applicant" type="vr:Applicant_Type"/>
+			<xs:element name="Period" type="cm:Period_Type"/>
+			<xs:element name="AdjustedValue" type="vr:ProRataRateCorrection_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AdjustmentReceiptBody_Type">
+		<xs:sequence>
+			<xs:element name="ReferenceNumber" type="vr:ApplicationNumber_Type"/>
+			<xs:element name="ReceiptDate" type="vr:RestrictedDate_Type"/>
+			<xs:element name="RefundingCountryCode" type="cm:EUCountryIsoCodeAlpha2_Type"/>
+		</xs:sequence>
+		<xs:attribute name="disclose" type="vr:Disclose_Type" use="optional" default="03"/>
+	</xs:complexType>
+	<xs:complexType name="AdjustmentResultBody_Type">
+		<xs:sequence>
+			<xs:element name="ReferenceNumber" type="vr:ApplicationNumber_Type"/>
+			<xs:element name="RefundingCountryCode" type="cm:EUCountryIsoCodeAlpha2_Type"/>
+			<xs:element name="Decision" type="vr:AdjustmentDecision_Type"/>
+			<xs:element name="DecisionDate" type="vr:RestrictedDate_Type"/>
+			<xs:element name="AcceptedRefund" type="vr:AcceptedRefund_Type" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Justification" type="vr:AdjustmentResultJustification_Type" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="AdjustmentInformation" type="vr:AdjustmentInformation_Type" minOccurs="0"/>
+			<xs:element name="OfficialCopy" type="vr:OfficialCopy_Type" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="disclose" type="vr:Disclose_Type" use="optional" default="03"/>
+	</xs:complexType>
+	<xs:complexType name="NETPNotificationBody_Type">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="VersionedReference" type="vr:VersionedReference_Type"/>
+				<xs:element name="ReferenceNumber" type="vr:ReferenceNumber18_Type"/>
+			</xs:choice>
+			<xs:element name="NotificationDate" type="vr:RestrictedDate_Type"/>
+		</xs:sequence>
+		<xs:attribute name="notifiedType" type="vr:NETPNotificationType_Type" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ValidationReportBody_Type">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="VersionedReference" type="vr:VersionedReference_Type" minOccurs="0"/>
+				<xs:element name="ReferenceNumber" type="vr:ReferenceNumber18_Type" minOccurs="0"/>
+			</xs:choice>
+			<xs:element name="Report" type="vr:Report_Type"/>
+		</xs:sequence>
+		<xs:attribute name="validatedType" type="vr:MessageType_Type" use="required"/>
+	</xs:complexType>
+	<!-- Complex Types-->
+	<xs:complexType name="AcceptedRefund_Type">
+		<xs:sequence>
+			<xs:element name="ApplicationReference" type="vr:Reference_Type"/>
+			<xs:element name="EstimatedTotalAmount" type="vr:SignedMoneyAmount_Type"/>
+			<xs:element name="AdjustedTotalAmount" type="vr:SignedMoneyAmount_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Adjustment_Type">
+		<xs:sequence>
+			<xs:element name="EstimatedTotalAmount" type="vr:SignedMoneyAmount_Type"/>
+			<xs:element name="AdjustedTotalAmount" type="vr:SignedMoneyAmount_Type"/>
+			<xs:element name="TransactionReference" type="vr:TransactionReference_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AdjustmentInformation_Type">
+		<xs:sequence>
+			<xs:element name="TotalAmount" type="vr:SignedMoneyAmount_Type"/>
+			<xs:element name="DebitBalance" type="vr:DebitBalance_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AdjustmentResultJustification_Type">
+		<xs:sequence>
+			<xs:element name="ReasonCode" type="vr:ProRataRateAdjustmentJustificationReasonCode_Type"/>
+			<xs:element name="AdditionalInformation" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Applicant_Type">
+		<xs:complexContent>
+			<xs:extension base="vr:BaseTrader_Type">
+				<xs:sequence>
+					<xs:element name="CountryCode" type="cm:CountryCode_Type"/>
+					<xs:element name="EUTraderID" type="vr:EUTraderID_Type"/>
+					<xs:element name="EmailAddress" type="cm:EMail_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BalanceCorrection_Type">
+		<xs:sequence>
+			<xs:element name="Amount" type="vr:SignedMoneyAmount_Type"/>
+			<xs:element name="Reason" type="vr:CorrectionReason_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BankAccount_Type">
+		<xs:sequence>
+			<xs:element name="OwnerName" type="vr:AccountName_Type"/>
+			<xs:element name="IBAN" type="vr:MSIBAN_Type"/>
+			<xs:element name="BIC" type="vr:BIC_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BaseTrader_Type">
+		<xs:sequence>
+			<xs:element name="Name" type="cm:Name_Type"/>
+			<xs:choice>
+				<xs:element name="AddressFree" type="cm:AddressFree_Type"/>
+				<xs:element name="AddressStruct" type="cm:AddressStruct_Type"/>
+			</xs:choice>
+			<xs:element name="TelephoneNumber" type="cm:PhoneNumber_Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BusinessDescription_Type">
+		<xs:choice>
+			<xs:element name="BusinessActivity" type="vr:BusinessActivity_Type" maxOccurs="unbounded"/>
+			<xs:element name="TextualDescription" type="vr:TextualDescription_Type" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="DebitBalance_Type">
+		<xs:sequence>
+			<xs:element name="AmountDue" type="vr:SignedMoneyAmount_Type"/>
+			<xs:element name="BalanceCorrection" type="vr:BalanceCorrection_Type" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="RecoveryInformation" type="vr:RecoveryInformation_Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Deduction_Type">
+		<xs:sequence>
+			<xs:element name="ProRataRate" type="vr:ProRataRate_Type" minOccurs="0"/>
+			<xs:element name="DeductibleVATAmount" type="vr:SignedMoneyAmount_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DetailedBankAccount_Type">
+		<xs:sequence>
+			<xs:element name="OwnerName" type="vr:AccountName_Type"/>
+			<xs:element name="OwnerType" type="vr:BankAccountOwnerType_Type"/>
+			<xs:element name="IBAN" type="vr:MSIBAN_Type"/>
+			<xs:element name="BIC" type="vr:BIC_Type"/>
+			<xs:element name="Currency" type="cm:currCode_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EUSupplier_Type">
+		<xs:complexContent>
+			<xs:extension base="vr:BaseTrader_Type">
+				<xs:sequence>
+					<xs:element name="CountryCode" type="cm:CountryCode_Type"/>
+					<xs:element name="EUTraderID" type="vr:EUTraderID_Type" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EUTraderID_Type">
+		<xs:choice>
+			<xs:element name="VATIdentificationNumber" type="vr:VATNumber_Type"/>
+			<xs:element name="TaxReferenceNumber" type="vr:VATNumberOrTIN_Type"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="NonEUTrader_Type">
+		<xs:complexContent>
+			<xs:extension base="vr:BaseTrader_Type">
+				<xs:sequence>
+					<xs:element name="CountryCode" type="cm:CountryCodeExMS_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FileAttachment_Type">
+		<xs:sequence>
+			<xs:element name="FileType" type="vr:FileType_Type"/>
+			<xs:element name="FileName" type="xs:token"/>
+			<xs:element name="FileDescription" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GoodsDescription_Type">
+		<xs:sequence>
+			<xs:element name="Code" type="vr:GoodsDescriptionCode_Type"/>
+			<xs:element name="SubCode" type="vr:GoodsDescriptionSubCode_Type" minOccurs="0"/>
+			<xs:element name="FreeText" type="vr:TextualDescription_Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ImportInformation_Type">
+		<xs:sequence>
+			<xs:element name="SequenceNumber" type="vr:SequenceNumber_Type"/>
+			<xs:choice>
+				<xs:element name="ReferenceNumber" type="vr:ReferenceNumber18_Type"/>
+				<xs:element name="ReferenceInformation" type="xs:string"/>
+			</xs:choice>
+			<xs:element name="IssuingDate" type="vr:RestrictedDate_Type"/>
+			<xs:element name="Supplier" type="vr:Trader_Type"/>
+			<xs:element name="GoodsDescription" type="vr:GoodsDescription_Type" maxOccurs="unbounded"/>
+			<xs:element name="TransactionDescription" type="vr:TransactionDescription_Type"/>
+			<xs:element name="Deduction" type="vr:Deduction_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ImportReference_Type">
+		<xs:choice>
+			<xs:element name="ReferenceNumber" type="vr:ReferenceNumber18_Type"/>
+			<xs:element name="ReferenceInformation" type="xs:string"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="InvoiceReference_Type">
+		<xs:sequence>
+			<xs:element name="InvoiceReferenceNumber" type="xs:token"/>
+			<xs:element name="EUTraderID" type="vr:EUTraderID_Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OfficialCopy_Type">
+		<xs:sequence>
+			<xs:element name="FileType" type="vr:OfficialCopyFileType_Type"/>
+			<xs:element name="FileName" type="xs:token"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PositiveMoneyAmount_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">An amount: a value with a currency
+			attribute</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="vr:Amount_Type">
+				<xs:attribute name="currency" type="cm:MSCurrCode_Type" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PurchaseInformation_Type">
+		<xs:sequence>
+			<xs:element name="SequenceNumber" type="vr:SequenceNumber_Type"/>
+			<xs:element name="ReferenceNumber" type="xs:token"/>
+			<xs:element name="IssuingDate" type="vr:RestrictedDate_Type"/>
+			<xs:element name="EUSupplier" type="vr:EUSupplier_Type"/>
+			<xs:element name="GoodsDescription" type="vr:GoodsDescription_Type" maxOccurs="unbounded"/>
+			<xs:element name="TransactionDescription" type="vr:TransactionDescription_Type"/>
+			<xs:element name="Deduction" type="vr:Deduction_Type"/>
+		</xs:sequence>
+		<xs:attribute name="simplifiedInvoice" type="xs:boolean" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="RecoveryInformation_Type">
+		<xs:sequence>
+			<xs:element name="BankAccount" type="vr:BankAccount_Type"/>
+			<xs:element name="PaymentType" type="vr:PaymentType_Type"/>
+			<xs:element name="PaymentReference" type="vr:PaymentInfo_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Reference_Type">
+		<xs:sequence>
+			<xs:element name="ReferenceNumber" type="vr:ApplicationNumber_Type"/>
+			<xs:element name="RefundingCountryCode" type="cm:EUCountryIsoCodeAlpha2_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RefundDecisionJustification_Type">
+		<xs:sequence>
+			<xs:element name="ReasonCode" type="vr:RefundDecisionJustificationReasonCode_Type"/>
+			<xs:element name="AdditionalInformation" type="xs:string" minOccurs="0"/>
+			<xs:element name="TransactionReference" type="vr:TransactionReference_Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RefundInformation_Type">
+		<xs:sequence>
+			<xs:element name="RequestedAmount" type="vr:SignedMoneyAmount_Type"/>
+			<xs:element name="AcceptedAmount" type="vr:SignedMoneyAmount_Type"/>
+			<xs:element name="DebitBalance" type="vr:DebitBalance_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Remark_Type">
+		<xs:sequence>
+			<xs:element name="Type" type="xs:int"/>
+			<xs:element name="SubType" type="xs:int"/>
+			<xs:element name="Details" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Report_Type">
+		<xs:sequence>
+			<xs:element name="Status" type="vr:Status_Type"/>
+			<xs:element name="Remark" type="vr:Remark_Type" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Representative_Type">
+		<xs:complexContent>
+			<xs:extension base="vr:BaseTrader_Type">
+				<xs:sequence>
+					<xs:element name="CountryCode" type="cm:CountryCode_Type"/>
+					<xs:element name="EmailAddress" type="cm:EMail_Type"/>
+					<xs:element name="RepresentativeID" type="vr:RepresentativeID_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RepresentativeID_Type">
+		<xs:simpleContent>
+			<xs:extension base="xs:token">
+				<xs:attribute name="issuedBy" type="cm:CountryCode_Type" use="required"/>
+				<xs:attribute name="identificationType" type="vr:RepresentativeIDType_Type" use="required"/>
+				<xs:attribute name="otherQlf" type="xs:token" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SignedMoneyAmount_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">An amount: a value with a currency
+			attribute</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="vr:SignedAmount_Type">
+				<xs:attribute name="currency" type="cm:MSCurrCode_Type" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="TextualDescription_Type">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="language" type="cm:EULanguageCode_Type" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Trader_Type">
+		<xs:complexContent>
+			<xs:extension base="vr:BaseTrader_Type">
+				<xs:sequence>
+					<xs:element name="CountryCode" type="cm:CountryCode_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TransactionDescription_Type">
+		<xs:sequence>
+			<xs:element name="TaxableAmount" type="vr:SignedMoneyAmount_Type"/>
+			<xs:element name="VATAmount" type="vr:SignedMoneyAmount_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TransactionReference_Type">
+		<xs:sequence>
+			<xs:element name="SequenceNumber" type="vr:SequenceNumber_Type"/>
+			<xs:choice>
+				<xs:element name="InvoiceReference" type="vr:InvoiceReference_Type"/>
+				<xs:element name="ImportReference" type="vr:ImportReference_Type"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateRefusal_Type">
+		<xs:sequence>
+			<xs:element name="ReasonCode" type="vr:UpdateRefusalReasonCode_Type"/>
+			<xs:element name="EffectiveVersion" type="vr:RestrictedDateTime_Type"/>
+			<xs:element name="AdditionalInformation" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VATNumber_Type">
+		<xs:simpleContent>
+			<xs:extension base="cm:VATNumber_Type">
+				<xs:attribute name="issuedBy" type="cm:EUCountryIsoCodeAlpha2_Type" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="VATNumberOrTIN_Type">
+		<xs:simpleContent>
+			<xs:extension base="cm:VATNumberOrTIN_Type">
+				<xs:attribute name="issuedBy" type="cm:EUCountryIsoCodeAlpha2_Type" use="required" fixed="DE"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="VersionedReference_Type">
+		<xs:complexContent>
+			<xs:extension base="vr:Reference_Type">
+				<xs:sequence>
+					<xs:element name="Version" type="vr:RestrictedDateTime_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- SIMPLE TYPES -->
+	<xs:simpleType name="AccountName_Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="70"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value="[A-Za-z0-9/\-?:().,'+ ]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AdjustmentDecision_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Accepted"/>
+			<xs:enumeration value="Refused"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Amount_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A positive decimal amount, resticted to two decimal
+				places</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="2"/>
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ApplicationNumber_Type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(AT|BE|BG|CY|CZ|DE|DK|EE|EL|ES|FI|FR|GB|HU|IE|IT|LT|LU|LV|MT|NL|PL|PT|RO|SE|SI|SK){1}\p{IsBasicLatin}{0,16}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BankAccountOwnerType_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="applicant"/>
+			<xs:enumeration value="representative"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BIC_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Bank Identifer Code</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3}){0,1}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BusinessActivity_Type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CorrectionReason_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="previous payment"/>
+			<xs:enumeration value="penalty"/>
+			<xs:enumeration value="NETP interest"/>
+			<xs:enumeration value="MSREF interest"/>
+			<xs:enumeration value="recovery"/>
+			<xs:enumeration value="transfer of balance"/>
+			<xs:enumeration value="bank fees"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Disclose_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01">
+				<xs:annotation>
+					<xs:documentation>Information for internal use of tax administration.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="02">
+				<xs:annotation>
+					<xs:documentation>Inform NETP unofficially.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="03">
+				<xs:annotation>
+					<xs:documentation>Officially notify the NETP.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FileType_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="application/pdf"/>
+			<xs:enumeration value="image/jpeg"/>
+			<xs:enumeration value="image/tiff"/>
+			<xs:enumeration value="application/zip"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MessageType_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="VATRefundApplication"/>
+			<xs:enumeration value="ApplicationReceipt"/>
+			<xs:enumeration value="VATRefundDecision"/>
+			<xs:enumeration value="ProRataRateAdjustment"/>
+			<xs:enumeration value="AdjustmentReceipt"/>
+			<xs:enumeration value="AdjustmentResult"/>
+			<xs:enumeration value="NETPNotification"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MSIBAN_Type">
+		<xs:restriction base="cm:IBAN_Type">
+			<xs:pattern value="(AT|BE|BG|CY|CZ|DE|DK|EE|GR|ES|FI|FR|GB|HU|IE|IT|LT|LU|LV|MC|MT|NL|PL|PT|RO|SE|SI|SK){1}.*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NETPNotificationType_Type">
+		<xs:restriction base="vr:MessageType_Type">
+			<xs:enumeration value="ApplicationReceipt"/>
+			<xs:enumeration value="VATRefundDecision"/>
+			<xs:enumeration value="AdjustmentReceipt"/>
+			<xs:enumeration value="AdjustmentResult"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OfficialCopyFileType_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="application/pdf"/>
+			<xs:enumeration value="image/jpeg"/>
+			<xs:enumeration value="image/tiff"/>
+			<xs:enumeration value="application/zip"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentType_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Payment"/>
+			<xs:enumeration value="Reimbursement"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProRataRateCorrection_Type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProRataRate_Type">
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="2"/>
+			<xs:minInclusive value="0.01"/>
+			<xs:maxInclusive value="99.99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ReferenceNumber_Type">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="\p{IsBasicLatin}*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ReferenceNumber18_Type">
+		<xs:restriction base="vr:ReferenceNumber_Type">
+			<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RefundDecision_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Accepted"/>
+			<xs:enumeration value="PartiallyAccepted"/>
+			<xs:enumeration value="Refused"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RepresentativeIDType_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NVAT"/>
+			<xs:enumeration value="TIN"/>
+			<xs:enumeration value="other"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RestrictedDate_Type">
+		<xs:restriction base="xs:date">
+			<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RestrictedDateTime_Type">
+		<xs:restriction base="xs:dateTime">
+			<xs:pattern value="\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SequenceNumber_Type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="999999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SignedAmount_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A decimal amount, resticted to two decimal
+				places</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Status_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="accepted"/>
+			<xs:enumeration value="rejected"/>
+			<xs:enumeration value="warning"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentInfo_Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="140"/>
+			<xs:pattern value="[A-Za-z0-9+\-\*/\s]{1,140}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UpdateRefusalReasonCode_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+			Correction not allowed</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="02">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+			The updated VAT Refund Application cannot present new refund requests</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="03">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+			Correction received outside of allowed period</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="04">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+			Type of file is incorrect</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="05">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+			The updated application does not belong to the same period as the initial one</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="99">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+			Other</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
