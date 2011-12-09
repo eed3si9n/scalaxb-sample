@@ -10,4 +10,4 @@ packageName in scalaxb in Compile := "intervat"
 
 sourceGenerators in Compile <+= scalaxb in Compile
 
-// libraryDependencies += "net.databinder" %% "dispatch-http" % "0.8.5"
+libraryDependencies += "net.databinder" %% "dispatch-http" % "0.8.5"
