@@ -21,4 +21,10 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
+  <xs:complexType name="USAddressBook">
+    <xs:sequence>
+      <xs:element name="address"   type="ipo:USAddress" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
 </xs:schema>
