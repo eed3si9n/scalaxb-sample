@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://example.com/"
+            xmlns:ex="http://example.com/"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified" attributeFormDefault="qualified">
+
+  <xsd:element name="customer" type="ex:Customer" />
+
+  <xsd:complexType name="Customer">
+    <xsd:sequence>
+      <xsd:element name="name" type="xsd:string"/>
+      <xsd:element name="id" type="xsd:string"/>
+      <xsd:element name="address" type="ex:Address"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="Address">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="internalAddress" type="ex:InternalAddress" />
+        <xsd:element name="ExternalAddress" type="ex:ExternalAddress" />
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="TypedAddress">
+    <xsd:complexContent>
+      <xsd:extension base="ex:Address">
+        <xsd:sequence>
+          <xsd:element name="addressType"   type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="InternalAddress">
+    <xsd:sequence>
+      <xsd:element name="line1" type="xsd:string"/>
+      <xsd:element name="line2" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ExternalAddress">
+    <xsd:sequence>
+      <xsd:element name="id1" type="xsd:integer"/>
+      <xsd:element name="id2" type="xsd:integer"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
