@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--© 2010 Thomson Reuters-->
+<wsdl:definitions xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" 
+          xmlns:faults="http://www.reuters.com/ns/2006/05/01/webservices/rkd/Faults_1" 
+          xmlns:wsa10="http://www.w3.org/2005/08/addressing" 
+          xmlns:sns="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1" 
+          xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" 
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+          xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding" 
+          xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" 
+          xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" 
+          xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" 
+          xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" 
+          xmlns:tns="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1/HttpsAndAnonymous" 
+          xmlns:cache="http://www.reuters.com/ns/2008/03/01/webservices/rkd/Cache_1" 
+          xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" 
+          xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" 
+          xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" 
+          xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+          name="TokenManagement_1_HttpsAndAnonymous" 
+          targetNamespace="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1/HttpsAndAnonymous" 
+          xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>Thomson Reuters Knowledge API - This WSDL document has been dynamically generated. Do not modify this document.</wsdl:documentation>
+  <wsp:Policy wsu:Id="HttpsAndAnonymous_ITokenManagement_1_HttpsAndAnonymous_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1/HttpsAndAnonymous/Imports">
+      <xsd:import schemaLocation="http://api.rkd.reuters.com/schemas/TokenManagement/TokenManagement_1.xsd" namespace="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1" />
+      <xsd:import schemaLocation="http://api.rkd.reuters.com/schemas/Faults_1.xsd" namespace="http://www.reuters.com/ns/2006/05/01/webservices/rkd/Faults_1" />
+      <xsd:import schemaLocation="http://api.rkd.reuters.com/schemas/Serialization_200310.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://api.rkd.reuters.com/schemas/Cache_1.xsd" namespace="http://www.reuters.com/ns/2008/03/01/webservices/rkd/Cache_1" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITokenManagement_1_HttpsAndAnonymous_ITokenManagement_1_HttpsAndAnonymous_CreateImpersonationToken_2_InputMessage">
+    <wsdl:part name="request" element="sns:CreateImpersonationToken_Request_2" />
+  </wsdl:message>
+  <wsdl:message name="ITokenManagement_1_HttpsAndAnonymous_ITokenManagement_1_HttpsAndAnonymous_CreateImpersonationToken_2_OutputMessage">
+    <wsdl:part name="response" element="sns:CreateImpersonationToken_Response_2" />
+  </wsdl:message>
+  <wsdl:message name="ITokenManagement_1_HttpsAndAnonymous_ITokenManagement_1_HttpsAndAnonymous_CreateImpersonationToken_2_ClientErrorReference_FaultMessage">
+    <wsdl:part name="detail" element="faults:ClientErrorReference" />
+  </wsdl:message>
+  <wsdl:message name="ITokenManagement_1_ITokenManagement_1_HttpsAndAnonymous_CreateServiceToken_1_InputMessage">
+    <wsdl:part name="request" element="sns:CreateServiceToken_Request_1" />
+  </wsdl:message>
+  <wsdl:message name="ITokenManagement_1_ITokenManagement_1_HttpsAndAnonymous_CreateServiceToken_1_OutputMessage">
+    <wsdl:part name="response" element="sns:CreateServiceToken_Response_1" />
+  </wsdl:message>
+  <wsdl:message name="ITokenManagement_1_ITokenManagement_1_HttpsAndAnonymous_CreateServiceToken_1_ClientErrorReference_FaultMessage">
+    <wsdl:part name="detail" element="faults:ClientErrorReference" />
+  </wsdl:message>
+  <wsdl:message name="CacheRequest">
+    <wsdl:part name="CacheRequestPart" element="cache:CacheRequest" />
+  </wsdl:message>
+  <wsdl:message name="CacheResponse">
+    <wsdl:part name="CacheResponsePart" element="cache:CacheResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ITokenManagement_1">
+    <wsdl:operation name="CreateImpersonationToken_2">
+      <wsdl:input wsaw:Action="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1/CreateImpersonationToken_2" name="CreateImpersonationToken_2_RequestMessage" message="tns:ITokenManagement_1_HttpsAndAnonymous_ITokenManagement_1_HttpsAndAnonymous_CreateImpersonationToken_2_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1/CreateImpersonationToken_2_Reply" name="CreateImpersonationToken_2_ResponseMessage" message="tns:ITokenManagement_1_HttpsAndAnonymous_ITokenManagement_1_HttpsAndAnonymous_CreateImpersonationToken_2_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.reuters.com/ns/2006/05/01/webservices/rkd/Faults_1/Fault_1_Reply" name="ClientErrorReference" message="tns:ITokenManagement_1_HttpsAndAnonymous_ITokenManagement_1_HttpsAndAnonymous_CreateImpersonationToken_2_ClientErrorReference_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateServiceToken_1">
+      <wsdl:input wsaw:Action="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1/CreateServiceToken_1" name="CreateServiceToken_1_RequestMessage" message="tns:ITokenManagement_1_ITokenManagement_1_HttpsAndAnonymous_CreateServiceToken_1_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1/CreateServiceToken_1_Reply" name="CreateServiceToken_1_ResponseMessage" message="tns:ITokenManagement_1_ITokenManagement_1_HttpsAndAnonymous_CreateServiceToken_1_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.reuters.com/ns/2006/05/01/webservices/rkd/Faults_1/Fault_1_Reply" name="ClientErrorReference" message="tns:ITokenManagement_1_ITokenManagement_1_HttpsAndAnonymous_CreateServiceToken_1_ClientErrorReference_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HttpsAndAnonymous_ITokenManagement_1_HttpsAndAnonymous" type="tns:ITokenManagement_1">
+    <wsp:PolicyReference URI="#HttpsAndAnonymous_ITokenManagement_1_HttpsAndAnonymous_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateImpersonationToken_2">
+      <soap12:operation soapAction="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1/CreateImpersonationToken_2" style="document" />
+      <wsdl:input name="CreateImpersonationToken_2_RequestMessage">
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CacheRequest" part="CacheRequestPart" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateImpersonationToken_2_ResponseMessage">
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CacheResponse" part="CacheResponsePart" use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ClientErrorReference">
+        <soap12:fault name="ClientErrorReference" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateServiceToken_1">
+      <soap12:operation soapAction="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1/CreateServiceToken_1" style="document" />
+      <wsdl:input name="CreateServiceToken_1_RequestMessage">
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CacheRequest" part="CacheRequestPart" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateServiceToken_1_ResponseMessage">
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CacheResponse" part="CacheResponsePart" use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ClientErrorReference">
+        <soap12:fault name="ClientErrorReference" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TokenManagement_1">
+    <wsdl:port name="HttpsAndAnonymous_ITokenManagement_1_HttpsAndAnonymous" binding="tns:HttpsAndAnonymous_ITokenManagement_1_HttpsAndAnonymous">
+      <soap12:address location="https://api.rkd.reuters.com/api/TokenManagement/TokenManagement.svc/Anonymous" />
+      <!--<wsa10:EndpointReference>
+        <wsa10:Address>https://api.rkd.reuters.com/api/TokenManagement/TokenManagement.svc/Anonymous</wsa10:Address>
+      </wsa10:EndpointReference>-->
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
