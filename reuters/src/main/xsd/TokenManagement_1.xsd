@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2010 Thomson Reuters -->
+<xs:schema id="TokenManagement_1" targetNamespace="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1" elementFormDefault="qualified" xmlns="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1" xmlns:mstns="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1" xmlns:global="http://www.reuters.com/ns/2006/05/01/webservices/rkd/Common_1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:import id="Common_1" namespace="http://www.reuters.com/ns/2006/05/01/webservices/rkd/Common_1" schemaLocation="Common_1.xsd"/>
+  <xs:simpleType name="UsernameType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="EffectiveUsernameType">
+    <xs:simpleContent>
+      <xs:extension base="UsernameType">
+        <xs:attribute name="userType" use="optional" default="Reuters">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Reuters" />
+              <xs:enumeration value="Linked" />
+              <xs:enumeration value="Unmanaged" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>        
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+	<xs:simpleType name="PasswordType">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:complexType name="SetPassword_Request_1">
+		<xs:sequence>
+      <xs:element ref="global:ApplicationID"/>
+      <xs:element ref="Username"/>
+      <xs:element name="OldPassword" type="PasswordType"/>
+			<xs:element name="NewPassword" type="PasswordType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SetPassword_Response_1">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="CreateToken_Response">
+		<xs:sequence>
+			<xs:element name="Expiration" type="TokenExpirationType"/>
+      <xs:element ref="global:Token"/>
+    </xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TokenExpirationType">
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:complexType name="ValidateToken_Request_1">
+    <xs:sequence>
+      <xs:element ref="global:ApplicationID"/>
+      <xs:element ref="global:Token"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ValidateToken_Response_1">
+		<xs:sequence>
+			<xs:element name="Expiration" type="TokenExpirationType"/>
+			<xs:element name="Valid" type="xs:boolean"/>
+      <xs:element name="Error" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Invalid"/>
+            <xs:enumeration value="Expired"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreateServiceToken_Request_1">
+		<xs:group ref="ServiceCredentialsGroup"/>
+	</xs:complexType>
+	<xs:complexType name="CreateImpersonationToken_Request_1">
+		<xs:annotation>
+			<xs:documentation>
+				This request form requires the client application is passing the
+				RKAPI Authorization header containing the Service token and Application ID
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+      <xs:element ref="EffectiveUsername"/>
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreateImpersonationToken_Request_2">
+		<xs:annotation>
+			<xs:documentation>
+				This request form provides a way to directly create an impersonation token
+				by passing the service account credentials in addition to the effective user name
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:group ref="ServiceCredentialsGroup"/>
+			<xs:element ref="EffectiveUsername"/>
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:complexType name="CreateImpersonationToken_Request_3">
+    <xs:sequence>
+      <xs:element ref="global:ApplicationID"/>
+      <xs:element ref="global:Token"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:group name="ServiceCredentialsGroup">
+		<xs:sequence>
+			<xs:element ref="global:ApplicationID"/>
+			<xs:element ref="Username"/>
+			<xs:element name="Password" type="PasswordType"/>
+		</xs:sequence>
+	</xs:group>
+  <xs:element name="Username" type="UsernameType"/>
+  <xs:element name="EffectiveUsername" type="EffectiveUsernameType"/>
+  <xs:element name="CreateServiceToken_Request_1" type="CreateServiceToken_Request_1">
+	</xs:element>
+	<xs:element name="CreateServiceToken_Response_1" type="CreateToken_Response">
+	</xs:element>
+	<xs:element name="CreateImpersonationToken_Request_1" type="CreateImpersonationToken_Request_1">
+	</xs:element>
+	<xs:element name="CreateImpersonationToken_Response_1" type="CreateToken_Response">
+	</xs:element>
+	<xs:element name="CreateImpersonationToken_Request_2" type="CreateImpersonationToken_Request_2">
+	</xs:element>
+	<xs:element name="CreateImpersonationToken_Response_2" type="CreateToken_Response">
+	</xs:element>
+  <xs:element name="CreateImpersonationToken_Request_3" type="CreateImpersonationToken_Request_3">
+  </xs:element>
+  <xs:element name="CreateImpersonationToken_Response_3" type="CreateToken_Response">
+  </xs:element>
+	<xs:element name="ValidateToken_Request_1" type="ValidateToken_Request_1">
+	</xs:element>
+	<xs:element name="ValidateToken_Response_1" type="ValidateToken_Response_1">
+	</xs:element>
+	<xs:element name="SetPassword_Request_1" type="SetPassword_Request_1">
+	</xs:element>
+	<xs:element name="SetPassword_Response_1" type="SetPassword_Response_1">
+	</xs:element>
+</xs:schema>

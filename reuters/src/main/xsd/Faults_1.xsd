@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2010 Thomson Reuters -->
+<xs:schema xmlns:tns="http://www.reuters.com/ns/2006/05/01/webservices/rkd/Faults_1" elementFormDefault="qualified" targetNamespace="http://www.reuters.com/ns/2006/05/01/webservices/rkd/Faults_1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ClientErrorReference">
+    <xs:sequence>
+      <xs:element name="Timestamp" type="xs:dateTime" />
+      <xs:element name="ErrorReference" nillable="true" type="xs:string" />
+      <xs:element name="ServerReference" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ClientErrorReference" nillable="true" type="tns:ClientErrorReference" />
+</xs:schema>

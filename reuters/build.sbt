@@ -6,7 +6,7 @@ name := "scalaxb-reuters-sample"
 
 seq(scalaxbSettings: _*)
 
-packageName in scalaxb in Compile := "generated"
+packageName in scalaxb in Compile := "reuters"
 
 sourceGenerators in Compile <+= scalaxb in Compile
 

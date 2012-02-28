@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- © 2010 Thomson Reuters -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"
+           targetNamespace="http://www.reuters.com/ns/2008/03/01/webservices/rkd/Cache_1"
+           xmlns="http://www.reuters.com/ns/2008/03/01/webservices/rkd/Cache_1"
+           elementFormDefault="qualified">
+	<xs:complexType name="NoData"/>
+	<xs:simpleType name="Warning">
+		<xs:annotation>
+			<xs:documentation>
+				The warnings used are akin to the level 1xx warnings used in HTTP 1.1 caching.
+				http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.46
+				110 Response is stale MUST be included whenever the returned response is stale.
+				111 Revalidation failed MUST be included if a cache returns a stale response because an attempt to revalidate the response failed, due to an inability to reach the server.
+				112 Disconnected operation SHOULD be included if the cache is intentionally disconnected from the rest of the network for a period of time.
+				113 Heuristic expiration MUST be included if the cache heuristically chose a freshness lifetime greater than 24 hours and the response's age is greater than 24 hours.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="StaleResponse"/>
+			<xs:enumeration value="FailedRevalidation"/>
+			<xs:enumeration value="Disconnected"/>
+			<xs:enumeration value="HeuristicExpiration"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="CacheRequest" abstract="true">
+		<xs:annotation>
+			<xs:documentation>
+				Abstract base type for all CacheRequests
+			</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+
+	<xs:complexType name="ETagCacheRequest">
+		<xs:complexContent>
+			<xs:extension base="CacheRequest">
+				<xs:sequence>
+					<xs:element name="Condition">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="MaxAge" type="xs:int" minOccurs="0"/>
+								<xs:element name="ETag" type="xs:string"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="LastModifiedCacheRequest">
+		<xs:complexContent>
+			<xs:extension base="CacheRequest">
+				<xs:sequence>
+					<xs:element name="Condition">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="MaxAge" type="xs:int" minOccurs="0"/>
+								<xs:element name="LastModified" type="xs:dateTime"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="EndToEndReloadCacheRequest">
+		<xs:complexContent>
+			<xs:extension base="CacheRequest">
+				<xs:sequence>
+					<xs:element name="EndToEndReload">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="MaxAge" type="xs:int" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="PassThroughCacheRequest">
+		<xs:complexContent>
+			<xs:extension base="CacheRequest">
+				<xs:sequence>
+					<xs:element name="PassThrough" type="NoData" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="AuthorizeOnlyCacheRequest">
+		<xs:complexContent>
+			<xs:extension base="CacheRequest">
+				<xs:sequence>
+					<xs:element name="AuthorizeOnly" type="NoData" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="CacheRequest" type="CacheRequest" />
+	<!--
+  <xs:simpleType name="Revalidate">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MustRevalidate"/>
+      <xs:enumeration value="MustAuthorize"/>
+    </xs:restriction>
+  </xs:simpleType>
+-->
+	<xs:simpleType name="CacheStorage">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Public"/>
+			<xs:enumeration value="Private"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="Validation" abstract="true">
+		<xs:sequence>
+			<!--
+            <xs:element name="Revalidate" type="Revalidate" minOccurs="0"/>
+      -->
+			<xs:element name="MustAuthorize" type="xs:boolean" minOccurs="1" />
+			<xs:element name="MustRevalidateOnStale" type="xs:boolean" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ETagValidation">
+		<xs:complexContent>
+			<xs:extension base="Validation">
+				<xs:sequence>
+					<xs:element name="ETag" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="LastModifiedValidation">
+		<xs:complexContent>
+			<xs:extension base="Validation">
+				<xs:sequence>
+					<xs:element name="LastModified" type="xs:dateTime"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="Expiration" abstract="true" />
+
+	<xs:complexType name="RelativeExpiration">
+		<xs:complexContent>
+			<xs:extension base="Expiration">
+				<xs:sequence>
+					<xs:element name="ExpiresIn" type="xs:int"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AbsoluteExpiration">
+		<xs:complexContent>
+			<xs:extension base="Expiration">
+				<xs:sequence>
+					<xs:element name="ExpiresAt" type="xs:dateTime"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="Expiration" type="Expiration" />
+
+	<xs:complexType name="AuthorizedCacheResponse">
+		<xs:complexContent>
+			<xs:extension base="CacheResponse">
+				<xs:sequence>
+					<xs:element name="Authorized" type="NoData" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="DoNotStoreCacheResponse">
+		<xs:complexContent>
+			<xs:extension base="CacheResponse">
+				<xs:sequence>
+					<xs:element name="DoNotStore" type="NoData" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="NotModifiedCacheResponse">
+		<xs:complexContent>
+			<xs:extension base="CacheResponse">
+				<xs:sequence>
+					<xs:element name="NotModified">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element type="Expiration" name="Expiration" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="CacheControlCacheResponse">
+		<xs:complexContent>
+			<xs:extension base="CacheResponse">
+				<xs:sequence>
+					<xs:element name="CacheControl">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="CacheStorage" type="CacheStorage"/>
+								<xs:element name="Expiration" type="Expiration"/>
+								<xs:element name="Validation" type="Validation"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="CacheResponse" abstract="true">
+		<xs:sequence>
+			<xs:element name="Date" type="xs:dateTime"/>
+			<xs:element name="Warnings" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence minOccurs="1" maxOccurs="1">
+						<xs:element name="Warning" type="Warning" minOccurs="1" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="CacheResponse" type="CacheResponse" />
+
+</xs:schema>
