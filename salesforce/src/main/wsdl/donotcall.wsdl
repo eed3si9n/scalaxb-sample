@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="https://telemarketing.donotcall.gov/DownloadSvc/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="https://telemarketing.donotcall.gov/DownloadSvc/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="https://telemarketing.donotcall.gov/DownloadSvc/">
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strCoID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strCoPwd" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="userType" type="tns:UserType" />
+            <s:element minOccurs="1" maxOccurs="1" name="enumCertify" type="tns:CertificationEnum" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="UserType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Representative" />
+          <s:enumeration value="Downloader" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="CertificationEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="Agree" />
+          <s:enumeration value="Disagree" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginResult" type="tns:Response" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Response">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="code" type="tns:ResponseCodeEnum" />
+          <s:element minOccurs="0" maxOccurs="1" name="value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ResponseCodeEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="LoginOK" />
+          <s:enumeration value="LoginFailed" />
+          <s:enumeration value="LoginDisabled" />
+          <s:enumeration value="SubmitOK" />
+          <s:enumeration value="SubmitFailed" />
+          <s:enumeration value="InvalidSessionToken" />
+          <s:enumeration value="InvalidCompanyID" />
+          <s:enumeration value="InvalidFileReqToken" />
+          <s:enumeration value="RequestPending" />
+          <s:enumeration value="RequestCompleted" />
+          <s:enumeration value="NoChanges" />
+          <s:enumeration value="NoFullDownloadPerformed" />
+          <s:enumeration value="SessionExpired" />
+          <s:enumeration value="DownloadOK" />
+          <s:enumeration value="AlreadyDownloadedToday" />
+          <s:enumeration value="CertificationNotAgreed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SubmitDeltaFileRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="fileFormat" type="tns:FileFormat" />
+            <s:element minOccurs="0" maxOccurs="1" name="strSessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strCoID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="FileFormat">
+        <s:restriction base="s:string">
+          <s:enumeration value="Xml" />
+          <s:enumeration value="Flat" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SubmitDeltaFileRequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitDeltaFileRequestResult" type="tns:Response" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeltaFileRequestStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strSessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strRequestedFileToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strCoID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeltaFileRequestStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDeltaFileRequestStatusResult" type="tns:Response" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeltaFileUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strSessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strRequestedFileToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strCoID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeltaFileUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDeltaFileUrlResult" type="tns:Response" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CanGetFullFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strSessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strCoID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CanGetFullFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CanGetFullFileResult" type="tns:Response" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetURLS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="fileFormat" type="tns:FileFormat" />
+            <s:element minOccurs="0" maxOccurs="1" name="strSessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strCoID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetURLSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetURLSResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitDeltaFileRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitDeltaFileRequest" />
+  </wsdl:message>
+  <wsdl:message name="SubmitDeltaFileRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitDeltaFileRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDeltaFileRequestStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDeltaFileRequestStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetDeltaFileRequestStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDeltaFileRequestStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDeltaFileUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDeltaFileUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetDeltaFileUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDeltaFileUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="CanGetFullFileSoapIn">
+    <wsdl:part name="parameters" element="tns:CanGetFullFile" />
+  </wsdl:message>
+  <wsdl:message name="CanGetFullFileSoapOut">
+    <wsdl:part name="parameters" element="tns:CanGetFullFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetURLSSoapIn">
+    <wsdl:part name="parameters" element="tns:GetURLS" />
+  </wsdl:message>
+  <wsdl:message name="GetURLSSoapOut">
+    <wsdl:part name="parameters" element="tns:GetURLSResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DownloadSvcSoap">
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitDeltaFileRequest">
+      <wsdl:input message="tns:SubmitDeltaFileRequestSoapIn" />
+      <wsdl:output message="tns:SubmitDeltaFileRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeltaFileRequestStatus">
+      <wsdl:input message="tns:GetDeltaFileRequestStatusSoapIn" />
+      <wsdl:output message="tns:GetDeltaFileRequestStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeltaFileUrl">
+      <wsdl:input message="tns:GetDeltaFileUrlSoapIn" />
+      <wsdl:output message="tns:GetDeltaFileUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CanGetFullFile">
+      <wsdl:input message="tns:CanGetFullFileSoapIn" />
+      <wsdl:output message="tns:CanGetFullFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetURLS">
+      <wsdl:input message="tns:GetURLSSoapIn" />
+      <wsdl:output message="tns:GetURLSSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DownloadSvcSoap" type="tns:DownloadSvcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="https://telemarketing.donotcall.gov/DownloadSvc/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitDeltaFileRequest">
+      <soap:operation soapAction="https://telemarketing.donotcall.gov/DownloadSvc/SubmitDeltaFileRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeltaFileRequestStatus">
+      <soap:operation soapAction="https://telemarketing.donotcall.gov/DownloadSvc/GetDeltaFileRequestStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeltaFileUrl">
+      <soap:operation soapAction="https://telemarketing.donotcall.gov/DownloadSvc/GetDeltaFileUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CanGetFullFile">
+      <soap:operation soapAction="https://telemarketing.donotcall.gov/DownloadSvc/CanGetFullFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetURLS">
+      <soap:operation soapAction="https://telemarketing.donotcall.gov/DownloadSvc/GetURLS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DownloadSvcSoap12" type="tns:DownloadSvcSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="https://telemarketing.donotcall.gov/DownloadSvc/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitDeltaFileRequest">
+      <soap12:operation soapAction="https://telemarketing.donotcall.gov/DownloadSvc/SubmitDeltaFileRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeltaFileRequestStatus">
+      <soap12:operation soapAction="https://telemarketing.donotcall.gov/DownloadSvc/GetDeltaFileRequestStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeltaFileUrl">
+      <soap12:operation soapAction="https://telemarketing.donotcall.gov/DownloadSvc/GetDeltaFileUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CanGetFullFile">
+      <soap12:operation soapAction="https://telemarketing.donotcall.gov/DownloadSvc/CanGetFullFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetURLS">
+      <soap12:operation soapAction="https://telemarketing.donotcall.gov/DownloadSvc/GetURLS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DownloadSvc">
+    <wsdl:port name="DownloadSvcSoap" binding="tns:DownloadSvcSoap">
+      <soap:address location="https://telemarketing.donotcall.gov/DownloadSvc/DownloadSvc.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DownloadSvcSoap12" binding="tns:DownloadSvcSoap12">
+      <soap12:address location="https://telemarketing.donotcall.gov/DownloadSvc/DownloadSvc.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
