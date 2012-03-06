@@ -6,6 +6,8 @@ name := "scalaxb-salesforce-partner-sample"
 
 seq(scalaxbSettings: _*)
 
+protocolPackageName in scalaxb in Compile := Some("salesforce.binding")
+
 packageName in scalaxb in Compile := "salesforce"
 
 packageNames in scalaxb in Compile := Map(
