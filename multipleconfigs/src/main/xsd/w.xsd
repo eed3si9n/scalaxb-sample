@@ -1,0 +1,12 @@
+<xs:schema targetNamespace="http://www.example.com/weather"
+        elementFormDefault="qualified"
+        xmlns="http://www.example.com/weather"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:w="http://www.example.com/weather">
+  <xs:complexType name="Weather">
+    <xs:sequence>
+      <xs:element name="zip"   type="xs:positiveInteger"/>
+      <xs:element name="status" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
