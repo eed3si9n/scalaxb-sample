@@ -18,16 +18,14 @@ object Main extends App {
         <something></something>
       </soap:Header>
       <soap:Body>
-        <nfeStatusServicoNF2Result xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico2">
-          <retConsStatServ versao="2.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+        <nfeStatusServicoNF2Result xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico2"><retConsStatServ versao="2.00" xmlns="http://www.portalfiscal.inf.br/nfe">
             <tpAmb>2</tpAmb>
             <verAplic>SP_NFE_PL_006j</verAplic>
             <cStat>252</cStat>
             <xMotivo>Rejeio: Ambiente informado diverge do Ambiente de recebimento</xMotivo>
             <cUF>35</cUF>
             <dhRecbto>2012-03-24T17:05:03</dhRecbto>
-          </retConsStatServ>
-        </nfeStatusServicoNF2Result>
+          </retConsStatServ></nfeStatusServicoNF2Result>
       </soap:Body>
     </soap:Envelope>
 
