@@ -6,6 +6,8 @@ name := "scalaxb-nfe-sample"
 
 seq(scalaxbSettings: _*)
 
+// sources in scalaxb in Compile <<= xsdSource in scalaxb in Compile map { xsd => (xsd * "*.xsd").get }
+
 packageName in scalaxb in Compile := "nfe"
 
 packageNames in scalaxb in Compile := Map(
@@ -14,7 +16,8 @@ packageNames in scalaxb in Compile := Map(
   uri("http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento2")  -> "nfe.cancelamento",
   uri("http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao2")  -> "nfe.inutilizacao",
   uri("http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao2")      -> "nfe.recpcao",
-  uri("http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetRecepcao2")   -> "nfe.retrecepcao"
+  uri("http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetRecepcao2")   -> "nfe.retrecepcao",
+  uri("http://www.w3.org/2000/09/xmldsig#")                        -> "xmldsig"
 )
 
 protocolPackageName in scalaxb in Compile := Some("nfe")
