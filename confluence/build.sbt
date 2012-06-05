@@ -15,4 +15,4 @@ packageNames in scalaxb in Compile := Map(
 
 sourceGenerators in Compile <+= scalaxb in Compile
 
-libraryDependencies += "net.databinder" %% "dispatch-http" % "0.8.5"
+libraryDependencies += "net.databinder" % "dispatch-http_2.9.1" % "0.8.5"
