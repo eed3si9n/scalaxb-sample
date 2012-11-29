@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA/2003/05" targetNamespace="http://www.opentravel.org/OTA/2003/05">
+	<xsd:include schemaLocation="OTA_PingRS.xsd" />
+	<xsd:include schemaLocation="OTA_VehAvailRateRS.xsd" />
+	<xsd:include schemaLocation="OTA_VehRetResRS.xsd" />
+	<xsd:include schemaLocation="OTA_VehResRS.xsd" />
+	<xsd:include schemaLocation="OTA_VehModifyRS.xsd" />
+	<xsd:include schemaLocation="OTA_VehCancelRS.xsd" />
+	<xsd:include schemaLocation="OTA_VehLocDetailRS.xsd" />
+	<xsd:include schemaLocation="OTA_VehLocSearchRS.xsd" />
+</xsd:schema>
