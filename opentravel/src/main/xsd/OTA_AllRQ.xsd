@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA/2003/05" targetNamespace="http://www.opentravel.org/OTA/2003/05">
+  <xsd:include schemaLocation="OTA_CommonPrefs.xsd" />
+  <xsd:include schemaLocation="OTA_SimpleTypes.xsd" />
+
 	<xsd:include schemaLocation="OTA_PingRQ.xsd" />
 	<xsd:include schemaLocation="OTA_VehAvailRateRQ.xsd" />
 	<xsd:include schemaLocation="OTA_VehRetResRQ.xsd" />
