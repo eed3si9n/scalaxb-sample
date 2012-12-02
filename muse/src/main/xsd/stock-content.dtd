@@ -1,0 +1,34 @@
+ <!ELEMENT stock-content (stock-paragraph*,stock-section*) >
+ <!ATTLIST stock-content xmlns:xuse CDATA #IMPLIED
+                         xmlns:xhtml CDATA #IMPLIED
+                         xmlns:xi CDATA #IMPLIED>
+ <!ATTLIST stock-content model-version CDATA #REQUIRED>
+ <!ELEMENT stock-paragraph (description,content) >
+ <!ELEMENT stock-section (description,content) >
+ <!ELEMENT description (#PCDATA) >
+ <!ELEMENT xuse:p ANY >
+ <!ELEMENT xuse:section ANY >
+ <!ELEMENT content ANY >
+ <!ELEMENT xuse:previous-release EMPTY >
+
+ <!ELEMENT xuse:current-release EMPTY >
+
+ <!ELEMENT xuse:project EMPTY >
+
+ <!ELEMENT xuse:company EMPTY >
+
+ <!ELEMENT xuse:customer EMPTY >
+
+ <!ELEMENT xuse:current-year EMPTY >
+
+ <!ELEMENT xuse:current-date EMPTY >
+
+ <!ELEMENT xuse:current-time EMPTY >
+
+ <!ELEMENT xuse:current-datetime EMPTY >
+ <!ATTLIST xuse:p id ID #IMPLIED>
+ <!ATTLIST xuse:section id ID #IMPLIED
+                        title CDATA #IMPLIED>                        
+ <!ELEMENT xi:include EMPTY>
+  <!ATTLIST xi:include href CDATA #REQUIRED
+                                       xpointer CDATA #IMPLIED>

@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+        © Copyright 2005-2010, Mike Odling-Smee.  All rights reserved.
+        
+        Licensed under the Artistic License: 
+        http://www.opensource.org/licenses/artistic-license.php
+        
+Preamble
+
+        The intent of this document is to state the conditions under which a 
+        Package may be copied, such that the Copyright Holder maintains some 
+        semblance of artistic control over the development of the package, while 
+        giving the users of the package the right to use and distribute the Package
+            in a more-or-less customary fashion, plus the right to make reasonable 
+        modifications.
+
+Definitions:
+
+        * "Package" refers to the collection of files distributed by the 
+        Copyright Holder, and derivatives of that collection of files created 
+        through textual modification. 
+
+        * "Standard Version" refers to such a Package if it has not been modified, 
+        or has been modified in accordance with the wishes of the Copyright Holder.
+
+        * "Copyright Holder" is whoever is named in the copyright or copyrights for
+        the package. 
+
+        * "You" is you, if you're thinking about copying or distributing this Package.
+
+        * "Reasonable copying fee" is whatever you can justify on the basis of 
+        media cost, duplication charges, time of people involved, and so on. 
+        (You will not be required to justify it to the Copyright Holder, but 
+        only to the computing community at large as a market that must bear the 
+        fee.) 
+
+        * "Freely Available" means that no fee is charged for the item 
+        itself, though there may be fees involved in handling the item. It also 
+        means that recipients of the item may redistribute it under the same 
+        conditions they received it.
+
+        1. You may make and give away verbatim copies of the source form of the Standard 
+        Version of this Package without restriction, provided that you duplicate all of 
+        the original copyright notices and associated disclaimers.
+        
+        2. You may apply bug fixes, portability fixes and other modifications derived 
+        from the Public Domain or from the Copyright Holder. A Package modified in such 
+        a way shall still be considered the Standard Version.
+        
+        3. You may otherwise modify your copy of this Package in any way, provided that 
+        you insert a prominent notice in each changed file stating how and when you 
+        changed that file, and provided that you do at least ONE of the following:
+        
+                a) place your modifications in the Public Domain or otherwise make them 
+                Freely Available, such as by posting said modifications to Usenet or an 
+                equivalent medium, or placing the modifications on a major archive site such 
+                as ftp.uu.net, or by allowing the Copyright Holder to include your modifications 
+                in the Standard Version of the Package.
+        
+                b) use the modified Package only within your corporation or organization.
+        
+                c) rename any non-standard executables so the names do not conflict with 
+                standard executables, which must also be provided, and provide a separate 
+                manual page for each non-standard executable that clearly documents how it 
+                differs from the Standard Version.
+        
+                d) make other distribution arrangements with the Copyright Holder.
+        
+        4. You may distribute the programs of this Package in object code or executable 
+        form, provided that you do at least ONE of the following:
+        
+                a) distribute a Standard Version of the executables and library files, 
+                together with instructions (in the manual page or equivalent) on where to 
+                get the Standard Version.
+        
+                b) accompany the distribution with the machine-readable source of the 
+                Package with your modifications.
+        
+                c) accompany any non-standard executables with their corresponding Standard 
+                Version executables, giving the non-standard executables non-standard names, 
+                and clearly documenting the differences in manual pages (or equivalent), 
+                together with instructions on where to get the Standard Version.
+        
+                d) make other distribution arrangements with the Copyright Holder.
+        
+        5. You may charge a reasonable copying fee for any distribution of this Package. 
+        You may charge any fee you choose for support of this Package. You may not 
+        charge a fee for this Package itself. However, you may distribute this Package 
+        in aggregate with other (possibly commercial) programs as part of a larger 
+        (possibly commercial) software distribution provided that you do not advertise 
+        this Package as a product of your own.
+        
+        6. The scripts and library files supplied as input to or produced as output from 
+        the programs of this Package do not automatically fall under the copyright of 
+        this Package, but belong to whomever generated them, and may be sold 
+        commercially, and may be aggregated with this Package.
+        
+        7. C or perl subroutines supplied by you and linked into this Package shall not 
+        be considered part of this Package.
+        
+        8. The name of the Copyright Holder may not be used to endorse or promote 
+        products derived from this software without specific prior written permission.
+        
+        9. THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED 
+        WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF 
+        MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+The End
+        
+        Created: Mike Odling-Smee
+        $Author: odlingsmee $
+        $Revision: 1.32 $ $Date 2006/01/14 16:16:06$
+        Log: $Log: data-types.xsd,v $
+        Log: Revision 1.32  2010/05/11 09:43:27  odlingsmee
+        Log: Upgraded to model version 1.0
+        Log:
+        Log: Revision 1.31  2010/03/30 21:20:55  odlingsmee
+        Log: Getting trace report import working
+        Log:
+        Log: Revision 1.30  2010/02/18 13:01:54  odlingsmee
+        Log: Trying to sort out schema issues
+        Log:
+        Log: Revision 1.29  2010/02/05 16:42:55  odlingsmee
+        Log: Ongong improvements to CSVImport routine
+        Log:
+        Log: Revision 1.28  2010/02/05 13:07:39  odlingsmee
+        Log: Ongong improvements to CSVImport routine
+        Log:
+        Log: Revision 1.27  2010/01/22 16:58:53  odlingsmee
+        Log: Completed intial version XInclude support.
+        Log:
+        Log: Revision 1.26  2010/01/15 16:50:00  odlingsmee
+        Log: Improved the way filter criteria works for requirement lists
+        Log:
+        Log: Revision 1.25  2010/01/15 15:14:51  odlingsmee
+        Log: Improved replacement text functionality such that it can be used throughout.
+        Log:
+        Log: Revision 1.24  2009/07/04 08:43:00  odlingsmee
+        Log: Relaxed the schema for dates - Xuse will now allow date only as well as date and times
+        Log:
+        Log: Revision 1.23  2009/05/02 23:10:45  odlingsmee
+        Log: Improved validation routines and reporting as well as fixing a few schema errors.
+        Log:
+        Log: Revision 1.22  2009/04/26 22:11:47  odlingsmee
+        Log: Made generic import (with CSV support only for now) and option for the main Xuse class. Also added support for requirements lacking title.
+        Log:
+        Log: Revision 1.21  2009/04/25 13:41:11  odlingsmee
+        Log: Fixed some minor issues with annotations and taxonomies.
+        Log:
+        Log: Revision 1.20  2007/04/01 23:31:15  odlingsmee
+        Log: Updated support for generic document publication in HTML - specifically for the vision document.
+        Log:
+        Log: Revision 1.19  2007/03/24 21:29:10  odlingsmee
+        Log: Fixed schemas and improved validation coverage.
+        Log:
+        Log: Revision 1.18  2007/03/18 23:44:04  odlingsmee
+        Log: Added initial classes to perform schema validation.
+        Log:
+        Log: Revision 1.17  2007/03/13 23:49:14  odlingsmee
+        Log: Created the inital drafts of the document schema that will form the basis of all generic Xuse documents.
+        Log:
+        Log: Revision 1.16  2007/03/11 19:35:55  odlingsmee
+        Log: Updated model to allow for extensibility (i.e. the model can be extended using foreign namespaces).
+        Log:
+        Log: Revision 1.15  2006/03/20 21:27:19  odlingsmee
+        Log: Fixed a few issues with the schemas as well as updated some documentation
+        Log:
+        Log: Revision 1.14  2006/03/15 22:16:18  odlingsmee
+        Log: Fixed a few issues with the project glossary and sorted the requirements view to be grouped by requirement type
+        Log:
+        Log: Revision 1.13  2006/03/07 22:17:42  odlingsmee
+        Log: Added first draft of glossary support
+        Log:
+        Log: Revision 1.12  2006/03/02 21:24:59  odlingsmee
+        Log: Added support for stakeholders
+        Log:
+        Log: Revision 1.11  2006/02/03 22:24:21  odlingsmee
+        Log: Fixed a minor bug in the data-types.xsd schema. Also fixed a bug in the traceability between requirements and use-cases.
+        Log:
+        Log: Revision 1.10  2006/01/21 17:41:20  odlingsmee
+        Log: Added Java class that is uded by the XSL to scan for use-cases and added the XSLTS to pull things together for the prototype HTML site.
+        Log:
+        Log: Revision 1.9  2006/01/19 21:04:00  odlingsmee
+        Log: Added more requirements
+        Log:
+        Log: Revision 1.8  2006/01/18 22:16:05  odlingsmee
+        Log: Add linking from use-cases to requirements and other use-case
+        Log:
+        Log: Revision 1.7  2006/01/17 21:14:28  odlingsmee
+        Log: Added support for annotations
+        Log:
+        Log: Revision 1.6  2006/01/15 12:51:22  odlingsmee
+        Log: Updated use-case schema to support business-rules.
+        Log:
+        Log: Revision 1.5  2006/01/14 21:31:04  odlingsmee
+        Log: Updated use-case schema to support main flow, alternate flows and excepin flows. Also added XSLT for HTML view of use-case.
+        Log:
+        Log: Revision 1.4  2006/01/14 16:49:05  odlingsmee
+        Log: Minor mods
+        Log:
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xuse="http://xuse.sourceforge.net"
+           targetNamespace="http://xuse.sourceforge.net"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           version="1.0">
+
+    <xs:include schemaLocation="replacement-elements.xsd"/>
+               
+	<xs:element name="req" type="xuse:requirementType"/>
+	<xs:element name="title" type="xuse:titleType"/>
+	<xs:element name="description" type="xuse:descriptionType"/>
+	<xs:element name="classification" type="xuse:classificationType"/>
+	<xs:element name="taxonomy" type="xuse:taxonomyType" nillable="false"/>
+	<xs:element name="package"/>
+	<xs:element name="type" default="functional" nillable="false">
+	   <xs:complexType>
+	       <xs:simpleContent>
+				<xs:extension base="xuse:requirementTypes">
+				    <xs:attribute name="is-feature" type="xs:boolean" use="optional"/>
+				</xs:extension>			
+		</xs:simpleContent>		
+	</xs:complexType>
+	</xs:element>
+	<xs:element name="parent">
+		<xs:complexType>
+			<xs:attribute name="refId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="requirementTypes">
+	   <xs:restriction base="xs:string">
+	        <xs:enumeration value="business"/>
+	        <xs:enumeration value="success-criteria"/>
+	        <xs:enumeration value="assumption"/>
+	        <xs:enumeration value="constraint"/>
+            <xs:enumeration value="functional"/>
+            <xs:enumeration value="non-functional"/>            
+            <xs:enumeration value="architectural"/>
+            <xs:enumeration value="technical"/>
+            <xs:enumeration value="inverse"/>
+        </xs:restriction>
+	</xs:simpleType>
+	<xs:element name="status" type="xuse:statusType"/>
+    <xs:element name="author" type="xuse:authorType"/>
+	<xs:element name="actor-ref" type="xuse:actor-refType"/>
+	<xs:element name="document-history" type="xuse:document-historyType"/>
+    <xs:element name="intended-audience" type="xuse:audienceType"/>
+	<xs:element name="version" type="xuse:versionType"/>
+    <xs:element name="stakeholder" type="xuse:stakeholderType"/>
+    <xs:element name="annotation" type="xuse:annotationType"/>
+	<xs:element name="req-ref" type="xuse:requirement-refType" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Reference to a requirement</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+    <xs:element name="stakeholder-ref" type="xuse:stakeholder-refType" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Reference to a stakeholder</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="external-link" type="xuse:external-linkType" nillable="true">
+        <xs:annotation>
+            <xs:documentation>Reference to an external entity</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="uc-ref" type="xuse:use-case-refType" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Reference to a use-case</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Data types below -->
+	<xs:complexType name="requirementType">
+		<xs:sequence>
+			<xs:element ref="xuse:annotation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="xuse:title" minOccurs="0"/>
+			<xs:element ref="xuse:description"/>
+         <xs:element ref="xuse:author" minOccurs="0"/>
+			<xs:element ref="xuse:classification" minOccurs="0"/>
+			<xs:element ref="xuse:parent" minOccurs="0"/>
+			<xs:element ref="xuse:req-ref" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element ref="xuse:stakeholder-ref" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element ref="xuse:external-link" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="version" type="xs:double" use="required"/>
+		<xs:attribute name="strength" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="shall"/>
+					<xs:enumeration value="should"/>
+					<xs:enumeration value="may"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="creation-date" type="xuse:dateOrDateTimeType" use="required"/>
+      <xs:attribute name="modification-date" type="xuse:dateOrDateTimeType" use="required"/>
+      <xs:anyAttribute processContents="lax" namespace="##other"/>
+	</xs:complexType>
+	<xs:complexType name="titleType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="xuse:replacement-text-elements-group"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="descriptionType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="xuse:referenceType-group"/>
+          <xs:group ref="xuse:replacement-text-elements-group"/>
+          <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice>
+		  <xs:anyAttribute processContents="lax" namespace="##other"/>
+    </xs:complexType>
+    <xs:complexType name="narrativeType">
+    		<xs:simpleContent>
+        		<xs:extension base="xs:string">
+        		</xs:extension>
+        	</xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="taxonomyType">
+    		<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="classifier" use="required"/>
+        		</xs:extension>
+        </xs:simpleContent>      
+    </xs:complexType>
+	<xs:complexType name="classificationType">
+		<xs:sequence>
+			<xs:element ref="xuse:type"/>
+			<xs:element ref="xuse:status"/>
+			<xs:element ref="xuse:package" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="xuse:taxonomy" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:anyAttribute processContents="lax" namespace="##other"/>
+	</xs:complexType>
+	<xs:complexType name="packageType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="statusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="proposed"/>
+			<xs:enumeration value="agreed"/>
+			<xs:enumeration value="onhold"/>
+			<xs:enumeration value="rejected"/>
+			<xs:enumeration value="withdrawn"/>
+			<xs:enumeration value="implemented"/>
+			<xs:enumeration value="partially-implemented"/>
+			<xs:enumeration value="operational"/>
+		</xs:restriction>
+	</xs:simpleType>
+    <xs:simpleType name="audienceType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="all"/>
+			<xs:enumeration value="internal"/>
+			<xs:enumeration value="client"/>
+			<xs:enumeration value="requirements"/>
+         <xs:enumeration value="development"/>
+         <xs:enumeration value="design"/>
+         <xs:enumeration value="test"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="actor-refType">
+		<xs:attribute name="refId" use="required"/>
+	</xs:complexType>
+    <xs:complexType name="stakeholder-refType">
+		<xs:attribute name="refId" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="external-linkType">
+        <xs:attribute name="refId" use="required"/>
+        <xs:attribute name="type" use="required"/>
+        <xs:attribute name="href" use="optional"/>
+    </xs:complexType>
+    <xs:simpleType name="authorType">
+		<xs:restriction base="xs:string">
+			
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="document-historyType">
+		<xs:sequence>
+			<xs:element ref="xuse:version" maxOccurs="unbounded"/>
+         <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="current-version" use="required"/>
+		<xs:anyAttribute processContents="lax" namespace="##other"/>
+	</xs:complexType>
+	<xs:complexType name="versionType">
+		<xs:sequence>
+			<xs:element name="revision" type="xs:double"/>
+			<xs:element ref="xuse:author"/>
+			<xs:element name="change-date" type="xuse:dateOrDateTimeType"/>
+			<xs:element ref="xuse:description"/>
+			<xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:anyAttribute processContents="lax" namespace="##other"/>
+	</xs:complexType>
+	<xs:complexType name="requirement-refType">
+		<xs:annotation>
+			<xs:documentation>when referencing an existing requirement</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="refId" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+    <xs:complexType name="use-case-refType">
+		<xs:annotation>
+			<xs:documentation>Used when referencing a use-case</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="refId" use="required"/>
+                <xs:attribute name="stereotype" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="include"/>
+				            <xs:enumeration value="extend"/>
+				            <xs:enumeration value="generalize"/>
+				            <xs:enumeration value="invoke"/>
+				            <xs:enumeration value="precedes"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="releaseRefType">
+		<xs:annotation>
+			<xs:documentation>when referencing an existing requirement</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">				
+				<xs:attribute name="refId" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>		
+	</xs:complexType>
+	<xs:complexType name="requirementsCollectionType">
+		<xs:annotation>
+			<xs:documentation>Represents a collection of referenced requirements that are logically grouped together for documentation purposes</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="xuse:req-ref" maxOccurs="unbounded"/>
+			<xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:anyAttribute processContents="lax" namespace="##other"/>
+	</xs:complexType>
+    <xs:complexType name="annotationType">
+		<xs:annotation>
+			<xs:documentation>Re-usable data type that can be inserted elsewhere within other types to represent a clarification. The clarification should be a wholly owned subsiduary of the enclosing type instance.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+            <xs:element ref="xuse:description"/>
+            <xs:element ref="xuse:author"/>
+            <xs:element ref="xuse:intended-audience"/>
+            <xs:element name="creation-date" type="xuse:dateOrDateTimeType" minOccurs="0"/>
+            <xs:element name="comments" type="xuse:commentsType" minOccurs="0"/>
+            <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:anyAttribute processContents="lax" namespace="##other"/>
+	</xs:complexType>
+	<xs:complexType name="commentsType">
+	   <xs:sequence>
+	       <xs:element name="comment" type="xuse:commentType" maxOccurs="unbounded"/>
+	       <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+	   </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="commentType">
+	   <xs:annotation>
+	       <xs:documentation>Re-usable block that represents a comment.</xs:documentation>
+	   </xs:annotation>
+	   <xs:sequence>
+	       <xs:element ref="xuse:description" minOccurs="0"/>
+           <xs:element name="comment-author" type="xuse:authorType" minOccurs="0"/>
+           <xs:element name="comment-date" type="xuse:dateOrDateTimeType" minOccurs="0"/>
+           <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+	   </xs:sequence>
+	</xs:complexType>
+    <xs:complexType name="stakeholderType">
+		<xs:annotation>
+			<xs:documentation>Describes a stakeholder of a requirement and/or use-case.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+            <xs:element ref="xuse:title"/>
+				<xs:element ref="xuse:description"/>
+            <xs:element name="role" type="xuse:roleType"/>
+            <xs:element name="representative" type="xuse:userRepresentativeType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="id" use="required"/>
+        <xs:anyAttribute processContents="lax" namespace="##other"/>
+	</xs:complexType>
+    <xs:simpleType name="roleType">
+		<xs:restriction base="xs:string">
+		</xs:restriction>
+	</xs:simpleType>
+    <xs:simpleType name="userRepresentativeType">
+		<xs:restriction base="xs:string">
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="dateOrDateTimeType">
+	   <xs:union memberTypes="xs:date xs:dateTime" />
+	</xs:simpleType>
+		
+	<xs:group name="referenceType-group">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-GB">Group of all the different reference elements that can be created within Xuse</xs:documentation>
+		</xs:annotation>	
+		<xs:choice>
+			 <xs:element ref="xuse:uc-ref"/>
+          <xs:element ref="xuse:req-ref"/>
+          <xs:element ref="xuse:actor-ref"/>
+			 <xs:element ref="xuse:stakeholder-ref"/>
+		</xs:choice>
+	</xs:group>
+	
+</xs:schema>

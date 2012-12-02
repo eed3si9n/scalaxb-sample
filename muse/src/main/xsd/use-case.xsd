@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+        © Copyright 2005-2007, Mike Odling-Smee.  All rights reserved.
+        
+        Licensed under the Artistic License: 
+        http://www.opensource.org/licenses/artistic-license.php
+        
+Preamble
+
+        The intent of this document is to state the conditions under which a 
+        Package may be copied, such that the Copyright Holder maintains some 
+        semblance of artistic control over the development of the package, while 
+        giving the users of the package the right to use and distribute the Package
+            in a more-or-less customary fashion, plus the right to make reasonable 
+        modifications.
+
+Definitions:
+
+        * "Package" refers to the collection of files distributed by the 
+        Copyright Holder, and derivatives of that collection of files created 
+        through textual modification. 
+
+        * "Standard Version" refers to such a Package if it has not been modified, 
+        or has been modified in accordance with the wishes of the Copyright Holder.
+
+        * "Copyright Holder" is whoever is named in the copyright or copyrights for
+        the package. 
+
+        * "You" is you, if you're thinking about copying or distributing this Package.
+
+        * "Reasonable copying fee" is whatever you can justify on the basis of 
+        media cost, duplication charges, time of people involved, and so on. 
+        (You will not be required to justify it to the Copyright Holder, but 
+        only to the computing community at large as a market that must bear the 
+        fee.) 
+
+        * "Freely Available" means that no fee is charged for the item 
+        itself, though there may be fees involved in handling the item. It also 
+        means that recipients of the item may redistribute it under the same 
+        conditions they received it.
+
+        1. You may make and give away verbatim copies of the source form of the Standard 
+        Version of this Package without restriction, provided that you duplicate all of 
+        the original copyright notices and associated disclaimers.
+        
+        2. You may apply bug fixes, portability fixes and other modifications derived 
+        from the Public Domain or from the Copyright Holder. A Package modified in such 
+        a way shall still be considered the Standard Version.
+        
+        3. You may otherwise modify your copy of this Package in any way, provided that 
+        you insert a prominent notice in each changed file stating how and when you 
+        changed that file, and provided that you do at least ONE of the following:
+        
+                a) place your modifications in the Public Domain or otherwise make them 
+                Freely Available, such as by posting said modifications to Usenet or an 
+                equivalent medium, or placing the modifications on a major archive site such 
+                as ftp.uu.net, or by allowing the Copyright Holder to include your modifications 
+                in the Standard Version of the Package.
+        
+                b) use the modified Package only within your corporation or organization.
+        
+                c) rename any non-standard executables so the names do not conflict with 
+                standard executables, which must also be provided, and provide a separate 
+                manual page for each non-standard executable that clearly documents how it 
+                differs from the Standard Version.
+        
+                d) make other distribution arrangements with the Copyright Holder.
+        
+        4. You may distribute the programs of this Package in object code or executable 
+        form, provided that you do at least ONE of the following:
+        
+                a) distribute a Standard Version of the executables and library files, 
+                together with instructions (in the manual page or equivalent) on where to 
+                get the Standard Version.
+        
+                b) accompany the distribution with the machine-readable source of the 
+                Package with your modifications.
+        
+                c) accompany any non-standard executables with their corresponding Standard 
+                Version executables, giving the non-standard executables non-standard names, 
+                and clearly documenting the differences in manual pages (or equivalent), 
+                together with instructions on where to get the Standard Version.
+        
+                d) make other distribution arrangements with the Copyright Holder.
+        
+        5. You may charge a reasonable copying fee for any distribution of this Package. 
+        You may charge any fee you choose for support of this Package. You may not 
+        charge a fee for this Package itself. However, you may distribute this Package 
+        in aggregate with other (possibly commercial) programs as part of a larger 
+        (possibly commercial) software distribution provided that you do not advertise 
+        this Package as a product of your own.
+        
+        6. The scripts and library files supplied as input to or produced as output from 
+        the programs of this Package do not automatically fall under the copyright of 
+        this Package, but belong to whomever generated them, and may be sold 
+        commercially, and may be aggregated with this Package.
+        
+        7. C or perl subroutines supplied by you and linked into this Package shall not 
+        be considered part of this Package.
+        
+        8. The name of the Copyright Holder may not be used to endorse or promote 
+        products derived from this software without specific prior written permission.
+        
+        9. THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED 
+        WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF 
+        MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+The End
+        
+        Created: Mike Odling-Smee
+        $Author: odlingsmee $
+        $Revision: 1.14 $ $Date 2006/01/14 16:16:06$
+        Log: $Log: use-case.xsd,v $
+        Log: Revision 1.14  2010/05/11 09:43:27  odlingsmee
+        Log: Upgraded to model version 1.0
+        Log:
+        Log: Revision 1.13  2010/01/31 13:06:12  odlingsmee
+        Log: Working towards completing the example template project
+        Log:
+        Log: Revision 1.12  2009/07/07 23:19:00  odlingsmee
+        Log: Added support for custom taxonomies on use-cases
+        Log:
+        Log: Revision 1.11  2009/05/02 23:10:45  odlingsmee
+        Log: Improved validation routines and reporting as well as fixing a few schema errors.
+        Log:
+        Log: Revision 1.10  2007/03/24 21:29:10  odlingsmee
+        Log: Fixed schemas and improved validation coverage.
+        Log:
+        Log: Revision 1.9  2007/03/11 19:35:35  odlingsmee
+        Log: Updated model to allow for extensibility (i.e. the model can be extended using foreign namespaces).
+        Log:
+        Log: Revision 1.8  2006/03/20 21:27:19  odlingsmee
+        Log: Fixed a few issues with the schemas as well as updated some documentation
+        Log:
+        Log: Revision 1.7  2006/02/16 19:25:45  odlingsmee
+        Log: Ongoing changes to support internationalisation
+        Log:
+        Log: Revision 1.6  2006/01/21 17:41:20  odlingsmee
+        Log: Added Java class that is uded by the XSL to scan for use-cases and added the XSLTS to pull things together for the prototype HTML site.
+        Log:
+        Log: Revision 1.5  2006/01/17 21:14:28  odlingsmee
+        Log: Added support for annotations
+        Log:
+        Log: Revision 1.4  2006/01/15 12:51:22  odlingsmee
+        Log: Updated use-case schema to support business-rules.
+        Log:
+        Log: Revision 1.3  2006/01/14 21:31:04  odlingsmee
+        Log: Updated use-case schema to support main flow, alternate flows and excepin flows. Also added XSLT for HTML view of use-case.
+        Log:
+        Log: Revision 1.2  2006/01/14 16:49:05  odlingsmee
+        Log: Minor mods
+        Log:
+-->
+<xs:schema 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xuse="http://xuse.sourceforge.net" targetNamespace="http://xuse.sourceforge.net" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="data-types.xsd"/>
+	<xs:element name="use-case" type="xuse:use-caseType">
+		<xs:annotation>
+			<xs:documentation>Structured information required for a use-case</xs:documentation>
+		</xs:annotation>
+		<!-- Constraints -->
+		<xs:key name="afKey">
+			<xs:selector xpath=".//xuse:alternate-flow"/>
+			<xs:field xpath="@id"/>
+		</xs:key>
+		<xs:key name="efKey">
+			<xs:selector xpath=".//xuse:exception-flow"/>
+			<xs:field xpath="@id"/>
+		</xs:key>
+		<xs:key name="step-idKey">
+			<xs:selector xpath=".//xuse:step"/>
+			<xs:field xpath="@step-id"/>
+		</xs:key>
+		<!--  TODO: Key-refs not working for now - need to sort out -->
+		<!-- xs:keyref name="afKeyMainRef" refer="xuse:afKey">
+			<xs:selector xpath="xuse:main-flow/xuse:step/xuse:ref-alternate-flow"/>
+			<xs:field xpath="@refId"/>
+		</xs:keyref>
+		<xs:keyref name="afKeyAfRef" refer="xuse:afKey">
+            <xs:selector xpath="xuse:alternate-flows/xuse:alternate-flow/xuse:step/xuse:ref-alternate-flow"/>
+            <xs:field xpath="@refId"/>
+        </xs:keyref>
+		<xs:keyref name="efKeyRef" refer="xuse:efKey">
+			<xs:selector xpath="xuse:main-flow/xuse:step/xuse:ref-exception-flow"/>
+			<xs:field xpath="@refId"/>
+		</xs:keyref>
+		<xs:keyref name="rejoinStep-idKeyRef" refer="xuse:step-idKey">
+			<xs:selector xpath=".//xuse:rejoin"/>
+			<xs:field xpath="@at-step"/>
+		</xs:keyref-->
+		<!-- End of constraints -->
+	</xs:element>
+	<xs:complexType name="use-caseType">
+		<xs:sequence>
+         <xs:element ref="xuse:annotation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="xuse:description"/>
+			<xs:element ref="xuse:document-history"/>
+			<xs:element name="use-case-properties" type="xuse:use-case-propertiesType"/>
+			<xs:element name="main-flow" type="xuse:mainSequenceType"/>
+			<xs:element name="alternate-flows" type="xuse:alternate-flowsType" minOccurs="0"/>
+			<xs:element name="exception-flows" type="xuse:exception-flowsType" minOccurs="0"/>
+			<xs:element name="business-rules" type="xuse:requirementsCollectionType" minOccurs="0"/>
+			<xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" use="required"/>
+		<xs:attribute name="name" use="required"/>
+		<xs:attribute name="model-version" use="required" fixed="1.0"/>
+		<xs:anyAttribute processContents="lax" namespace="##other"/>
+	</xs:complexType>
+	<xs:complexType name="use-case-propertiesType">
+		<xs:sequence>
+            <xs:element ref="xuse:annotation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="trigger" type="xuse:descriptionType"/>
+			<xs:element name="goal" type="xuse:descriptionType"/>
+			<xs:element name="primary-actor" type="xuse:actor-refType" maxOccurs="unbounded"/>
+			<xs:element name="secondary-actor" type="xuse:actor-refType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="pre-requisites" type="xuse:descriptionType"/>
+			<xs:element name="success-outcome" type="xuse:descriptionType"/>
+			<xs:element name="failure-outcome" type="xuse:descriptionType"/>
+			<xs:element name="priority" type="xs:string"/>
+			<xs:element name="complexity" type="xs:integer"/>
+			<xs:element ref="xuse:taxonomy" minOccurs="0" maxOccurs="unbounded">
+			 <xs:annotation>
+			     <xs:documentation xml:lang="en-GB">Taxonomy element allows for custom tagging of the use-case. This effectively acts an extensible mechanism for use-case meta-data.</xs:documentation>
+			 </xs:annotation>
+			</xs:element>
+			<xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:anyAttribute processContents="lax" namespace="##other"/>
+	</xs:complexType>	
+	<xs:complexType name="sequenceType">
+		<xs:sequence>
+            <xs:element ref="xuse:annotation" minOccurs="0" maxOccurs="unbounded"/>
+			   <xs:element name="step" type="xuse:stepType" minOccurs="0" maxOccurs="unbounded"/>	
+			   <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>		
+		</xs:sequence>
+		<xs:anyAttribute processContents="lax" namespace="##other"/>
+	</xs:complexType >
+	<xs:complexType name="mainSequenceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-GB">
+                Represents the structure of the main flow
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="xuse:sequenceType">
+				<xs:sequence>
+					<xs:element name="end"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="alternateSequenceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-GB">
+                We need to add additional markers on these flows such that events occuring on the main flow can 
+				reference these alternate and exception flows.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="xuse:sequenceType">
+				<xs:choice>
+					<xs:element name="end"/>
+					<xs:element name="rejoin">
+						<xs:complexType>
+							<xs:attribute name="at-step" use="required"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+				<xs:attribute name="id" type="xs:string" use="required"/>
+				<xs:attribute name="title" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="stepType">
+		<xs:sequence>
+			<xs:element ref="xuse:annotation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="xuse:description"/>
+			<xs:element name="proposed-release"	type="xuse:releaseRefType" minOccurs="0"/>
+			<xs:element name="ref-alternate-flow" type="xuse:ref-alternate-flowsType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ref-exception-flow" type="xuse:ref-alternate-flowsType" minOccurs="0" maxOccurs="unbounded"/>            
+			<xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>		
+		</xs:sequence>
+		<xs:attribute name="step-id" type="xs:string" use="required"/>
+      <xs:anyAttribute processContents="lax" namespace="##other"/>
+	</xs:complexType>
+	<xs:complexType name="alternate-flowsType">
+		<xs:sequence>
+			<xs:element name="alternate-flow" type="xuse:alternateSequenceType" maxOccurs="unbounded"/>
+			<xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>		
+		</xs:sequence>
+		<xs:anyAttribute processContents="lax" namespace="##other"/>
+	</xs:complexType>
+	<xs:complexType name="ref-alternate-flowsType">
+		<xs:attribute name="refId" use="required"/>
+		<xs:attribute name="condition" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="exception-flowsType">
+		<xs:sequence>
+			<xs:element name="exception-flow" type="xuse:alternateSequenceType" maxOccurs="unbounded"/>
+			<xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>		
+		</xs:sequence>
+		<xs:anyAttribute processContents="lax" namespace="##other"/>
+	</xs:complexType>
+	
+	
+</xs:schema>

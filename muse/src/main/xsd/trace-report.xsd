@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+        © Copyright 2005-2010, Mike Odling-Smee.  All rights reserved.
+        
+        Licensed under the Artistic License: 
+        http://www.opensource.org/licenses/artistic-license.php
+        
+Preamble
+
+        The intent of this document is to state the conditions under which a 
+        Package may be copied, such that the Copyright Holder maintains some 
+        semblance of artistic control over the development of the package, while 
+        giving the users of the package the right to use and distribute the Package
+            in a more-or-less customary fashion, plus the right to make reasonable 
+        modifications.
+
+Definitions:
+
+        * "Package" refers to the collection of files distributed by the 
+        Copyright Holder, and derivatives of that collection of files created 
+        through textual modification. 
+
+        * "Standard Version" refers to such a Package if it has not been modified, 
+        or has been modified in accordance with the wishes of the Copyright Holder.
+
+        * "Copyright Holder" is whoever is named in the copyright or copyrights for
+        the package. 
+
+        * "You" is you, if you're thinking about copying or distributing this Package.
+
+        * "Reasonable copying fee" is whatever you can justify on the basis of 
+        media cost, duplication charges, time of people involved, and so on. 
+        (You will not be required to justify it to the Copyright Holder, but 
+        only to the computing community at large as a market that must bear the 
+        fee.) 
+
+        * "Freely Available" means that no fee is charged for the item 
+        itself, though there may be fees involved in handling the item. It also 
+        means that recipients of the item may redistribute it under the same 
+        conditions they received it.
+
+        1. You may make and give away verbatim copies of the source form of the Standard 
+        Version of this Package without restriction, provided that you duplicate all of 
+        the original copyright notices and associated disclaimers.
+        
+        2. You may apply bug fixes, portability fixes and other modifications derived 
+        from the Public Domain or from the Copyright Holder. A Package modified in such 
+        a way shall still be considered the Standard Version.
+        
+        3. You may otherwise modify your copy of this Package in any way, provided that 
+        you insert a prominent notice in each changed file stating how and when you 
+        changed that file, and provided that you do at least ONE of the following:
+        
+                a) place your modifications in the Public Domain or otherwise make them 
+                Freely Available, such as by posting said modifications to Usenet or an 
+                equivalent medium, or placing the modifications on a major archive site such 
+                as ftp.uu.net, or by allowing the Copyright Holder to include your modifications 
+                in the Standard Version of the Package.
+        
+                b) use the modified Package only within your corporation or organization.
+        
+                c) rename any non-standard executables so the names do not conflict with 
+                standard executables, which must also be provided, and provide a separate 
+                manual page for each non-standard executable that clearly documents how it 
+                differs from the Standard Version.
+        
+                d) make other distribution arrangements with the Copyright Holder.
+        
+        4. You may distribute the programs of this Package in object code or executable 
+        form, provided that you do at least ONE of the following:
+        
+                a) distribute a Standard Version of the executables and library files, 
+                together with instructions (in the manual page or equivalent) on where to 
+                get the Standard Version.
+        
+                b) accompany the distribution with the machine-readable source of the 
+                Package with your modifications.
+        
+                c) accompany any non-standard executables with their corresponding Standard 
+                Version executables, giving the non-standard executables non-standard names, 
+                and clearly documenting the differences in manual pages (or equivalent), 
+                together with instructions on where to get the Standard Version.
+        
+                d) make other distribution arrangements with the Copyright Holder.
+        
+        5. You may charge a reasonable copying fee for any distribution of this Package. 
+        You may charge any fee you choose for support of this Package. You may not 
+        charge a fee for this Package itself. However, you may distribute this Package 
+        in aggregate with other (possibly commercial) programs as part of a larger 
+        (possibly commercial) software distribution provided that you do not advertise 
+        this Package as a product of your own.
+        
+        6. The scripts and library files supplied as input to or produced as output from 
+        the programs of this Package do not automatically fall under the copyright of 
+        this Package, but belong to whomever generated them, and may be sold 
+        commercially, and may be aggregated with this Package.
+        
+        7. C or perl subroutines supplied by you and linked into this Package shall not 
+        be considered part of this Package.
+        
+        8. The name of the Copyright Holder may not be used to endorse or promote 
+        products derived from this software without specific prior written permission.
+        
+        9. THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED 
+        WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF 
+        MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+The End
+        
+        Created: Mike Odling-Smee
+        $Author: odlingsmee $
+        $Revision: 1.1 $ $Date 2006/01/14 16:16:06$
+        Log: $Log: trace-report.xsd,v $
+        Log: Revision 1.1  2010/05/18 12:20:26  odlingsmee
+        Log: Added new schema that describes the format of an external artefact trace report. Also fixed stock content DTD.
+        Log:
+-->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.xml-solutions.com/xuse/trace-report" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xtr="http://www.xml-solutions.com/xuse/trace-report">
+
+	<xs:element name="trace-report" type="xtr:trace-reportType"/>
+	<xs:element name="artefact" type="xtr:artefactType"/>
+	
+	<xs:complexType name="trace-reportType">
+		<xs:annotation>
+			<xs:documentation>Container for all the trace report information.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="xtr:artefact"/>
+		</xs:sequence>
+		<xs:attribute name="created" type="xtr:xs-date-or-dateTime" use="required">
+			<xs:annotation>
+				<xs:documentation>The date and time the report was prepared or generated.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="base-uri" type="xs:anyURI" use="optional">
+			<xs:annotation>
+				<xs:documentation>The base-uri for the external resources. If present Xuse will use this information to create links to information external from the Xuse model.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="base-id" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>The base-id for this set of artefacts. A little like namespaces this id will be used to ensure external artefact references are unique/do not collide.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="artefactType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-GB">Represents any external artefact. This may include things such as Java classes, Test cases, documents etc.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Unique Id (within the context of the base-id) for this artefact.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="location" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Pointer to the exact artefact location - for instance it may be the local file path and line number for a file based artefact.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="trace-to" maxOccurs="unbounded" >
+				<xs:annotation>
+					<xs:documentation>Defines the trace link to the local Xuse model entity. Supports tracability to requirements and Use-cases.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="class">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="requirement"/>
+										<xs:enumeration value="usecase"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="status" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-GB">The status of this artefact - if appropriate.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>				
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="type" type="xtr:artefact-classifiersTypes" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en-GB">Classifies the type of external artefact. For java artefacts Xuse has built in support if you use the following values: java:method; java:class; java:interface; java:member and java:type. For tests there is test:unit; test:integration; test:performance; test:resillience and test:ui and test:integration.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="uri">
+			<xs:annotation>
+				<xs:documentation xml:lang="en-GB">Local uri for retrieving this artefact from a remote location. Is used in conjuntion with the base-uri attribute present on the trace-report element. If both are present Xuse will use these to construct a URL to link to the external artefact.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="artefact-classifiersTypes">
+		<xs:union memberTypes="xtr:built-in-artefact-classifiersType xtr:extensible-artefact-classifiersType"/>
+	</xs:simpleType>
+	<xs:simpleType name="built-in-artefact-classifiersType">
+		<xs:restriction base="xs:string">
+			<xs:annotation>
+				<xs:documentation xml:lang="en-GB">Standard classifiers for external artefacts with out-of-the-box support from Xuse.</xs:documentation>
+			</xs:annotation>
+<!--Java artefact classifiers -->
+			<xs:enumeration value="java:class"/>
+			<xs:enumeration value="java:type"/>
+			<xs:enumeration value="java:interface"/>
+			<xs:enumeration value="java:method"/>
+			<xs:enumeration value="java:member"/>
+			<xs:enumeration value="java:unknown"/>
+<!--Test artefact classifiers -->
+			<xs:enumeration value="test:unit"/>
+			<xs:enumeration value="test:integration"/>
+			<xs:enumeration value="test:performance"/>
+			<xs:enumeration value="test:resillience"/>
+			<xs:enumeration value="test:ui"/>
+			<xs:enumeration value="test:other"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="extensible-artefact-classifiersType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-GB">Allows extension for the list of external artefact classifiers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="xs-date-or-dateTime">
+		<xs:union memberTypes="xs:date xs:dateTime"/>
+	</xs:simpleType>
+	
+</xs:schema>
