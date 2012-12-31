@@ -4,7 +4,9 @@ organization := "com.example"
 
 name := "scalaxb-nfe-sample"
 
-seq(scalaxbSettings: _*)
+scalaVersion := "2.10.0"
+
+scalaxbSettings
 
 // sources in scalaxb in Compile <<= xsdSource in scalaxb in Compile map { xsd => (xsd * "*.xsd").get }
 
@@ -24,4 +26,4 @@ protocolPackageName in scalaxb in Compile := Some("nfe")
 
 sourceGenerators in Compile <+= scalaxb in Compile
 
-libraryDependencies += "net.databinder" %% "dispatch-http" % "0.8.5"
+libraryDependencies += "net.databinder.dispatch" %% "dispatch-core" % "0.9.4"
