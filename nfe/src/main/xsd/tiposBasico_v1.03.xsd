@@ -347,6 +347,7 @@ acrescentado:
  acrescentado a tabela de paises</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
+			<!--
 			<xs:whiteSpace value="preserve"/>
 			<xs:enumeration value="132"/>
 			<xs:enumeration value="175"/>
@@ -621,6 +622,7 @@ acrescentado:
 			<xs:enumeration value="9946"/>
 			<xs:enumeration value="9950"/>
 			<xs:enumeration value="9970"/>
+		-->
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TUf">

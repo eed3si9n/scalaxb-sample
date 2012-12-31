@@ -4993,6 +4993,7 @@ Campo de uso da SEFAZ para enviar mensagem de interesse da SEFAZ para o emissor.
 			<xs:documentation>Tipo CFOP // 24/10/08 acrescentada a lista de CFOP validos // PL_06 eliminado os CFOP de prestação de serviços de comunicação // PL_006f eliminado os CFOP de prestação de serviços de transporte</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
+			<!--
 			<xs:whiteSpace value="preserve"/>
 			<xs:enumeration value="1101"/>
 			<xs:enumeration value="1102"/>
@@ -5509,6 +5510,7 @@ Campo de uso da SEFAZ para enviar mensagem de interesse da SEFAZ para o emissor.
 			<xs:enumeration value="7667"/>
 			<xs:enumeration value="7930"/>
 			<xs:enumeration value="7949"/>
+		  -->
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TCfopTransp">
@@ -5577,6 +5579,7 @@ Campo de uso da SEFAZ para enviar mensagem de interesse da SEFAZ para o emissor.
 			<xs:documentation>Tipo Código da Lista de Serviços LC 116/2003</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
+			<!--
 			<xs:whiteSpace value="preserve"/>
 			<xs:enumeration value="101"/>
 			<xs:enumeration value="102"/>
@@ -5771,6 +5774,7 @@ Campo de uso da SEFAZ para enviar mensagem de interesse da SEFAZ para o emissor.
 			<xs:enumeration value="3801"/>
 			<xs:enumeration value="3901"/>
 			<xs:enumeration value="4001"/>
+		-->
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TIdLote">
