@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.crossref.org/fundref.xsd"
+    xmlns="http://www.crossref.org/fundref.xsd">
+    <xsd:element name="program">
+        <xsd:annotation>
+            <xsd:documentation>
+                FundRef documentation and examples: http://help.crossref.org/#fundref
+                
+                As part of CrossMark metadata, a deposit may contain what is called FundRef info. This details the funding behind a published article. The schema is a sequence of nested &lt;assertion&gt; tags. 
+                
+                If a DOI is not participating in CrossMark, FundRef data may be deposited as part of the &lt;journal_article&gt; metadata.
+                    
+                    Note: Some rules will be enforced by the deposit logic (e.g. not the schema). 
+                    
+                    FundRef data includes one or more fundING identifiers (funding_identifier), each of which may have one or more fundERS (funder_name). Each funder may have an optional identifier (funder_identifier).
+                    
+                    A FundRef deposit begins with a &lt;fr:program&gt; tag within the &lt;crossmark&gt; structure (where fr is the namespace for the FundRef program).
+                        
+                        The &lt;program&gt; element is an implicit funder_group and MUST contain:
+                            
+                            A) one or more funder_name assertions and a funding_identifier assertion.
+                            *** this is not enforced in the schema but will be verified by the deposit logic***
+                            
+                            or
+                            
+                            B) one or more funder_group assertions where each funder_group MUST contain one or more funder_name assertions and at least one funding_identifier assertion
+                            
+                            *** this is not enforced in the schema but will be verified by the deposit logic***</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="assertion" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="xsd:string" fixed="fundref"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="assertion">
+        <xsd:annotation>
+            <xsd:documentation>FundRef attributes included in assertion are:
+
+fundgroup: used to group funding info for items with multiple funding sources. Required for items with multiple funding_identifier assertions, optional for items with a single funding_identifier
+
+funder_identifier: funding agency identifier, must be nested within the funder_name assertion (optional) 
+
+funder_name: name of the funding agency (required)
+
+funding_identifier: grant number or other fund identifier (required)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+                <xsd:element ref="assertion" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="name" use="required">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:NMTOKEN">
+                        <xsd:enumeration value="fundgroup"/>
+                        <!-- fundgroup: used to group funding info for items with multiple funding sources. 
+                                 Required for items with multiple funding_identifier assertions, optional for items with a single funding_identifier -->
+                        <xsd:enumeration value="funder_identifier"/>
+                        <!--funder_identifier: funding agency identifier, must be nested within the funder_name assertion (optional) -->
+                        <xsd:enumeration value="funder_name"/>
+                        <!--funder_name: name of the funding agency (required)-->
+                        <xsd:enumeration value="funding_identifier"/>
+                        <!---funding_identifier: grant number or other fund identifier (required)-->
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
