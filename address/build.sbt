@@ -4,7 +4,7 @@ organization := "com.example"
 
 name := "scalaxb-address-sample"
 
-seq(scalaxbSettings: _*)
+scalaxbSettings
 
 packageName in scalaxb in Compile := "generated"
 
