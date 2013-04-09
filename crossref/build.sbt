@@ -10,4 +10,4 @@ packageName in scalaxb in Compile := "crossref"
 
 sourceGenerators in Compile <+= scalaxb in Compile
 
-// libraryDependencies += "net.databinder" %% "dispatch-http" % "0.9.4"
+libraryDependencies += "net.databinder.dispatch" %% "dispatch-core" % "0.9.5"
