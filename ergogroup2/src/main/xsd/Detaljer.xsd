@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/include/Detaljer.xsd"
+    xmlns:tns="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/include/Detaljer.xsd">
+
+    <xsd:include schemaLocation="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/include/GlobaleElementer.xsd" />
+    <xsd:include schemaLocation="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/include/GlobaleTyper.xsd" />
+
+    <xsd:complexType name="Detaljer">
+        <xsd:sequence>
+            <xsd:element name="RESULT" minOccurs="0" maxOccurs="1">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="1" minOccurs="0" name="ANTA" type="xsd:string">
+                            <xsd:annotation>
+                                <xsd:documentation xml:lang="no">Antall tilsalg som returneres. Numerisk.</xsd:documentation>
+                                <xsd:documentation xml:lang="en">Amount of findings returned. Numeric.</xsd:documentation>
+                            </xsd:annotation>								
+                        </xsd:element>
+                        <xsd:element maxOccurs="1" minOccurs="0" name="ANTAFUN" type="xsd:string">
+                            <xsd:annotation>
+                                <xsd:documentation xml:lang="no">Antall tilslag som er funnet i søket. Numerisk.</xsd:documentation>
+                                <xsd:documentation xml:lang="en">Amount of findings detected in search. Numeric.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element maxOccurs="1" minOccurs="0" name="FORMANGE" type="xsd:string">
+                            <xsd:annotation>
+                                <xsd:documentation xml:lang="no">Antall tilsalg overskredet. 'J' hvis antall tilsalg er flere enn angitt i ant02 i NTRANS. Hvis ikke: 'N' eller utelatt.</xsd:documentation>
+                                <xsd:documentation xml:lang="en">Amount of findings exceeded. 'J' if amount of findings are more than denoted in ant02 in NTRANS. If not: 'N' or omit.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element minOccurs="0" maxOccurs="1" name="HOV" type="tns:Tperson" />
+                        <xsd:element minOccurs="0" maxOccurs="unbounded" name="BAR" type="tns:Tperson" />
+                        <xsd:element minOccurs="0" maxOccurs="1" name="EKT" type="tns:Tperson" />
+                        <xsd:element minOccurs="0" maxOccurs="unbounded" name="FOR" type="tns:Tperson" />
+                        <xsd:element minOccurs="0" maxOccurs="unbounded" name="KJE" type="tns:Tperson" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="MESSAGE" type="tns:MESSAGE" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+	
+	<xsd:complexType name="Barn">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="BAR-FODT" type="tns:Tfodt">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Barnets fødselsdato, DDMMÅÅ</xsd:documentation>
+					<xsd:documentation xml:lang="en">Childs birthdate, DDMMYY</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="BAR-PERS" type="tns:Tpers">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Barnets personnummer, 11 siffer</xsd:documentation>
+					<xsd:documentation xml:lang="en">Childs personnumber, 11 digits</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="BAR-INR" type="tns:Tinr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Barnets inummer, kryptert fødselsnummer</xsd:documentation>
+					<xsd:documentation xml:lang="en">Childs inumber, encrypted birthnumber</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="BAR-NAV" type="tns:Tnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Barnets navn, vanligvis blankt</xsd:documentation>
+					<xsd:documentation xml:lang="en">Childs name, usually blank</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="BAR-KJO" type="tns:Tkjonn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Barnets kjønn, M=mann K=kvinne</xsd:documentation>
+					<xsd:documentation xml:lang="en">Childs sex, M=male K=female</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="Tperson">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="FODT" type="tns:Tfodt">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Fødselsdato, DDMMÅÅ</xsd:documentation>
+					<xsd:documentation xml:lang="en">Birthdate, DDMMYY</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="PERS" type="tns:Tpers">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Personnummer, 5 siste av fødselsnummer</xsd:documentation>
+					<xsd:documentation xml:lang="en">Personnumber, the 5 last numbers of the birthnumber</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="INR" type="tns:Tinr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Kryptert fødselsnummer</xsd:documentation>
+					<xsd:documentation xml:lang="en">Encrypted birthnumber</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="FODTAR" type="tns:Tfodtaar">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Fødselsår ÅÅÅÅ</xsd:documentation>
+					<xsd:documentation xml:lang="en">Birthyear YYYY</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="STAT-KD" type="tns:Tkode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Status kode</xsd:documentation>
+					<xsd:documentation xml:lang="no">1=Bosatt 2=Utflyttet (ikke i bruk) 3=Utvandret 4=Forsvunnet 5=Død 6=Utgått fødsnr 7=Fødselsreg. 8=Annulert tilg. 9=Uregistrert person</xsd:documentation>
+					<xsd:documentation xml:lang="en">Status code</xsd:documentation>
+					<xsd:documentation xml:lang="en">1=Resident 2=Relocated (not in use) 3=Emigrated 4=Disappeared 5=Dead 6=Emanated birthnumber 7=Birthregistered 8=Canceled access 9=Not registered person</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="STAT" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Status i klartekst, lengde 40</xsd:documentation>
+					<xsd:documentation xml:lang="en">Status in plain text</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="STAT-D" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Status dato, ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">Status date, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="NAVN-S" type="tns:Tnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Etternavn</xsd:documentation>
+					<xsd:documentation xml:lang="en">Familyname</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="NAVN-F" type="tns:Tnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Fornavn</xsd:documentation>
+					<xsd:documentation xml:lang="en">Firstname</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="NAVN-M" type="tns:Tnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Mellomnavn</xsd:documentation>
+					<xsd:documentation xml:lang="en">Middlename</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="NAVN-U" type="tns:Tnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Navn som ugift</xsd:documentation>
+					<xsd:documentation xml:lang="en">Name as single</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="NAVN" type="tns:Tnavnkort">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Forkortet navn på formen: Etternavn Fornavn Mellomnavn</xsd:documentation>
+					<xsd:documentation xml:lang="en">Abbreviated name in pattern: Familyname Firstname Middlename</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="NAVN-D" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="ADRR" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="ADRF" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Flyttedato siste flytting, ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">Reloctingdate last relocating, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="ADR" type="tns:Tadr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Adresse</xsd:documentation>
+					<xsd:documentation xml:lang="en">Address</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="POSTN" type="tns:Tpostnr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Postnummer</xsd:documentation>
+					<xsd:documentation xml:lang="en">Postal-/ZIP-code</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="POSTS" type="tns:Tpoststed">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Poststed</xsd:documentation>
+					<xsd:documentation xml:lang="en">Postalarea</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="ADR-T" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">CO adresse, lengde 30</xsd:documentation>
+					<xsd:documentation xml:lang="en">CO address</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="KOMNR" type="tns:Tkomnr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Bo-kommune nummer. Blank hvis DNR.</xsd:documentation>
+					<xsd:documentation xml:lang="en">Live-in communenumber. Blank if DNR.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="KOMNA" type="tns:Tkomnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Bo kommune navn. Blank hvis DNR.</xsd:documentation>
+					<xsd:documentation xml:lang="en">Live-in communename. Blank if DNR.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="REKVNR" type="tns:Trekvnr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Rekvirentnummer. Kun for DNR.</xsd:documentation>
+					<xsd:documentation xml:lang="en">Claimant number. Only for DNR.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="REKVNAVN" type="tns:Trekvnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Rekvirent navn. Kun for DNR.</xsd:documentation>
+					<xsd:documentation xml:lang="en">Claimant name. Only for DNR.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>					
+			<xsd:element minOccurs="0" maxOccurs="1" name="GATE" type="tns:Tgatenr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Gate, når ADRTYPE = O</xsd:documentation>
+					<xsd:documentation xml:lang="en">Street, when ADRTYPE = O</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="HUS" type="tns:Thusnr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Husnummer, når ADRTYPE = O</xsd:documentation>
+					<xsd:documentation xml:lang="en">Housenumber, when ADRTYPE = O</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="BOKS" type="tns:Tbokstav">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Bokstav, når ADRTYPE = O</xsd:documentation>
+					<xsd:documentation xml:lang="en">Letter, when ADRTYPE = O</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="GARD" type="tns:Tgardnr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Gårdsnummer, når ADRTYPE = M</xsd:documentation>
+					<xsd:documentation xml:lang="en">Propertynumber, when ADRTYPE = M</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="BRUK" type="tns:Tbruksnr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Bruk, når ADRTYPE = M</xsd:documentation>
+					<xsd:documentation xml:lang="en">Estatenumber, when ADRTYPE = M</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="FEST" type="tns:Tfestenr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Festenummer, når ADRTYPE = M</xsd:documentation>
+					<xsd:documentation xml:lang="en">Attachnumber, when ADRTYPE = M</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="UND" type="tns:Tundernr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Undernummer</xsd:documentation>
+					<xsd:documentation xml:lang="en">Undernumber</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="ADRTYPE" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Forteller om det er offentlig adresse eller matrikkel adresse, O=offentlig/gate, M=matrikkel</xsd:documentation>
+					<xsd:documentation xml:lang="en">Tells if it is a public address or matrikkel address, O=public/street, M=matrikkel</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="BOLIGNR" type="tns:Tbolignr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Bolignummer</xsd:documentation>
+					<xsd:documentation xml:lang="en">Housenumber</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="ADR1" type="tns:Tadr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Postadresse del 1, de 3 feltene ADR1, ADR2, ADR3 hører sammen</xsd:documentation>
+					<xsd:documentation xml:lang="en">Postaladdress part 1, the 3 cells ADR1, ADR2, ADR3 belong together</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="ADR2" type="tns:Tadr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Postadresse del 2, de 3 feltene ADR1, ADR2, ADR3 hører sammen</xsd:documentation>
+					<xsd:documentation xml:lang="en">Postaladdress part 2, the 3 cells ADR1, ADR2, ADR3 belong together</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="ADR3" type="tns:Tadr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Postadressen del 3, de 3 feltene ADR1, ADR2, ADR3 hører sammen</xsd:documentation>
+					<xsd:documentation xml:lang="en">Postaladdress part 3, the 3 cells ADR1, ADR2, ADR3 belong together</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="ADRL-KD" type="tns:Tlandkode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Landekode når postadressen er i utlandet, ihht. tabell</xsd:documentation>
+					<xsd:documentation xml:lang="en">Countrycode when postaladdress is abroad, according to table</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="ADRL" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Postadresse land, i klartekst, lengde 30</xsd:documentation>
+					<xsd:documentation xml:lang="en">Postaladdress country, in plain text</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="POSTADRDA" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Registreringsdato postadresse</xsd:documentation>
+					<xsd:documentation xml:lang="en">Registrationdate postadress</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="INVF" type="tns:Tlandkode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Innvandret fra landekode, ihht. tabell</xsd:documentation>
+					<xsd:documentation xml:lang="en">Immigrated from countrycode, according to table</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="INVF-N" type="tns:Tlandnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Innvandret land navn, i klartekst</xsd:documentation>
+					<xsd:documentation xml:lang="en">Immigrated countryname, in plain text</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="INVF-R" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Innvandret reg. dato, ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">Immigrated registration date, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="INVF-F" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Innvandret flytte dato, ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">Immigrated relocating date, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="FKOM" type="tns:Tkomnr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Flyttet fra kommune, kommunenr</xsd:documentation>
+					<xsd:documentation xml:lang="en">Relocated from commune, communenumber</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="FKOM-N" type="tns:Tkomnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Flyttet fra kommune navn, i klartekst</xsd:documentation>
+					<xsd:documentation xml:lang="en">Relocated from communename, in plain text</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="FKOM-R" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Fra kommune registrerings dato, ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">From commune registation date, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="FKOM-F" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Fra kommune flyttedato, ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">From commune relocatingdate, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="UTVT" type="tns:Tlandkode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Utvandret til land kode, ihht. tabell</xsd:documentation>
+					<xsd:documentation xml:lang="en">Emigrated to country code, according to table</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="UTVT-N" type="tns:Tlandnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Utvandret til land, i klartekst</xsd:documentation>
+					<xsd:documentation xml:lang="en">Emigrated to country, in plain text</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="UTVT-R" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Utvandret til land registrert dato, ÅÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">Emigrated to country registration date, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="UTVT-F" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Utvandret til land flyttedato, ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">Emigrated to country relocatingdate, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="UTVTYPE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Utvandringstype</xsd:documentation>
+					<xsd:documentation xml:lang="en">Type of emigration</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="AARSADR" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Årsakskode for siste adresseendring, ihht. tabell. lengde 2</xsd:documentation>
+					<xsd:documentation xml:lang="en">Reasoncode for last addresschange, according to table</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="SPES-KD" type="tns:Tkode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Spesreg kode/ Adressekode - status for adresse</xsd:documentation>
+					<xsd:documentation xml:lang="no">0=vanlig bosatt 1=utenriks 2=militær 3=Svalbard 4=klientadr. 5=uten fast bo. 6=sperret, strengt fortrolig 7=sperret, fortrolig 8=pendler</xsd:documentation>
+					<xsd:documentation xml:lang="en">Special registrationcode/Addresscode - address status</xsd:documentation>
+					<xsd:documentation xml:lang="en">0=common resident 1=external 2=military 3=Svalbard 4=client address 5=without steady residence 6=blocked, strictly confidential 7=blocked, confidential 8=pendling</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="SPES" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Spesreg kode/Adressekode - status for adresse, i klartekst. Lengde 40</xsd:documentation>
+					<xsd:documentation xml:lang="en">Special registrationcode/Adresscode - address status, in plain text</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="SPES-D" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="SKKR" type="tns:Tkrets">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Skolekrets, ihht. tabell</xsd:documentation>
+					<xsd:documentation xml:lang="en">Schoolarea, according to table</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="VAKR" type="tns:Tkrets">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Valgkrets, ihht. tabell</xsd:documentation>
+					<xsd:documentation xml:lang="en">Electionarea, according to table</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="GRUNNKR" type="tns:Tgrunnkr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Grunnkrets</xsd:documentation>
+					<xsd:documentation xml:lang="en">A smaller geographical unit used to work with and present regional statistics.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="MELD" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Viktig melding som genereres fra program. Tilleggstekst til SPES-KD og TIDLFNR. Lengde 40</xsd:documentation>
+					<xsd:documentation xml:lang="en">Important message which is generated from program. Additional text to SPES-KD and TDLFNR</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="K-FAMNR" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Familienummer, lengde 11</xsd:documentation>
+					<xsd:documentation xml:lang="en">Familynumber</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="FAMNR-D" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Familienummer dato, ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">Familynumber date, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="PERSKODE" type="tns:Tkode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Personkode</xsd:documentation>
+					<xsd:documentation xml:lang="no">1=referanseperson/hovedperson 2=gift kvinne/yngste partner 3=barn som bor sammen med foreldre</xsd:documentation>
+					<xsd:documentation xml:lang="en">Personcode</xsd:documentation>
+					<xsd:documentation xml:lang="en">1=referenceperson/mainperson 2=married woman/youngest partner 3=child living with parents</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="EKT-FODT" type="tns:Tfodt">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Ektepart fødselsdato, ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">Spouse birthdate, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="EKT-PERS" type="tns:Tpers">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Ektepart personnummer</xsd:documentation>
+					<xsd:documentation xml:lang="en">Spouse personnumber</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="EKT-INR" type="tns:Tinr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Ektepart inummer, kryptert fødselsnummer</xsd:documentation>
+					<xsd:documentation xml:lang="en">Spouse inumber, encrypted birthnumber</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="EKT-NAV" type="tns:Tnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Ektepart navn, vanligvis blank</xsd:documentation>
+					<xsd:documentation xml:lang="en">Spouse name, usually blank</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="EKT-STBKD" type="tns:TstatsbKode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Ektepart statsborgerskap kode, ihht. tabell</xsd:documentation>
+					<xsd:documentation xml:lang="en">Spouse citizenship code, according to table</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="EKT-STB" type="tns:Tlandnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Ektepart statsborgerskap, ihht. tabell</xsd:documentation>
+					<xsd:documentation xml:lang="en">Spouse citizenship, according to table</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element name="Barn" minOccurs="0" maxOccurs="30" type="tns:Barn"/>
+
+			<xsd:element minOccurs="0" maxOccurs="1" name="MOR-FODT" type="tns:Tfodt">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Mors fødselsdato. Ledetekst for feltet skal være Forelder</xsd:documentation>
+					<xsd:documentation xml:lang="en">Mothers birthdate. Backgroundtext for this element is Forelder(parent)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="MOR-PERS" type="tns:Tpers">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Mors personnummer. Ledetekst for feltet skal være Forelder</xsd:documentation>
+					<xsd:documentation xml:lang="en">Mothers personnumber. Backgroundtext for this element is Forelder(parent)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="MOR-INR" type="tns:Tinr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Mors inummer, kryptert. Ledetekst for feltet skal være Forelder</xsd:documentation>
+					<xsd:documentation xml:lang="en">Mothers inumber, encrypted. Backgroundtext for this element is Forelder(parent)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="MOR-NAV" type="tns:Tnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Mors navn, vanligvis blank. Ledetekst for feltet skal være Forelder</xsd:documentation>
+					<xsd:documentation xml:lang="en">Mothers name, usually blank. Backgroundtext for this element is Forelder(parent)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="MOR-STBKD" type="tns:TstatsbKode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Mors statsborgerskap kode, ihht. tabell. Ledetekst for feltet skal være Forelder</xsd:documentation>
+					<xsd:documentation xml:lang="no">Mothers citizenship code, according to table. Backgroundtext for this element is Forelder(parent)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="MOR-STB" type="tns:Tlandnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Mors statsborgerskap landsnavn, i klartekst. Ledetekst for feltet skal være Forelder</xsd:documentation>
+					<xsd:documentation xml:lang="en">Mothers citizenship countryname, in plain text. Backgroundtext for this element is Forelder(parent)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="FAR-FODT" type="tns:Tfodt">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Fars fødselsdato. Ledetekst for feltet skal være Forelder</xsd:documentation>
+					<xsd:documentation xml:lang="en">Fathers birthdate. Backgroundtext for this element is Forelder(parent)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="FAR-PERS" type="tns:Tpers">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Fars personnummer. Ledetekst for feltet skal være Forelder</xsd:documentation>
+					<xsd:documentation xml:lang="en">Fathers personnumber. Backgroundtext for this element is Forelder(parent)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="FAR-INR" type="tns:Tinr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Fars inummer, kryptert fødselsnummer. Ledetekst for feltet skal være Forelder</xsd:documentation>
+					<xsd:documentation xml:lang="en">Fathers inumber, encrypted birthnumber. Backgroundtext for this element is Forelder(parent)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="FAR-NAV" type="tns:Tnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Fars navn, vanligvis blank. Ledetekst for feltet skal være Forelder</xsd:documentation>
+					<xsd:documentation xml:lang="en">Fathers name, usually blank. Backgroundtext for this element is Forelder(parent)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="FAR-STBKD" type="tns:TstatsbKode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Fars statsborgerskap kode, ihht. tabell. Ledetekst for feltet skal være Forelder</xsd:documentation>
+					<xsd:documentation xml:lang="en">Fathers citizenship code, according to table. Backgroundtext for this element is Forelder(parent)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="FAR-STB" type="tns:Tlandnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Fars statsborgerskap landsnavn, i klartekst. Ledetekst for feltet skal være Forelder</xsd:documentation>
+					<xsd:documentation xml:lang="en">Fathers citizenship countryname, in plain text. Backgroundtext for this element is Forelder(parent)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="SIVS-KD" type="tns:Tkode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Sivilstands kode</xsd:documentation>
+					<xsd:documentation xml:lang="no">1=ugift 2=gift 3=enke/-mann 4=skilt 5=separert 6=reg. partner 7=sep. partner 8=skilt partner 9=gjenlevende partner</xsd:documentation>
+					<xsd:documentation xml:lang="en">Marital status code</xsd:documentation>
+					<xsd:documentation xml:lang="en">1=not married 2=married 3=widow/-er 4=divorced 5=separated 6=registrated partner 7=separated partner 9=living partner</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="SIVS" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Tekst sivilstands kode, i klartekst. Lengde 40</xsd:documentation>
+					<xsd:documentation xml:lang="en">Text maritalstatus code, in plain text</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="SIVS-D" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Dato sivilstand, ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">Date maritalstatus, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="AARSSIV" type="tns:Taarsakkode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Årsakskode til sivilstandsendring, ihht. tabell</xsd:documentation>
+					<xsd:documentation xml:lang="en">Reasoncode to change of maritalstatus, according to table</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="STATB-KD" type="tns:TstatsbKode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Statsborgerskap kode, ihht. tabell</xsd:documentation>
+					<xsd:documentation xml:lang="en">Nationality code, according to table</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="STATB" type="tns:Tlandnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Statsborgerskap, i klartekst</xsd:documentation>
+					<xsd:documentation xml:lang="en">Nationality, in plain text</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="STATBD" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="KJONN" type="tns:Tkjonn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Kjønn, M=mann K=kvinne</xsd:documentation>
+					<xsd:documentation xml:lang="en">Sex, M=male K=female</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="AARSNVN" type="tns:Taarsakkode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Årsakskode for navn, ihht. tabell</xsd:documentation>
+					<xsd:documentation xml:lang="en">Reasoncode for name, according to table</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="FODKNR" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Født kommunenr. eller land. Kommunenr eller landkode(3 tegn) ihht. tabell</xsd:documentation>
+					<xsd:documentation xml:lang="en">Born communenumber or country. Communenumber or countrycode(3 characters) according to table</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="FODK" type="tns:Tkomland">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Født kommune, i klartekst</xsd:documentation>
+					<xsd:documentation xml:lang="en">Birth commune, in plain text</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="FODS" type="tns:Tkomnavn">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Fødested</xsd:documentation>
+					<xsd:documentation xml:lang="en">Place of birth</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="SAMEMT" type="tns:Tkode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Samemantall, I=innmeldt U=utmeldt</xsd:documentation>
+					<xsd:documentation xml:lang="en">Samemantall, I=reported in U=reported out</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="SAMEMT-D" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Dato for hendelse i samemantall, ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">Date of event in samemantall, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="UMYND" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Kode umyndig, ihht. tabell.Lengde 3</xsd:documentation>
+					<xsd:documentation xml:lang="en">Code underage, according to table</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="UMYNDD" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="FORAN-KD" type="tns:Tkode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Kode foreldreansvar, blank/D=delt m=mor F=far A=andre</xsd:documentation>
+					<xsd:documentation xml:lang="en">Code parent responsibility, blank/D=shared M=mother F=father A=others</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="FORAN" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Tekst foreldreansvar, i klartekst. Lengde 20</xsd:documentation>
+					<xsd:documentation xml:lang="en">Text parent responsibility, in plain text</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="FORAND" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Dato for foreldreansvar, YYYYMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">Date for parent responsibility, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="OPPHT-KD" type="tns:Tkode">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Oppholds- og arbeidstillatelse kode</xsd:documentation>
+					<xsd:documentation xml:lang="no">Blank=trenger ikke A=oppholdstill. med arbeidstill. B=bosettingstillatelse E=oppholdstill. etter EØS-avtalen M=opplysning mangler</xsd:documentation>
+					<xsd:documentation xml:lang="en">Staying- and workingpermit code</xsd:documentation>
+					<xsd:documentation xml:lang="en">Blank= not needed A= stayingpermit with workingpermit B=settlingpermit E=stayingpermit reflecting the EØS-agreement M=information missing</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="OPPHT" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Oppholds- og arbeidstillatelse, i klartekst. Lengde 40</xsd:documentation>
+					<xsd:documentation xml:lang="en">Staying- and workingpermit, in plain text</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="OPPHT-D" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Dato for utløp av oppholds- og/eller arbeidstillatelse, ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">Expiration date of staying- and/or workingpermit, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="DUFNR" type="tns:Tdufnr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">DUF-nummer</xsd:documentation>
+					<xsd:documentation xml:lang="en">DUF-number</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="TIDLFNR" type="tns:Tfnr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Tidligere føds.nr./D-nummer</xsd:documentation>
+					<xsd:documentation xml:lang="en">Former birthnumber/D-number</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="DNRFNR-D" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Dato for endring av føds.nr./D-nummer, ÅÅÅÅMMDD</xsd:documentation>
+					<xsd:documentation xml:lang="en">Date of change of birthnumber/D-number, YYYYMMDD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="NYTTFNR" type="tns:Tfnr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Nytt fødselsnummer</xsd:documentation>
+					<xsd:documentation xml:lang="en">New birthnumber</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="NYTTFNR-D" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Dato for nytt fødselsnummer, ååååmmdd</xsd:documentation>
+					<xsd:documentation xml:lang="en">Date of new birthnumber</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="MEDLK" type="tns:Tjanei">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Medlem kirke, 1=innmeldt 2=utmeldt</xsd:documentation>
+					<xsd:documentation xml:lang="en">Member of church, 1=reported in 2=reported out</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="TK-NR" type="tns:Ttknr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Trygdekontor nummer</xsd:documentation>
+					<xsd:documentation xml:lang="en">Social security office number</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="HJEMLADR1" type="tns:Tadr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Hjemlandsadresse 1 for DNR</xsd:documentation>
+					<xsd:documentation xml:lang="en">Homeadress 1 for DNR</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="HJEMLADR2" type="tns:Tadr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Hjemlandsadresse 2 for DNR</xsd:documentation>
+					<xsd:documentation xml:lang="en">Homeadress 2 for DNR</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="HJEMLADR3" type="tns:Tadr">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Hjemlandsadresse 3 for DNR</xsd:documentation>
+					<xsd:documentation xml:lang="en">Homeadress 3 for DNR</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="HJEMLKODE" >
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Landkode for hjemlandsadresse</xsd:documentation>
+					<xsd:documentation xml:lang="en">Countrycode for homeadresse</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="3" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="HJEMLAND" >
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Hjemland</xsd:documentation>
+					<xsd:documentation xml:lang="en">Homecountry</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="40" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="HJEMLREGD" type="tns:Tdato">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Registreringsdato for hjemlandsadresse</xsd:documentation>
+					<xsd:documentation xml:lang="en">Registrationdate for homeadress</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="VISTLEG" >
+				<xsd:annotation>
+					<xsd:documentation xml:lang="no">Vist legitimasjon</xsd:documentation>
+					<xsd:documentation xml:lang="en">Shown identifiaction</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>	
+</xsd:schema>

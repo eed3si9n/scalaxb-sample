@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<definitions name="DSFMasseoppslag"
+    targetNamespace="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/DSFMasseoppslag1_4.wsdl"
+    xmlns:tns="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/DSFMasseoppslag1_4.wsdl"
+    xmlns:brukersesjon="http://ws.infotorg.no/xml/Admin/Brukersesjon/2006-07-07/Brukersesjon.xsd"
+    xmlns:transaksjon="http://ws.infotorg.no/xml/Admin/Transaksjon/2006-07-07/Transaksjon.xsd"
+    xmlns:feil="http://ws.infotorg.no/xml/Feil/Feil.xsd"
+    xmlns:dsfmo="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/DSFMasseoppslag1_4.xsd"
+    xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <documentation>
+        Tjenestespesifikasjon for DSFMasseoppslag.
+
+        © 2011 EDB ErgoGroup ASA
+        Forfatter: Thomas Flatmo &lt;thomas.flatmo@ergogroup.no&gt;
+    </documentation>
+
+    <types>
+        <schema
+            xmlns="http://www.w3.org/2001/XMLSchema">
+            <import
+                namespace="http://ws.infotorg.no/xml/Admin/Brukersesjon/2006-07-07/Brukersesjon.xsd"
+                schemaLocation="http://ws.infotorg.no/xml/Admin/Brukersesjon/2006-07-07/Brukersesjon.xsd"/>
+            <import
+                namespace="http://ws.infotorg.no/xml/Admin/Transaksjon/2006-07-07/Transaksjon.xsd"
+                schemaLocation="http://ws.infotorg.no/xml/Admin/Transaksjon/2006-07-07/Transaksjon.xsd"/>
+            <import
+                namespace="http://ws.infotorg.no/xml/Feil/Feil.xsd"
+                schemaLocation="http://ws.infotorg.no/xml/Feil/Feil.xsd"/>
+            <import
+                 namespace="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/DSFMasseoppslag1_4.xsd"
+                 schemaLocation="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/DSFMasseoppslag1_4.xsd"/>
+        </schema>
+    </types>
+
+    <message name="spoerring">
+        <part name="Brukersesjon" element="brukersesjon:Brukersesjon"/>
+        <part name="Transaksjon" element="transaksjon:Transaksjon"/>
+    </message>
+
+    <message name="svar">
+        <part name="Brukersesjon" element="brukersesjon:Brukersesjon"/>
+        <part name="Transaksjonsinfo" element="transaksjon:Transaksjonsinfo"/>
+    </message>
+
+    <message name="feil">
+        <part name="feil" element="feil:feil"/>
+    </message>
+
+    <message name="hentDetaljerRequest">
+        <part name="hentDetaljer" element="dsfmo:hentDetaljer"/>
+    </message>
+    <message name="hentDetaljerResponse">
+        <part name="hentDetaljerResponse" element="dsfmo:Detaljer"/>
+    </message>
+
+    <portType name="dsfmoPortType">
+        <operation name="hentDetaljer">
+           <input message="tns:hentDetaljerRequest"/>
+           <output message="tns:hentDetaljerResponse"/>
+           <fault name="feil" message="tns:feil"/>
+        </operation>
+    </portType>
+
+    <binding name="dsfmoBinding" type="tns:dsfmoPortType">
+        <soapbind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="hentDetaljer">
+            <soapbind:operation soapAction=""/>
+            <input>
+                <soapbind:header message="tns:spoerring" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:spoerring" part="Transaksjon" use="literal"/>
+                <soapbind:body use="literal"/>
+            </input>
+            <output>
+                <soapbind:header message="tns:svar" part="Brukersesjon" use="literal"/>
+                <soapbind:header message="tns:svar" part="Transaksjonsinfo" use="literal"/>
+                <soapbind:body use="literal"/>
+            </output>
+            <fault name="feil">
+                <soapbind:fault name="feil" use="literal"/>
+            </fault>
+        </operation>
+    </binding>
+
+    <service name="DSFMOService">
+        <port name="dsfmoPort" binding="tns:dsfmoBinding">
+            <soapbind:address location="https://ws.infotorg.no/ws/ErgoGroup/DSFMasseoppslag1_4.pl"/>
+        </port>
+    </service>
+
+</definitions>

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<schema targetNamespace="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/DSFMasseoppslag1_4.xsd"
+    xmlns:tns="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/DSFMasseoppslag1_4.xsd"
+    xmlns:det="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/include/Detaljer.xsd"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.w3.org/2001/XMLSchema">
+
+    <annotation>
+        <documentation xml:lang="no">
+            Datatyper for Folkeregisteret.
+
+            © 2012 EDB ErgoGroup ASA
+            Forfatter: Thomas Flatmo &lt;thomas.flatmo@ergogroup.no&gt;
+        </documentation>
+    </annotation>
+
+    <import
+        namespace="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/include/Detaljer.xsd"
+        schemaLocation="http://ws.infotorg.no/xml/ErgoGroup/DSFMasseoppslag1_4/2011-09-26/include/Detaljer.xsd"/>
+    <include schemaLocation="http://ws.infotorg.no/xml/ErgoGroup/DetSentraleFolkeregister1_4/2011-09-26/include/GlobaleTyper.xsd"/>
+
+    <!-- dsfdet -->
+    <element name="hentDetaljer" type="tns:personsoek"/>
+
+    <complexType name="personsoek">
+        <sequence>
+            <element name="saksref" type="string" minOccurs="0"/>
+            <element name="foedselsnr" type="tns:Tfnr" minOccurs="0"/>
+            <element name="personid" type="tns:Tinr" minOccurs="0"/>
+            <element name="dufnr" type="string" minOccurs="0"/>
+            <element name="foedselsdato" type="string" minOccurs="0"/>
+            <element name="etternavn" type="string" minOccurs="0"/>
+            <element name="fornavn" type="string" minOccurs="0"/>
+            <element name="fornavnnr" type="string" minOccurs="0"/>
+            <element name="navnUgift" type="string" minOccurs="0"/>
+            <element name="mellomnavn" type="string" minOccurs="0"/>
+            <element name="fonetiskNavn" type="tns:Tjn" minOccurs="0"/>
+            <element name="adresse" type="string" minOccurs="0"/>
+            <element name="husnr" type="tns:Thusnr" minOccurs="0"/>
+            <element name="husnrFra" type="tns:Thusnr" minOccurs="0"/>
+            <element name="husnrTil" type="tns:Thusnr" minOccurs="0"/>
+            <element name="bokstav" type="string" minOccurs="0"/>
+            <element name="fonetiskAdresse" type="tns:Tjn" minOccurs="0"/>
+            <element name="gatenr" type="string" minOccurs="0"/>
+            <element name="gaardsnr" type="string" minOccurs="0"/>
+            <element name="bruksnr" type="string" minOccurs="0"/>
+            <element name="festenr" type="string" minOccurs="0"/>
+            <element name="kommunefylkenavn" type="string" minOccurs="0"/>
+            <element name="kommunefylkenr" type="tns:Tkomfylknr" minOccurs="0"/>
+            <element name="postnr" type="string" minOccurs="0"/>
+            <element name="foedekommunenr" type="tns:Tkomnr" minOccurs="0"/>
+            <element name="foedekommunenavn" type="string" minOccurs="0"/>
+            <element name="kjoenn" type="tns:Tkjonn" minOccurs="0"/>
+            <element name="ikkeDoed" type="tns:Tjn" minOccurs="0">
+                <annotation>
+                    <documentation xml:lang="no">Paramater for kun levende i søket. 'J' hvis døde ikke skal være med i søket.</documentation>
+                    <documentation xml:lang="en">Parameter for only people alive in the search. Set 'J' to omit dead people in the search.</documentation>
+                </annotation>
+            </element>
+            <element name="foedselsaar" type="tns:Tfodtaar" minOccurs="0"/>
+            <element name="foedselsaarFra" type="tns:Tfodtaar" minOccurs="0"/>
+            <element name="foedselsaarTil" type="tns:Tfodtaar" minOccurs="0"/>
+            <element name="alderFra" type="string" minOccurs="0"/>
+            <element name="alderTil" type="string" minOccurs="0"/>
+            <element name="status" type="string" minOccurs="0"/>
+            <element name="doedsdatoFra" type="string" minOccurs="0">
+                <annotation>
+                    <documentation xml:lang="no">Dødsdato fra ÅÅÅÅMMDD</documentation>
+                    <documentation xml:lang="en">Date of death from YYYYMMDD</documentation>
+                </annotation>
+            </element>
+            <element name="doedsdatoTil" type="string" minOccurs="0">
+                <annotation>
+                    <documentation xml:lang="no">Dødsdato til ÅÅÅÅMMDD</documentation>
+                    <documentation xml:lang="en">Date of death to YYYYMMDD</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+
+    <element name="Detaljer" type="det:Detaljer"/>
+</schema>

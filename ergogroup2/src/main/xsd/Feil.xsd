@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<schema targetNamespace="http://ws.infotorg.no/xml/Feil/Feil.xsd"
+    xmlns:tns="http://ws.infotorg.no/xml/Feil/Feil.xsd"
+    xmlns="http://www.w3.org/2001/XMLSchema">
+
+    <annotation>
+        <documentation xml:lang="no">
+            Felles datatyper for feil.
+
+            © 2006 ErgoGroup AS
+            Forfatter: Dag Lem &lt;dag@nimrod.no&gt;
+            QA: Morten Haugen &lt;morten.haugen@ifront.no&gt;
+        </documentation>
+    </annotation>
+       
+    <element name="feil" type="tns:feil"/>
+
+    <complexType name="feil">
+        <sequence>
+            <element name="feilgruppekode" type="string"/>
+            <element name="feilgruppetekst" type="string"/>
+            <element name="feilkode" type="string"/>
+            <element name="feiltekst" type="string"/>
+            <element name="feilmelding" type="string"/>
+            <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+        </sequence>
+    </complexType>
+
+</schema>

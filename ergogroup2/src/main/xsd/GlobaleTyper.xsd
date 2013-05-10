@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:simpleType name="Tanta">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Ttelefon">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 8</xsd:documentation>
+				<xsd:documentation>Length 8</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tfodt">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 6</xsd:documentation>
+				<xsd:documentation>Length 6</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="Tpers">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 5</xsd:documentation>
+				<xsd:documentation>Length 5</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tfodtaar">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tdato">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 8</xsd:documentation>
+				<xsd:documentation>Length 8</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tnavn">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 50</xsd:documentation>
+				<xsd:documentation>Length 50</xsd:documentation>
+			</xsd:annotation>
+			<xsd:minLength value="0"/>
+    		<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tnavnkort">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 50</xsd:documentation>
+				<xsd:documentation>Length 50</xsd:documentation>
+			</xsd:annotation>
+			<xsd:minLength value="0"/>
+    		<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tpostnr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tpoststed">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 30</xsd:documentation>
+				<xsd:documentation>Length 30</xsd:documentation>
+			</xsd:annotation>
+			<xsd:minLength value="0"/>
+    		<xsd:maxLength value="30"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tepost">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Inneholder @</xsd:documentation>
+				<xsd:documentation>Contains @</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tkomfylknr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 2 eller 4</xsd:documentation>
+				<xsd:documentation>Length 2 or 4</xsd:documentation>
+			</xsd:annotation>
+            <xsd:pattern value="[0-9]{0}|[0-9]{2}|[0-9]{4}"/>
+        </xsd:restriction>
+	</xsd:simpleType>	
+	<xsd:simpleType name="Tkomnr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+            <xsd:pattern value="[0-9]{0}|[0-9]{4}"/>
+        </xsd:restriction>
+	</xsd:simpleType>	
+	<xsd:simpleType name="TkomnrNotBlank">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+            <xsd:pattern value="[0-9]{4}"/>
+        </xsd:restriction>
+	</xsd:simpleType>	
+	<xsd:simpleType name="Tkomnavn">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 30</xsd:documentation>
+				<xsd:documentation>Length 30</xsd:documentation>
+			</xsd:annotation>
+			<xsd:minLength value="0"/>
+            <xsd:maxLength value="30"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tkomland">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 60</xsd:documentation>
+				<xsd:documentation>Length 60</xsd:documentation>
+			</xsd:annotation>
+			<xsd:maxLength value="60"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Trekvnr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Trekvnavn">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 40</xsd:documentation>
+				<xsd:documentation>Length 40</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Thusnr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+			<xsd:pattern value="[0-9]{0,4}"/>
+		</xsd:restriction>
+	</xsd:simpleType>	
+	<xsd:simpleType name="Tbokstav">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+			<xsd:minLength value="0"/>
+    		<xsd:maxLength value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tgatenr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 5</xsd:documentation>
+				<xsd:documentation>Length 5</xsd:documentation>
+			</xsd:annotation>
+			<xsd:pattern value="[0-9]{0,5}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tgardnr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 5</xsd:documentation>
+				<xsd:documentation>Length 5</xsd:documentation>
+			</xsd:annotation>
+			<xsd:pattern value="[0-9]{0,5}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tbruksnr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+			<xsd:pattern value="[0-9]{0,4}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tfestenr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>	
+			<xsd:pattern value="[0-9]{0,4}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tundernr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+			<xsd:pattern value="[0-9]{0,4}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tbolignr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 5</xsd:documentation>
+				<xsd:documentation>Length 5</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tadr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 40</xsd:documentation>
+				<xsd:documentation>Length 40</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tlandkode">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tlandnavn">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 60</xsd:documentation>
+				<xsd:documentation>Length 60</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tkrets">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tgrunnkr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tinr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 11</xsd:documentation>
+				<xsd:documentation>Length 11</xsd:documentation>
+			</xsd:annotation>
+            <xsd:length value="11"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="TstatsbKode">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tkjonn">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 1</xsd:documentation>
+				<xsd:documentation>Length 1</xsd:documentation>
+			</xsd:annotation>
+			<xsd:pattern value="[KM]"/>			
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tkode">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 1</xsd:documentation>
+				<xsd:documentation>Length 1</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Taarsakkode">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 2</xsd:documentation>
+				<xsd:documentation>Length 2</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tfnr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 11</xsd:documentation>
+				<xsd:documentation>Length 11</xsd:documentation>
+			</xsd:annotation>
+            <xsd:length value="11"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Torgnr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 9</xsd:documentation>								
+				<xsd:documentation>Length 9</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tdufnr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 12</xsd:documentation>
+				<xsd:documentation>Length 12</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Ttknr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 4</xsd:documentation>
+				<xsd:documentation>Length 4</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tkundenr">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 6</xsd:documentation>
+				<xsd:documentation>Length 6</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tjanei">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 3</xsd:documentation>
+				<xsd:documentation>Length 3</xsd:documentation>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Tjn">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Lengde 1, inneholder j eller n</xsd:documentation>
+				<xsd:documentation>Length 1, contains j or no</xsd:documentation>
+			</xsd:annotation>
+			<xsd:pattern value="[JNjn]"/>			
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

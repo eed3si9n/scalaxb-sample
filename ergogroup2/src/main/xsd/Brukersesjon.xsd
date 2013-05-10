@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<schema targetNamespace="http://ws.infotorg.no/xml/Admin/Brukersesjon/2006-07-07/Brukersesjon.xsd"
+    xmlns:tns="http://ws.infotorg.no/xml/Admin/Brukersesjon/2006-07-07/Brukersesjon.xsd"
+    xmlns="http://www.w3.org/2001/XMLSchema">
+
+    <annotation>
+        <documentation xml:lang="no">
+            Datatyper for sesjon mot BackOffice.
+
+            © 2006 ErgoGroup AS
+            Forfatter: Dag Lem &lt;dag@nimrod.no&gt;
+            QA: Morten Haugen &lt;morten.haugen@ifront.no&gt;
+        </documentation>
+    </annotation>
+       
+    <element name="hentAutorisasjon">
+        <complexType/>
+    </element>
+
+    <element name="loggInn">
+        <complexType>
+            <sequence>
+                <group ref="tns:innlogging"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="loggInnWeb">
+        <complexType>
+            <sequence>
+                <group ref="tns:innlogging"/>
+            </sequence>
+            <attribute name="autorisasjonsnoekkel" type="tns:autorisasjonsnoekkel" use="required"/>
+        </complexType>
+    </element>
+
+    <element name="loggInnSSO">
+        <complexType>
+            <sequence>
+                <group ref="tns:innlogging"/>
+            </sequence>
+            <attribute name="autorisasjonsnoekkel" type="tns:autorisasjonsnoekkel" use="required"/>
+        </complexType>
+    </element>
+
+    <element name="loggUt">
+        <complexType/>
+    </element>
+
+    <element name="OK">
+        <complexType/>
+    </element>
+
+    <simpleType name="brukernavn">
+        <restriction base="string">
+            <minLength value="4"/>
+            <maxLength value="12"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="passord">
+        <restriction base="string">
+            <minLength value="5"/>
+            <maxLength value="12"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="autorisasjonsnoekkel">
+        <restriction base="string">
+            <minLength value="10"/>
+            <maxLength value="40"/>
+        </restriction>
+    </simpleType>
+
+
+    <element name="byttPassord">
+        <complexType>
+            <sequence>
+                <group ref="tns:bp"/>
+                <element name="nyttPassord" type="tns:passord"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <group name="bp">
+        <sequence>
+            <element name="brukernavn" type="tns:brukernavn"/>
+            <element name="passord" type="tns:passord"/>
+        </sequence>
+    </group>
+
+    <simpleType name="distribusjonskanal">
+        <restriction base="string">
+            <!-- NB! Alle integrasjonsløsninger skal benytte PTP -->
+            <enumeration value="PTP"/>
+            <enumeration value="GUI"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="systemnavn">
+        <annotation>
+            <documentation xml:lang="no">NB! Ikke benytt mellomrom i systemnavn.</documentation>
+            <documentation xml:lang="en">NB! Do not use spaces in "systemnavn".</documentation>
+        </annotation>
+        <restriction base="string">
+            <!-- NB! Internt navn på fagsystem/integrerende system. -->
+            <minLength value="1"/>
+            <maxLength value="11"/>
+        </restriction>
+    </simpleType>
+
+    <group name="akkreditering">
+        <sequence>
+            <choice>
+                <group ref="tns:bp"/>
+            </choice>
+            <element name="delegertBrukernavn" type="tns:brukernavn" minOccurs="0"/>
+        </sequence>
+    </group>
+
+    <group name="innlogging">
+        <sequence>
+            <element name="distribusjonskanal" type="tns:distribusjonskanal"/>
+            <element name="systemnavn" type="tns:systemnavn"/>
+            <group ref="tns:akkreditering"/>
+        </sequence>
+    </group>
+
+    <element name="Brukersesjon">
+        <complexType>
+            <sequence>
+                <group ref="tns:innlogging" minOccurs="0"/>
+                <element name="sesjonsid" type="string" minOccurs="0"/>
+            </sequence>
+            <anyAttribute processContents="skip"/>
+        </complexType>
+    </element>
+
+    <element name="Autorisasjon">
+        <complexType>
+            <sequence>
+                <element name="byttPassord" type="boolean"/>
+                <element name="sesjonstimeout" type="duration" nillable="true"/>
+                <element name="passordutloep" type="dateTime" nillable="true"/>
+                <element name="brukerutloep" type="dateTime" nillable="true"/>
+                <element name="ulestPost" type="boolean"/>
+                <element name="ulestMelding" type="boolean"/>
+                <element name="tjenester">
+                    <complexType>
+                        <sequence>
+                            <element name="tjeneste" minOccurs="0" maxOccurs="unbounded">
+                                <complexType>
+                                    <sequence>
+                                        <element name="navn" type="string"/>
+                                        <element name="datakilde" type="string"/>
+                                        <element name="produkter">
+                                            <complexType>
+                                                <sequence>
+                                                    <element name="produkt" minOccurs="0" maxOccurs="unbounded">
+                                                        <complexType>
+                                                            <sequence>
+                                                                <element name="navn" type="string"/>
+                                                                <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                                            </sequence>
+                                                        </complexType>
+                                                    </element>
+                                                </sequence>
+                                            </complexType>
+                                        </element>
+                                        <!--<element name="ipRestriksjon" type="string" nillable="true" minOccurs="0" maxOccurs="1"/>-->
+                                        <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                    </sequence>
+                                </complexType>
+                            </element>
+                        </sequence>
+                    </complexType>
+                </element>
+                <element name="autosysSelskap" type="string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                <element name="oppdaterKontaktinfo" type="boolean"/>
+                <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+            </sequence>
+        </complexType>
+    </element>
+
+</schema>
