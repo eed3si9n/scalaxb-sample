@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2007 Ultra Electronics Limited. All rights reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schema.ultra-as.com" xmlns="http://schema.ultra-as.com"  elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+  <xs:annotation>
+    <xs:documentation>Active Flight Distribution Service - Flight Data message.</xs:documentation>
+  </xs:annotation>
+  <xs:include schemaLocation="../Common/CommonTypes.xsd"/>
+  <xs:element name="AFDSFlightData">
+    <xs:annotation>
+      <xs:documentation>Contains information describing a single flight, originally sourced from the AODB. May be sent as a real-time update, or as part of a stream of messages forming a snapshot of the current eligible flight list. Once it has received a subscription request from a client, the sender will continue to provide these messages until the subscription is cancelled.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="AmendmentType" type="AmendmentType" nillable="false">
+          <xs:annotation>
+            <xs:documentation>Indicates the operation made to the flight data within the AODB (Create, Update, Delete).
+			</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="FlightIdentification" type="FlightIdentification" nillable="false">
+          <xs:annotation>
+            <xs:documentation>Unique identification of a flight is determined by flight identity, flight direction, flight repeat count and scheduled date. For scheduled flights, the identification can be supplemented by an IATA flight identifier and/or an ICAO flight identifier. The flight repeat count is used to determine flights that operate more than one time on a single day.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="FlightData" type="FlightData" nillable="false">
+          <xs:annotation>
+            <xs:documentation>Collection of flight data common to multiple flight messages.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      <xs:element name="FlightFilterData" type="FlightFilterData" nillable="false" minOccurs="0">
+      	<xs:annotation>
+      		<xs:documentation>Provides the client with additional information regarding	the predefined filter
+      		</xs:documentation>
+      	</xs:annotation>
+      </xs:element>
+      </xs:sequence>
+      <xs:attribute name="isCompleteRecord" type="IsCompleteRecord" use="required">
+        <xs:annotation>
+          <xs:documentation>Determines whether the entire record is being transmitted or a subset of the record</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
