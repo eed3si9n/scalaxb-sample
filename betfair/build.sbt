@@ -4,7 +4,7 @@ organization := "com.example"
 
 name := "scalaxb-betfair-sample"
 
-scalaVersion := "2.10.1"
+scalaVersion := "2.11.1"
 
 scalaxbSettings
 
@@ -12,4 +12,10 @@ packageName in scalaxb in Compile := "betfair"
 
 sourceGenerators in Compile <+= scalaxb in Compile
 
-libraryDependencies += "net.databinder.dispatch" %% "dispatch-core" % "0.9.5"
+val scalaXml = "org.scala-lang.modules" %% "scala-xml" % "1.0.2"
+val scalaParser = "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.1"
+val dispatch = "net.databinder.dispatch" %% "dispatch-core" % "0.11.1"
+
+libraryDependencies ++= Seq(
+  scalaXml, scalaParser, dispatch
+)
