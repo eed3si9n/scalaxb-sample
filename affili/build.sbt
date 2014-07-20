@@ -1,17 +1,28 @@
 import ScalaxbKeys._
 
+val scalaXml = "org.scala-lang.modules" %% "scala-xml" % "1.0.2"
+val scalaParser = "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.1"
+val dispatchV = "0.11.1" // change this to appropriate dispatch version
+val dispatch = "net.databinder.dispatch" %% "dispatch-core" % dispatchV
+
 organization := "com.example"
 
 name := "scalaxb-affili-sample"
 
-seq(scalaxbSettings: _*)
+scalaVersion := "2.11.1"
 
-packageName in scalaxb in Compile := "affili"
+scalaxbSettings
 
-packageNames in scalaxb in Compile := Map(uri("http://schemas.microsoft.com/2003/10/Serialization/") -> "microsoft.serialization")
+packageName in (Compile, scalaxb) := "affili"
+
+packageNames in (Compile, scalaxb) := Map(uri("http://schemas.microsoft.com/2003/10/Serialization/") -> "microsoft.serialization")
+
+dispatchVersion in (Compile, scalaxb) := dispatchV
+ 
+async in (Compile, scalaxb) := true
 
 sourceGenerators in Compile <+= scalaxb in Compile
 
-libraryDependencies += "net.databinder" %% "dispatch-http" % "0.8.5"
+libraryDependencies ++= Seq(scalaXml, scalaParser, dispatch)
 
-logLevel in scalaxb in Compile := Level.Debug
+logLevel in (Compile, scalaxb) := Level.Debug
