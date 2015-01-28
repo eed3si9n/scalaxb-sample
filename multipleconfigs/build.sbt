@@ -1,4 +1,3 @@
-import sbtscalaxb.Plugin._
 import ScalaxbKeys._
 
 val Ipo = config("ipo") extend(Compile)
