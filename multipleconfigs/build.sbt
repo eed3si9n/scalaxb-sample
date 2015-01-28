@@ -1,7 +1,7 @@
 import ScalaxbKeys._
 
-val Ipo = config("ipo") extend(Compile)
-val W = config("w") extend(Compile)
+lazy val Ipo = config("ipo") extend(Compile)
+lazy val W = config("w") extend(Compile)
 
 lazy val commonSettings = Seq(
   version := "0.1",
