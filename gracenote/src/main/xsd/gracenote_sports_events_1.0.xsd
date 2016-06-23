@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="gracenote_sports_base_types_1.0.xsd"/>
+	<xs:element name="gracenoteSports">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="header"/>
+				<xs:element name="events">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="event" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence minOccurs="0">
+										<xs:element ref="xids" minOccurs="0"/>
+										<xs:element name="status" type="xs:string" minOccurs="0"/>
+										<xs:element name="gender" type="xs:string" minOccurs="0"/>
+										<xs:element name="name" type="langString" minOccurs="0"/>
+										<xs:element name="descriptions" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="description" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="type" type="xs:string"/>
+																<xs:element name="content" type="langString"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="seasonType" type="xs:string" minOccurs="0"/>
+										<xs:element name="week" type="xs:int" minOccurs="0"/>
+										<xs:element name="recurring" type="xs:boolean" minOccurs="0"/>
+										<xs:element name="startDate" type="xs:date" minOccurs="0"/>
+										<xs:element name="startTime" type="xs:time" minOccurs="0"/>
+										<xs:element name="startTimeTBD" type="xs:boolean" minOccurs="0"/>
+										<xs:element name="endDate" type="xs:date" minOccurs="0"/>
+										<xs:element name="endTime" type="xs:time" minOccurs="0"/>
+										<xs:element name="previousStartDate" type="xs:date" minOccurs="0"/>
+										<xs:element name="timeZone" type="xs:string" minOccurs="0"/>
+										<xs:element name="timeZoneTms" type="xs:string" minOccurs="0"/>
+										<xs:element name="sport">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="name" type="langString"/>
+												</xs:sequence>
+												<xs:attribute name="sportId" type="xs:nonNegativeInteger" use="required"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="venue" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="name" type="langString"/>
+												</xs:sequence>
+												<xs:attribute name="venueId" type="xs:nonNegativeInteger" use="required"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="neutralSite" type="xs:boolean" minOccurs="0"/>
+										<xs:element name="participants" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="teamSeason" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="fullName" type="langString"/>
+																<xs:element name="isHome" type="xs:boolean" minOccurs="0"/>
+															</xs:sequence>
+															<xs:attribute name="teamSeasonId" type="xs:nonNegativeInteger" use="required"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="organizationSeasons" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="organizationSeason" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="name" type="langString"/>
+																<xs:element name="startYear" type="xs:int"/>
+																<xs:element name="endYear" type="xs:int"/>
+															</xs:sequence>
+															<xs:attribute name="organizationSeasonId" type="xs:nonNegativeInteger" use="required"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="parentEvent" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="event">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="name" type="langString" minOccurs="0"/>
+															</xs:sequence>
+															<xs:attribute name="eventId" type="xs:nonNegativeInteger" use="required"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="precedentEvents" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="precedentEvent">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="event">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="name" type="langString" minOccurs="0"/>
+																		</xs:sequence>
+																		<xs:attribute name="eventId" type="xs:nonNegativeInteger" use="required"/>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="attendance" type="xs:int" minOccurs="0"/>
+										<xs:element name="necessary" type="xs:string" minOccurs="0"/>
+										<xs:element name="round" type="xs:string" minOccurs="0"/>
+										<xs:element name="officialUrl" type="xs:anyURI" minOccurs="0"/>										
+									</xs:sequence>
+									<xs:attribute name="eventId" type="xs:nonNegativeInteger" use="required"/>
+									<xs:attribute ref="deleted" use="optional"/>
+									<xs:attribute ref="updateId" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="schemaVersion" type="xs:decimal" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

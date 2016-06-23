@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Last Modified: Wed, June 10, 2015 -->
+<!-- Copyright 2015 Gracenote, Inc. All rights reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
+	<xs:element name="header">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="content" type="xs:string"/>
+				<xs:element name="created" type="xs:dateTime"/>
+				<xs:element name="copyright" type="xs:string"/>
+				<xs:element name="requestParameters">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="requestParameter" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="name" type="xs:string" use="required"/>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:attribute name="updateId" type="xs:nonNegativeInteger"/>
+	<xs:attribute name="deleted" type="xs:boolean"/>	
+	<xs:complexType name="langString">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="lang" type="xs:language" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:element name="xids">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="xid" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:string">
+								<xs:attribute name="datasource" type="xs:string" use="required"/>
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
