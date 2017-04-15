@@ -133,7 +133,7 @@
 			<xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="type" type="atom:ContentTypeType"/>
-		<xs:attribute name="src" type=" xs:anyURI"/>
+		<xs:attribute name="src" type="xs:anyURI"/>
 		<xs:attributeGroup ref="atom:commonAttributes"/>
 	</xs:complexType>
 	<xs:complexType name="categoryType">
